@@ -2,141 +2,141 @@
 
 'use strict';
 var grpc = require('@grpc/grpc-js');
-var auth_pb = require('./auth_pb.js');
+var interfaces_proto_pb_auth_pb = require('../../../interfaces/proto/pb/auth_pb.js');
 
-function serialize_auth_LoginRequest(arg) {
-  if (!(arg instanceof auth_pb.LoginRequest)) {
-    throw new Error('Expected argument of type auth.LoginRequest');
+function serialize_pb_LoginRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.LoginRequest)) {
+    throw new Error('Expected argument of type pb.LoginRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_auth_LoginRequest(buffer_arg) {
-  return auth_pb.LoginRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_LoginRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.LoginRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_auth_LoginResponse(arg) {
-  if (!(arg instanceof auth_pb.LoginResponse)) {
-    throw new Error('Expected argument of type auth.LoginResponse');
+function serialize_pb_LoginResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.LoginResponse)) {
+    throw new Error('Expected argument of type pb.LoginResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_auth_LoginResponse(buffer_arg) {
-  return auth_pb.LoginResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_LoginResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.LoginResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_auth_OtpSignUpRequest(arg) {
-  if (!(arg instanceof auth_pb.OtpSignUpRequest)) {
-    throw new Error('Expected argument of type auth.OtpSignUpRequest');
+function serialize_pb_OtpSignUpRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.OtpSignUpRequest)) {
+    throw new Error('Expected argument of type pb.OtpSignUpRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_auth_OtpSignUpRequest(buffer_arg) {
-  return auth_pb.OtpSignUpRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_OtpSignUpRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.OtpSignUpRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_auth_OtpSignUpResponse(arg) {
-  if (!(arg instanceof auth_pb.OtpSignUpResponse)) {
-    throw new Error('Expected argument of type auth.OtpSignUpResponse');
+function serialize_pb_OtpSignUpResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.OtpSignUpResponse)) {
+    throw new Error('Expected argument of type pb.OtpSignUpResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_auth_OtpSignUpResponse(buffer_arg) {
-  return auth_pb.OtpSignUpResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_OtpSignUpResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.OtpSignUpResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_auth_SignupRequest(arg) {
-  if (!(arg instanceof auth_pb.SignupRequest)) {
-    throw new Error('Expected argument of type auth.SignupRequest');
+function serialize_pb_SignupRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.SignupRequest)) {
+    throw new Error('Expected argument of type pb.SignupRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_auth_SignupRequest(buffer_arg) {
-  return auth_pb.SignupRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_SignupRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.SignupRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_auth_SignupResponse(arg) {
-  if (!(arg instanceof auth_pb.SignupResponse)) {
-    throw new Error('Expected argument of type auth.SignupResponse');
+function serialize_pb_SignupResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.SignupResponse)) {
+    throw new Error('Expected argument of type pb.SignupResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_auth_SignupResponse(buffer_arg) {
-  return auth_pb.SignupResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_SignupResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.SignupResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_auth_validNameRequest(arg) {
-  if (!(arg instanceof auth_pb.validNameRequest)) {
-    throw new Error('Expected argument of type auth.validNameRequest');
+function serialize_pb_validNameRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.validNameRequest)) {
+    throw new Error('Expected argument of type pb.validNameRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_auth_validNameRequest(buffer_arg) {
-  return auth_pb.validNameRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_validNameRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.validNameRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_auth_validNameResponse(arg) {
-  if (!(arg instanceof auth_pb.validNameResponse)) {
-    throw new Error('Expected argument of type auth.validNameResponse');
+function serialize_pb_validNameResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.validNameResponse)) {
+    throw new Error('Expected argument of type pb.validNameResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_auth_validNameResponse(buffer_arg) {
-  return auth_pb.validNameResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_pb_validNameResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.validNameResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 
 var AutharizationService = exports.AutharizationService = {
   userSignup: {
-    path: '/auth.Autharization/UserSignup',
+    path: '/pb.Autharization/UserSignup',
     requestStream: false,
     responseStream: false,
-    requestType: auth_pb.SignupRequest,
-    responseType: auth_pb.SignupResponse,
-    requestSerialize: serialize_auth_SignupRequest,
-    requestDeserialize: deserialize_auth_SignupRequest,
-    responseSerialize: serialize_auth_SignupResponse,
-    responseDeserialize: deserialize_auth_SignupResponse,
+    requestType: interfaces_proto_pb_auth_pb.SignupRequest,
+    responseType: interfaces_proto_pb_auth_pb.SignupResponse,
+    requestSerialize: serialize_pb_SignupRequest,
+    requestDeserialize: deserialize_pb_SignupRequest,
+    responseSerialize: serialize_pb_SignupResponse,
+    responseDeserialize: deserialize_pb_SignupResponse,
   },
   otpRequest: {
-    path: '/auth.Autharization/OtpRequest',
+    path: '/pb.Autharization/OtpRequest',
     requestStream: false,
     responseStream: false,
-    requestType: auth_pb.OtpSignUpRequest,
-    responseType: auth_pb.OtpSignUpResponse,
-    requestSerialize: serialize_auth_OtpSignUpRequest,
-    requestDeserialize: deserialize_auth_OtpSignUpRequest,
-    responseSerialize: serialize_auth_OtpSignUpResponse,
-    responseDeserialize: deserialize_auth_OtpSignUpResponse,
+    requestType: interfaces_proto_pb_auth_pb.OtpSignUpRequest,
+    responseType: interfaces_proto_pb_auth_pb.OtpSignUpResponse,
+    requestSerialize: serialize_pb_OtpSignUpRequest,
+    requestDeserialize: deserialize_pb_OtpSignUpRequest,
+    responseSerialize: serialize_pb_OtpSignUpResponse,
+    responseDeserialize: deserialize_pb_OtpSignUpResponse,
   },
   userLogin: {
-    path: '/auth.Autharization/UserLogin',
+    path: '/pb.Autharization/UserLogin',
     requestStream: false,
     responseStream: false,
-    requestType: auth_pb.LoginRequest,
-    responseType: auth_pb.LoginResponse,
-    requestSerialize: serialize_auth_LoginRequest,
-    requestDeserialize: deserialize_auth_LoginRequest,
-    responseSerialize: serialize_auth_LoginResponse,
-    responseDeserialize: deserialize_auth_LoginResponse,
+    requestType: interfaces_proto_pb_auth_pb.LoginRequest,
+    responseType: interfaces_proto_pb_auth_pb.LoginResponse,
+    requestSerialize: serialize_pb_LoginRequest,
+    requestDeserialize: deserialize_pb_LoginRequest,
+    responseSerialize: serialize_pb_LoginResponse,
+    responseDeserialize: deserialize_pb_LoginResponse,
   },
   validName: {
-    path: '/auth.Autharization/validName',
+    path: '/pb.Autharization/validName',
     requestStream: false,
     responseStream: false,
-    requestType: auth_pb.validNameRequest,
-    responseType: auth_pb.validNameResponse,
-    requestSerialize: serialize_auth_validNameRequest,
-    requestDeserialize: deserialize_auth_validNameRequest,
-    responseSerialize: serialize_auth_validNameResponse,
-    responseDeserialize: deserialize_auth_validNameResponse,
+    requestType: interfaces_proto_pb_auth_pb.validNameRequest,
+    responseType: interfaces_proto_pb_auth_pb.validNameResponse,
+    requestSerialize: serialize_pb_validNameRequest,
+    requestDeserialize: deserialize_pb_validNameRequest,
+    responseSerialize: serialize_pb_validNameResponse,
+    responseDeserialize: deserialize_pb_validNameResponse,
   },
 };
 
