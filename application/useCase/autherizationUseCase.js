@@ -1,6 +1,7 @@
 const userDBRepository = require("../../domain/repository/userDBRepository")
 const otpUseCase = require("./authOtpUseCase")
 
+
 const validateName = async (userName)=>{
     try {
      const user = await userDBRepository.findUserName(userName)
@@ -24,10 +25,28 @@ const validateData = async (email,number)=>{
     }
 } 
 
+const createUser = async (userName,email,number,password,otp,referral)=>{
+    try{
+        const status = await otpUseCase.validateOtp(number,otp)  
+        if(status){
+           await userDBRepository.createUser(userName,email,number,password) 
+           if(referral){
+             await userDBRepository.referalCoins(referral)
+            }
+        return true
+        }else{
+            return false
+        }
+    }catch(error){
+        throw new Error(error.message)
+    }
+}
+
 
 
 
 module.exports = {
     validateName,
-    validateData
+    validateData,
+    createUser
 }

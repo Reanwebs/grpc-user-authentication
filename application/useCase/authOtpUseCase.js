@@ -12,17 +12,14 @@ const sendOtp = async(number)=>{
     } catch (error) {
         throw new Error("error in sending otp")
     }
-    
 }
 
 const validateOtp = async(number,otp)=>{
     try {
-        let response = await client.verify.v2.services(verifySid ).verificationChecks.create({ to: `+91${number}`, code: otp })
-        if(response.valid) return true
-        else  return false
-        
-    } catch (error) {
-        throw new Error("error in validating  otp")
+        let response = await client.verify.v2.services(verifySid).verificationChecks.create({ to: `+91${number}`, code: otp })
+        return response.valid    
+    } catch (error) {  
+        throw new Error("error in validating otp")
     }
 }
 

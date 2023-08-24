@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
 const WalletSchema = new mongoose.Schema({
     userId:{
@@ -15,4 +15,4 @@ const WalletSchema = new mongoose.Schema({
 
 const Wallet = mongoose.model('Wallet',WalletSchema);
 
-export default Wallet;
+module.exports = Wallet;

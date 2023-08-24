@@ -42,23 +42,43 @@ const otpRequest =async (call,callback)=>{
             details: "user exists in email or password"
         };
         callback(error,null)
-    }
-        
+    } 
+
     } catch (err) {
         const error = {
             code:grpc.status.ABORTED,
             details:"internal server error"
         };
        callback(error,null)
-        
     }
-    
+}
 
-    
+const  userSignup = async(call,callback)=>{
+    try{
+        const[userName,email,number,password,cPassword,otp,referral] = call.request.array;
+        const status = await autherizationUseCase.createUser(userName,email,number,password,otp,referral)
+        const replay = new auth_pb.SignupResponse()
+        if(status){
+            replay.setStatus(201)
+            replay.setMessage("account created successfully")
+            callback(null,replay)
+        }else{
+            const error = {
+                code: grpc.status.ALREADY_EXISTS,
+                details: "please provide valid otp"
+            };
+            callback(error,null)
+        }
+    }catch(err){
+        const error = {
+            code:grpc.status.ABORTED,
+            details:err.message
+        };
+       callback(error,null)
+    }
 }
 
 
-
 module.exports = {
-    validName,otpRequest
+    validName,otpRequest,userSignup
 }
