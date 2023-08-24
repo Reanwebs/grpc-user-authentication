@@ -1,4 +1,5 @@
 const userDBRepository = require("../../domain/repository/userDBRepository")
+const otpUseCase = require("./authOtpUseCase")
 
 const validateName = async (userName)=>{
     try {
@@ -10,6 +11,23 @@ const validateName = async (userName)=>{
     }
 }
 
+const validateData = async (email,number)=>{
+    try {
+        const user = await userDBRepository.findExistingUser(email,number)
+        if(user) return false;
+        else {
+         await otpUseCase.sendOtp(number)
+         return true
+        }
+    } catch (error) {
+        throw new Error("Error in sending otp ")
+    }
+} 
+
+
+
+
 module.exports = {
-    validateName
+    validateName,
+    validateData
 }

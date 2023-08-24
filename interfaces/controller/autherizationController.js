@@ -4,7 +4,6 @@ const grpc = require("@grpc/grpc-js")
 
 const validName = async(call,callback)=>{
     try {
-        console.log(call);
         const [userName] = call.request.array
         const status =  await autherizationUseCase.validateName(userName)
        const replay = new auth_pb.validNameResponse()
@@ -26,9 +25,40 @@ const validName = async(call,callback)=>{
         };
        callback(error,null)
     }
-   
+}
+ 
+const otpRequest =async (call,callback)=>{
+    try {
+    const [userName,email,number,password] = call.request.array;
+    let status =await autherizationUseCase.validateData(email,number)
+    const replay = new auth_pb.OtpSignUpResponse()
+    if(status){
+        replay.setStatus(200)
+        replay.setMessage("otp send successfully")
+        callback(null,replay)
+    }else{
+        const error = {
+            code: grpc.status.ALREADY_EXISTS,
+            details: "user exists in email or password"
+        };
+        callback(error,null)
+    }
+        
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:"internal server error"
+        };
+       callback(error,null)
+        
+    }
+    
+
+    
 }
 
 
 
-module.exports = validName;
+module.exports = {
+    validName,otpRequest
+}

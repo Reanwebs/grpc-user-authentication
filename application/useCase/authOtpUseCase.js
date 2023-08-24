@@ -8,9 +8,7 @@ const client =  twilio(accountSid, authToken);
 
 const sendOtp = async(number)=>{
     try {
-     const response = await client.verify.v2.services(verifySid).verifications.create({to:`+91${number}`,channel:"sms"})
-    if(response.status === "pending") return true  
-    else return false 
+      await client.verify.v2.services(verifySid).verifications.create({to:`+91${number}`,channel:"sms"})
     } catch (error) {
         throw new Error("error in sending otp")
     }
