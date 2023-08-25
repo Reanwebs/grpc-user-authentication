@@ -1408,7 +1408,7 @@ proto.pb.LoginResponse.toObject = function(includeInstance, msg) {
     email: jspb.Message.getFieldWithDefault(msg, 3, ""),
     phonenumber: jspb.Message.getFieldWithDefault(msg, 4, ""),
     error: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    uid: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    uid: jspb.Message.getFieldWithDefault(msg, 6, ""),
     message: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
@@ -1467,7 +1467,7 @@ proto.pb.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       msg.setError(value);
       break;
     case 6:
-      var value = /** @type {number} */ (reader.readInt32());
+      var value = /** @type {string} */ (reader.readString());
       msg.setUid(value);
       break;
     case 7:
@@ -1539,8 +1539,8 @@ proto.pb.LoginResponse.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getUid();
-  if (f !== 0) {
-    writer.writeInt32(
+  if (f.length > 0) {
+    writer.writeString(
       6,
       f
     );
@@ -1646,20 +1646,20 @@ proto.pb.LoginResponse.prototype.setError = function(value) {
 
 
 /**
- * optional int32 uid = 6;
- * @return {number}
+ * optional string uid = 6;
+ * @return {string}
  */
 proto.pb.LoginResponse.prototype.getUid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /**
- * @param {number} value
+ * @param {string} value
  * @return {!proto.pb.LoginResponse} returns this
  */
 proto.pb.LoginResponse.prototype.setUid = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
