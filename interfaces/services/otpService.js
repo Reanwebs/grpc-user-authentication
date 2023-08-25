@@ -1,5 +1,5 @@
 const twilio = require("twilio")
-const configKeys = require("../config/config")
+const configKeys = require("../../application/config/config")
 
 const accountSid = configKeys.TWILIO_ACCOUNT_SID;
 const authToken = configKeys.TWILIO_AUTH_TOKEN;

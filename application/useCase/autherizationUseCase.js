@@ -1,5 +1,5 @@
 const userDBRepository = require("../../domain/repository/userDBRepository")
-const otpUseCase = require("./authOtpUseCase")
+const otpUseCase = require("../../interfaces/services/otpService")
 const authService = require("../../interfaces/services/authService")
 
 
