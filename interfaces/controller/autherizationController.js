@@ -85,10 +85,11 @@ const  userLogin = async (call,callback)=>{
     const replay = new auth_pb.LoginResponse()
     if(status.status){
         replay.setStatus(200)
-        replay.setMessage(status.message)
         replay.setUsername(status.userName)
         replay.setEmail(status.email)
-        replay.setNumber(status.number)
+        replay.setPhonenumber(status.number)
+        replay.setUid(status.userId)
+        replay.setMessage(status.message)
         callback(null,replay)
     }else{
         const error = {
