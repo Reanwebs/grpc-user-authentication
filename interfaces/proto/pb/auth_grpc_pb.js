@@ -70,6 +70,28 @@ function deserialize_pb_SignupResponse(buffer_arg) {
   return interfaces_proto_pb_auth_pb.SignupResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_resendOtpRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.resendOtpRequest)) {
+    throw new Error('Expected argument of type pb.resendOtpRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_resendOtpRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.resendOtpRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_resendOtpResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_pb.resendOtpResponse)) {
+    throw new Error('Expected argument of type pb.resendOtpResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_resendOtpResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_pb.resendOtpResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_validNameRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_pb.validNameRequest)) {
     throw new Error('Expected argument of type pb.validNameRequest');
@@ -137,6 +159,17 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_validNameRequest,
     responseSerialize: serialize_pb_validNameResponse,
     responseDeserialize: deserialize_pb_validNameResponse,
+  },
+  resendOtp: {
+    path: '/pb.Autharization/ResendOtp',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_pb.resendOtpRequest,
+    responseType: interfaces_proto_pb_auth_pb.resendOtpResponse,
+    requestSerialize: serialize_pb_resendOtpRequest,
+    requestDeserialize: deserialize_pb_resendOtpRequest,
+    responseSerialize: serialize_pb_resendOtpResponse,
+    responseDeserialize: deserialize_pb_resendOtpResponse,
   },
 };
 

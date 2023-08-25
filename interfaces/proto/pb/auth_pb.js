@@ -1404,9 +1404,12 @@ proto.pb.LoginResponse.prototype.toObject = function(opt_includeInstance) {
 proto.pb.LoginResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    error: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    token: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    message: jspb.Message.getFieldWithDefault(msg, 4, "")
+    username: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    email: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    phonenumber: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    error: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    message: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -1449,13 +1452,25 @@ proto.pb.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setError(value);
+      msg.setUsername(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setToken(value);
+      msg.setEmail(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPhonenumber(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setError(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToken(value);
+      break;
+    case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
@@ -1495,24 +1510,45 @@ proto.pb.LoginResponse.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getError();
+  f = message.getUsername();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getToken();
+  f = message.getEmail();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getMessage();
+  f = message.getPhonenumber();
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getError();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getToken();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = message.getMessage();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
       f
     );
   }
@@ -1538,10 +1574,10 @@ proto.pb.LoginResponse.prototype.setStatus = function(value) {
 
 
 /**
- * optional string error = 2;
+ * optional string username = 2;
  * @return {string}
  */
-proto.pb.LoginResponse.prototype.getError = function() {
+proto.pb.LoginResponse.prototype.getUsername = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -1550,16 +1586,16 @@ proto.pb.LoginResponse.prototype.getError = function() {
  * @param {string} value
  * @return {!proto.pb.LoginResponse} returns this
  */
-proto.pb.LoginResponse.prototype.setError = function(value) {
+proto.pb.LoginResponse.prototype.setUsername = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string token = 3;
+ * optional string email = 3;
  * @return {string}
  */
-proto.pb.LoginResponse.prototype.getToken = function() {
+proto.pb.LoginResponse.prototype.getEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -1568,16 +1604,16 @@ proto.pb.LoginResponse.prototype.getToken = function() {
  * @param {string} value
  * @return {!proto.pb.LoginResponse} returns this
  */
-proto.pb.LoginResponse.prototype.setToken = function(value) {
+proto.pb.LoginResponse.prototype.setEmail = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string message = 4;
+ * optional string phoneNumber = 4;
  * @return {string}
  */
-proto.pb.LoginResponse.prototype.getMessage = function() {
+proto.pb.LoginResponse.prototype.getPhonenumber = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -1586,8 +1622,62 @@ proto.pb.LoginResponse.prototype.getMessage = function() {
  * @param {string} value
  * @return {!proto.pb.LoginResponse} returns this
  */
-proto.pb.LoginResponse.prototype.setMessage = function(value) {
+proto.pb.LoginResponse.prototype.setPhonenumber = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string error = 5;
+ * @return {string}
+ */
+proto.pb.LoginResponse.prototype.getError = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.LoginResponse} returns this
+ */
+proto.pb.LoginResponse.prototype.setError = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string token = 6;
+ * @return {string}
+ */
+proto.pb.LoginResponse.prototype.getToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.LoginResponse} returns this
+ */
+proto.pb.LoginResponse.prototype.setToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string message = 7;
+ * @return {string}
+ */
+proto.pb.LoginResponse.prototype.getMessage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.LoginResponse} returns this
+ */
+proto.pb.LoginResponse.prototype.setMessage = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
