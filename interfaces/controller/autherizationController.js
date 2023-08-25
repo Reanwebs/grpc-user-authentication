@@ -107,11 +107,30 @@ const  userLogin = async (call,callback)=>{
        callback(error,null)
         
     }
-    
+}
+
+const resendOtp = async (call,callback)=>{
+    try {
+        const [number] = call.request.array
+        const status = await autherizationUseCase.resendOtp(number)  
+        const replay = new auth_pb.resendOtpResponse()
+        if(status){
+            replay.setStatus(201);
+            replay.setMessage("otp send successfully")
+            callback(null,replay)
+        }      
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:err.message
+        };
+       callback(error,null)
+        
+    }
 
 }
 
 
 module.exports = {
-    validName,otpRequest,userSignup,userLogin
+    validName,otpRequest,userSignup,userLogin,resendOtp
 }

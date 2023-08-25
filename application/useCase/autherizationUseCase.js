@@ -57,6 +57,15 @@ const loginUser = async(email,password)=>{
     }
 }
 
+const resendOtp = async (number)=>{
+    try{       
+      await otpUseCase.sendOtp(number)
+      return true
+    }catch(error){
+        throw new Error("error in resend otp")
+    }
+}
+
 
 
 
@@ -64,5 +73,6 @@ module.exports = {
     validateName,
     validateData,
     createUser,
-    loginUser
+    loginUser,
+    resendOtp
 }
