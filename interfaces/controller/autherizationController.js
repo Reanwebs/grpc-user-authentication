@@ -90,7 +90,6 @@ const  userLogin = async (call,callback)=>{
         replay.setPhonenumber(status.number)
         replay.setUid(status.userId)
         replay.setMessage(status.message)
-        console.log(replay);
         callback(null,replay)
     }else{
         const error = {
