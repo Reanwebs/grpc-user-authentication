@@ -78,7 +78,39 @@ const  userSignup = async(call,callback)=>{
     }
 }
 
+const  userLogin = async (call,callback)=>{
+    try {
+    const [email,password] = call.request.array;
+    const status = await autherizationUseCase.loginUser(email,password)
+    const replay = new auth_pb.LoginResponse()
+    if(status.status){
+        replay.setStatus(200)
+        replay.setMessage(status.message)
+        replay.setUserName(status.userName)
+        replay.setEmail(status.email)
+        replay.setNumber(status.number)
+        callback(null,replay)
+    }else{
+        const error = {
+            code: grpc.status.UNAUTHENTICATED,
+            details: status.message
+        };
+        callback(error,null)
+
+    }
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:err.message
+        };
+       callback(error,null)
+        
+    }
+    
+
+}
+
 
 module.exports = {
-    validName,otpRequest,userSignup
+    validName,otpRequest,userSignup,userLogin
 }

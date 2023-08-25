@@ -10,6 +10,7 @@ service Autharization {
     rpc OtpRequest (OtpSignUpRequest) returns (OtpSignUpResponse) {}
     rpc UserLogin (LoginRequest) returns (LoginResponse) {}
     rpc validName (validNameRequest) returns (validNameResponse) {}
+    rpc ResendOtp (resendOtpRequest) returns (resendOtpResponse){}
 }
 
 message SignupRequest {
@@ -50,9 +51,12 @@ message LoginRequest {
 
 message LoginResponse {
     int64 status = 1;
-    string error = 2;
-    string token = 3;
-    string message = 4;
+    string username = 2;
+    string email = 3;
+    string phoneNumber = 4;
+    string error = 5;
+    string token = 6;
+    string message = 7;
 }
 
 message validNameRequest {

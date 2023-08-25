@@ -1,5 +1,6 @@
 const userDBRepository = require("../../domain/repository/userDBRepository")
 const otpUseCase = require("./authOtpUseCase")
+const authService = require("../../interfaces/services/authService")
 
 
 const validateName = async (userName)=>{
@@ -42,11 +43,26 @@ const createUser = async (userName,email,number,password,otp,referral)=>{
     }
 }
 
+const loginUser = async(email,password)=>{
+    try{
+        const user = await userDBRepository.findUserByEmail(email)
+        if(!user) return {status:false,message:"No account matches the entered email "}
+        else{
+          const status = await authService.comparePassword(password,user.password)
+          if(!status) return {status:false,message:"Invalid password"}
+        }
+        return {status:true,message:"loggedin successfully",userName:user.userName,email:user.email,number:user.mobNo}
+    }catch(error){
+       throw new Error(error.message)
+    }
+}
+
 
 
 
 module.exports = {
     validateName,
     validateData,
-    createUser
+    createUser,
+    loginUser
 }

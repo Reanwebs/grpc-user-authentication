@@ -6,14 +6,13 @@ const hashPassword =async (password)=>{
         const  hashedPassword = await bcrypt.hash(password,salt)
         return hashedPassword
     }catch(error){
-        console.log(error);
-        // throw new Error("error in password hashing")
+        throw new Error("error in password hashing")
 
     }
 }
 
-const comparePassword = (password,hashPassword)=>{
-    return bcrypt.compare(password,hashPassword)
+const comparePassword = async(password,hashPassword)=>{
+    return await bcrypt.compare(password,hashPassword)
 }
 
 module.exports = {
