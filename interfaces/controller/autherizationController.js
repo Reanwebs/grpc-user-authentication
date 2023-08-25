@@ -86,7 +86,7 @@ const  userLogin = async (call,callback)=>{
     if(status.status){
         replay.setStatus(200)
         replay.setMessage(status.message)
-        replay.setUserName(status.userName)
+        replay.setUsername(status.userName)
         replay.setEmail(status.email)
         replay.setNumber(status.number)
         callback(null,replay)
