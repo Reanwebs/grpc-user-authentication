@@ -30,9 +30,9 @@ const createUser = async (userName,email,number,password,otp,referral)=>{
     try{
         const status = await otpUseCase.validateOtp(number,otp)  
         if(status){
-           await userDBRepository.createUser(userName,email,number,password) 
+         const user =  await userDBRepository.createUser(userName,email,number,password) 
            if(referral){
-             await userDBRepository.referalCoins(referral)
+             await userDBRepository.referalCoins(referral,user._id)
             }
         return true
         }else{

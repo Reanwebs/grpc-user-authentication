@@ -38,6 +38,8 @@ const createUser = async (userName,email,mobNo,password,)=>{
         userId:user._id,
         coins:0
         })
+
+        return user;
           
     } catch (error) {
         throw new Error("error in creating user")
