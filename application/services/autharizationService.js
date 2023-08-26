@@ -10,7 +10,6 @@ server.addService(auth_grpc.AutharizationService,{
     userSignup,
     userLogin,
     resendOtp
-    
 })
 
 module.exports = server;

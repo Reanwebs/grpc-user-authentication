@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package pb;
+
+option objc_class_prefix = "ADMIN";
+
+service AdminManagement{
+    rpc AdminLogin(LoginRequest) returns (LoginResponse){}
+    rpc GetUsers(GetUsersRequest) returns (GetUsersResponse){}
+    rpc ManageUser(ManageUserRequest) returns (ManageUserResponse){}
+    rpc AddInterest(AddInterestRequest) returns (AddInterestResponse){}
+}
+
+message LoginRequest{
+    string email=1;
+    string password=2;
+}
+
+message LoginResponse{
+    int32 status = 1;
+    string message = 2;
+    string error = 3;
+}
+
+message GetUsersRequest{
+
+}
+
+message User{
+    string id = 1;
+    string userName =2;
+    string email = 3;
+    string phoneNumber = 4;
+}
+
+message GetUsersResponse{
+    int32 status = 1;
+    repeated User users = 2;
+    string message = 3;
+    string error = 4;
+}
+
+message ManageUserRequest{
+    string id = 1;
+}
+
+message ManageUserResponse{
+    int32 status = 1;
+    string message = 2;
+    string error = 3;
+}
+
+message AddInterestRequest{
+    string interest = 1;
+}
+
+message AddInterestResponse{
+    int32 status = 1;
+    string message = 2;
+    string error = 3;
+}
+
