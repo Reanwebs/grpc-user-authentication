@@ -1,5 +1,5 @@
 const autherizationUseCase = require("../../application/useCase/autherizationUseCase")
-const auth_pb = require("../proto/pb/auth_pb")
+const auth_pb = require("../proto/pb/auth/auth_pb")
 const grpc = require("@grpc/grpc-js")
 
 const validName = async(call,callback)=>{

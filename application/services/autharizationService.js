@@ -1,5 +1,5 @@
 const grpc = require("@grpc/grpc-js")
-const auth_grpc = require("../../interfaces/proto/pb/auth_grpc_pb")
+const auth_grpc = require("../../interfaces/proto/pb/auth/auth_grpc_pb")
 const {validName,otpRequest,userSignup,userLogin,resendOtp} = require("../../interfaces/controller/autherizationController")
 
 const server = new grpc.Server();

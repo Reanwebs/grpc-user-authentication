@@ -2,7 +2,7 @@
 
 'use strict';
 var grpc = require('@grpc/grpc-js');
-var interfaces_proto_pb_auth_pb = require('../../../interfaces/proto/pb/auth_pb.js');
+var interfaces_proto_pb_auth_pb = require('./auth_pb.js');
 
 function serialize_pb_LoginRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_pb.LoginRequest)) {
