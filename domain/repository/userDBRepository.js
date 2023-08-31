@@ -70,6 +70,31 @@ const findUserByEmail =async (email)=>{
     }
 }
 
+const allUsers = async ()=>{
+    try {
+       const users =  await User.find({},{_id:1,userName:1,email:1,mobNo:1})
+        console.log(users);
+        return users    
+    } catch (error) {
+        console.log(error);
+        throw new Error("error finding all userss")
+        
+    }
+}
+
+const manageUser = async (userId)=>{
+    try{
+        const user = await User.findById(userId)
+        const newStatus = !user.isBlocked
+        const status = await User.findByIdAndUpdate(userId,{
+            $set:{isBlocked:newStatus}
+        })
+        return true
+    }catch(err){
+        throw new Error("err in updating user")
+    }
+}
+
 
 
 module.exports = {
@@ -77,5 +102,7 @@ module.exports = {
     findExistingUser,
     createUser,
     referalCoins,
-    findUserByEmail
+    findUserByEmail,
+    allUsers,
+    manageUser
 }

@@ -180,6 +180,28 @@ function deserialize_pb_LoginResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.LoginResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_ManageInterestRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ManageInterestRequest)) {
+    throw new Error('Expected argument of type pb.ManageInterestRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ManageInterestRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ManageInterestRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ManageInterestResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ManageInterestResponse)) {
+    throw new Error('Expected argument of type pb.ManageInterestResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ManageInterestResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ManageInterestResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_ManageUserRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ManageUserRequest)) {
     throw new Error('Expected argument of type pb.ManageUserRequest');
@@ -434,6 +456,17 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_AddInterestRequest,
     responseSerialize: serialize_pb_AddInterestResponse,
     responseDeserialize: deserialize_pb_AddInterestResponse,
+  },
+  manageInterest: {
+    path: '/pb.Autharization/ManageInterest',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ManageInterestRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ManageInterestResponse,
+    requestSerialize: serialize_pb_ManageInterestRequest,
+    requestDeserialize: deserialize_pb_ManageInterestRequest,
+    responseSerialize: serialize_pb_ManageInterestResponse,
+    responseDeserialize: deserialize_pb_ManageInterestResponse,
   },
 };
 

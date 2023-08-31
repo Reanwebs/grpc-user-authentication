@@ -19,6 +19,7 @@ service Autharization {
     rpc ManageUser (ManageUserRequest) returns (ManageUserResponse){}
     rpc GetInterest(GetInterestRequest) returns (GetInterestResponse){}
     rpc AddInterest(AddInterestRequest) returns (AddInterestResponse) {}
+    rpc ManageInterest(ManageInterestRequest) returns (ManageInterestResponse){}
 
 }
 
@@ -183,6 +184,16 @@ message AddInterestRequest{
 
 message AddInterestResponse{
     int32 status = 1;
+    string message = 2;
+    string error = 3;
+}
+
+message ManageInterestRequest{
+    string id = 1;
+}
+
+message ManageInterestResponse{
+    int64 status = 1;
     string message = 2;
     string error = 3;
 }
