@@ -92,6 +92,28 @@ function deserialize_pb_ForgotPasswordOtpResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.ForgotPasswordOtpResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_ForgotPasswordValidateOtpRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ForgotPasswordValidateOtpRequest)) {
+    throw new Error('Expected argument of type pb.ForgotPasswordValidateOtpRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ForgotPasswordValidateOtpRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ForgotPasswordValidateOtpRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ForgotPasswordValidateOtpResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ForgotPasswordValidateOtpResponse)) {
+    throw new Error('Expected argument of type pb.ForgotPasswordValidateOtpResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ForgotPasswordValidateOtpResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ForgotPasswordValidateOtpResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_GetInterestRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetInterestRequest)) {
     throw new Error('Expected argument of type pb.GetInterestRequest');
@@ -335,6 +357,17 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_ForgotPasswordOtpRequest,
     responseSerialize: serialize_pb_ForgotPasswordOtpResponse,
     responseDeserialize: deserialize_pb_ForgotPasswordOtpResponse,
+  },
+  forgotPasswordValidateOtp: {
+    path: '/pb.Autharization/ForgotPasswordValidateOtp',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ForgotPasswordValidateOtpRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ForgotPasswordValidateOtpResponse,
+    requestSerialize: serialize_pb_ForgotPasswordValidateOtpRequest,
+    requestDeserialize: deserialize_pb_ForgotPasswordValidateOtpRequest,
+    responseSerialize: serialize_pb_ForgotPasswordValidateOtpResponse,
+    responseDeserialize: deserialize_pb_ForgotPasswordValidateOtpResponse,
   },
   forgotPasswordChangePassword: {
     path: '/pb.Autharization/ForgotPasswordChangePassword',
