@@ -12,6 +12,7 @@ service Autharization {
     rpc validName (validNameRequest) returns (validNameResponse){}
     rpc ResendOtp (resendOtpRequest) returns (resendOtpResponse){}
     rpc ForgotPasswordOtp(ForgotPasswordOtpRequest) returns (ForgotPasswordOtpResponse){}
+    rpc ForgotPasswordValidateOtp(ForgotPasswordValidateOtpRequest) returns (ForgotPasswordValidateOtpResponse){}
     rpc ForgotPasswordChangePassword(ForgotPasswordChangePasswordRequest) returns (ForgotPasswordChangePasswordResponse){}
     rpc AdminLogin(AdminLoginRequest) returns (AdminLoginResponse) {}
     rpc GetUsers (GetUsersRequest) returns (GetUsersResponse) {}
@@ -95,6 +96,16 @@ message ForgotPasswordOtpRequest{
 message ForgotPasswordOtpResponse{
     int64 status =1;
     string message = 2;
+    string error = 3;
+}
+
+message ForgotPasswordValidateOtpRequest{
+    string phoneNumber =1;
+    string otp = 2;
+}
+message ForgotPasswordValidateOtpResponse{
+    int64 status =1;
+    string message =2;
     string error = 3;
 }
 

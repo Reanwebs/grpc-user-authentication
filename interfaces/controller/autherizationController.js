@@ -2,6 +2,7 @@ const autherizationUseCase = require("../../application/useCase/autherizationUse
 const auth_pb = require("../proto/pb/auth/auth_pb")
 const grpc = require("@grpc/grpc-js")
 
+
 const validName = async(call,callback)=>{
     try {
         const [userName] = call.request.array
