@@ -2,6 +2,8 @@ const User = require("../models/userModel")
 const Wallet = require("../models/walletModel")
 const authService = require("../../interfaces/services/authService")
 const generateCode = require("../../interfaces/services/generateReferralCode")
+const mongoose = require('mongoose')
+
 
 
 const findUserName =async (userName)=>{
@@ -72,11 +74,9 @@ const findUserByEmail =async (email)=>{
 
 const allUsers = async ()=>{
     try {
-       const users =  await User.find({},{_id:1,userName:1,email:1,mobNo:1})
-        console.log(users);
+       const users =  await User.find({},{_id:1,userName:1,email:1,mobNo:1,isBlocked:1})
         return users    
     } catch (error) {
-        console.log(error);
         throw new Error("error finding all userss")
         
     }
@@ -84,13 +84,18 @@ const allUsers = async ()=>{
 
 const manageUser = async (userId)=>{
     try{
-        const user = await User.findById(userId)
+        if(!mongoose.Types.ObjectId.isValid(userId)){
+            return false
+        }
+        const user = await User.findOne({_id:userId})
+        if(!user) return false;
         const newStatus = !user.isBlocked
         const status = await User.findByIdAndUpdate(userId,{
             $set:{isBlocked:newStatus}
         })
         return true
     }catch(err){
+        console.log(err);
         throw new Error("err in updating user")
     }
 }

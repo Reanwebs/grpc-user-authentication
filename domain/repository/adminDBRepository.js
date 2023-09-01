@@ -1,10 +1,10 @@
 const Admin = require("../models/adminModel")
 const Interest = require("../models/interestModel")
+const mongoose = require("mongoose")
 
 const validateAdmin = async (email)=>{
     try {
         const admin = await Admin.findOne({email})
-        console.log(admin);
         return admin
         
     } catch (error) {
@@ -26,6 +26,9 @@ const getAllInterest = async ()=>{
 
 const addInterest = async (interest)=>{
     try {
+        interest = interest.toLowerCase();
+        const interestExists = await Interest.findOne({interest})
+        if(interestExists) return false
         const data = await Interest.create({
             interest,
             isBlocked:false
@@ -39,6 +42,9 @@ const addInterest = async (interest)=>{
 
 const manageInterest = async(id)=>{
     try {
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return false
+        }
         const interest = await Interest.findOne({_id:id});
         if(interest){
             const blocked = !interest.isBlocked;

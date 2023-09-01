@@ -4297,7 +4297,8 @@ proto.pb.user.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     username: jspb.Message.getFieldWithDefault(msg, 2, ""),
     email: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    phonenumber: jspb.Message.getFieldWithDefault(msg, 4, "")
+    phonenumber: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    status: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
   };
 
   if (includeInstance) {
@@ -4349,6 +4350,10 @@ proto.pb.user.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setPhonenumber(value);
+      break;
+    case 5:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setStatus(value);
       break;
     default:
       reader.skipField();
@@ -4404,6 +4409,13 @@ proto.pb.user.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getStatus();
+  if (f) {
+    writer.writeBool(
+      5,
       f
     );
   }
@@ -4479,6 +4491,24 @@ proto.pb.user.prototype.getPhonenumber = function() {
  */
 proto.pb.user.prototype.setPhonenumber = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional bool status = 5;
+ * @return {boolean}
+ */
+proto.pb.user.prototype.getStatus = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.pb.user} returns this
+ */
+proto.pb.user.prototype.setStatus = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 5, value);
 };
 
 
@@ -5187,7 +5217,7 @@ proto.pb.interest.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     interest: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    status: jspb.Message.getFieldWithDefault(msg, 3, "")
+    status: jspb.Message.getBooleanFieldWithDefault(msg, 3, false)
   };
 
   if (includeInstance) {
@@ -5233,7 +5263,7 @@ proto.pb.interest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setInterest(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {boolean} */ (reader.readBool());
       msg.setStatus(value);
       break;
     default:
@@ -5280,8 +5310,8 @@ proto.pb.interest.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getStatus();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f) {
+    writer.writeBool(
       3,
       f
     );
@@ -5326,20 +5356,20 @@ proto.pb.interest.prototype.setInterest = function(value) {
 
 
 /**
- * optional string status = 3;
- * @return {string}
+ * optional bool status = 3;
+ * @return {boolean}
  */
 proto.pb.interest.prototype.getStatus = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 3, false));
 };
 
 
 /**
- * @param {string} value
+ * @param {boolean} value
  * @return {!proto.pb.interest} returns this
  */
 proto.pb.interest.prototype.setStatus = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3BooleanField(this, 3, value);
 };
 
 

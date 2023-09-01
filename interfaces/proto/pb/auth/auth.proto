@@ -142,6 +142,7 @@ message user{
     string userName =2;
     string email = 3;
     string phoneNumber = 4;
+    bool status = 5;
 }
 
 message GetUsersResponse{
@@ -168,7 +169,7 @@ message GetInterestRequest{
 message interest{
     string id =1;
     string interest = 2;
-    string status = 3;
+    bool status = 3;
 }
 
 message GetInterestResponse{

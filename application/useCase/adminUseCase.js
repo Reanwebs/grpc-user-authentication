@@ -14,17 +14,23 @@ const adminLogin = async (email,password)=>{
     return {status:false,message:"invalid email"}
         
     } catch (error) {
-        console.log(error,"errrrrr in admin login use case");
         throw new Error(error.message)
     }
 }
 
 const getAllUsers = async ()=>{
     try {
-        const users = await userDBRepository.allUsers();
-        console.log(users,"in the use case");    
+        const users = await userDBRepository.allUsers(); 
+        const parsedUsers = users.map(user => ({
+            id: user._id.toString() ,
+            userName :user.userName,
+            email:user.email,
+            phoneNumber:user.mobNo.toString(),
+            status:user.isBlocked
+            
+        }));
+        return parsedUsers  
     } catch (error) {
-        console.log(error,"errrrrr in admin get all usersss");
         throw new Error(error.message)
     }
 }
@@ -34,16 +40,20 @@ const manageUser = async (userId)=>{
        return await userDBRepository.manageUser(userId)
  
     } catch (error) {
-        console.log(error,"error in updating user");
         throw new Error(error.message)
     }
 }
 
 const getAllInterest = async ()=>{
     try {
-        const interest = await adminDBRepository.getAllInterest();
-        console.log(interest);
-        return interest        
+        const interests = await adminDBRepository.getAllInterest();
+        const parsedInterest = interests.map(interest => ({
+            id: interest._id.toString(),
+            interest:interest.interest,
+            status:interest.isBlocked
+        }));
+
+        return parsedInterest        
     } catch (error) {
         console.log(error);
         throw new Error(error.message)
@@ -54,7 +64,6 @@ const getAllInterest = async ()=>{
 const addInterest = async (interest)=>{
     try {
         const status = await adminDBRepository.addInterest(interest);
-        console.log(status);
         return status  
     } catch (error) {
         console.log(error);
@@ -65,9 +74,7 @@ const addInterest = async (interest)=>{
 const manageInterest = async (id)=>{
     try {
         const status = await adminDBRepository.manageInterest(id);
-        console.log(status);
-        return status
-        
+        return status        
     } catch (error) {
         console.log(error);
         throw new Error(error.message)

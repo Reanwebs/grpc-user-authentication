@@ -32,14 +32,24 @@ const adminLogin = async (call,response)=>{
 const getUsers = async (call,response)=>{
     try {
         const users = await adminUseCase.getAllUsers();
-        console.log(users,"insidesss  controller");
+        console.log(users);
         const replay = new auth_pb.GetUsersResponse()
         replay.setStatus(200);
-        replay.setUsersList(users);
         replay.setMessage("user list fetched successfully");
+        const usermsg = users.map(user => {
+            const userMessage = new auth_pb.user();
+            userMessage.setId(user.id);
+            userMessage.setUsername(user.userName);
+            userMessage.setEmail(user.email);
+            userMessage.setPhonenumber(user.phoneNumber);
+            userMessage.setStatus(user.status)
+            return userMessage;
+        });
+        replay.setUsersList(usermsg)
         response(null,replay)
         
     } catch (err) {
+        console.log(err);
         const error = {
             code:grpc.status.ABORTED,
             details:"error in fetching users list"
@@ -57,6 +67,12 @@ const manageUser = async (call,response)=>{
             replay.setStatus(200);
             replay.setMessage("user updated successfully")
             response(null,replay)
+        }else{
+            const error = {
+                code:grpc.status.NOT_FOUND,
+                details:"user not found"
+            }
+            response(error,null)
         }
         
     } catch (err) {
@@ -75,10 +91,18 @@ const getInterest = async (call,response)=>{
         const interests = await adminUseCase.getAllInterest();
         const replay = new auth_pb.GetInterestResponse()
         replay.setStatus(200);
-        replay.setInterestsList(interests);
         replay.setMessage("interest fetched successfully");
+        const interstMsg = interests.map(interest => {
+            const interestMessage = new auth_pb.interest();
+            interestMessage.setId(interest.id);
+            interestMessage.setInterest(interest.interest);
+            interestMessage.setStatus(interest.status);
+            return interestMessage;
+        });
+        replay.setInterestsList(interstMsg)
         response(null,replay)
     } catch (err) {
+        console.log(err);
         const error = {
             code:grpc.status.ABORTED,
             details:"error in fetching interests"
@@ -91,11 +115,20 @@ const getInterest = async (call,response)=>{
 const addInterest = async (call,response)=>{
     try{
         const [interest] = call.request.array
-        await adminUseCase.addInterest(interest)
+        const status = await adminUseCase.addInterest(interest)
         const replay = new auth_pb.AddInterestResponse();
-        replay.setStatus(200);
-        replay.setMessage("interest addedd successfully");
-        response(null,replay)
+        if(status){
+            replay.setStatus(200);
+            replay.setMessage("interest addedd successfully");
+            response(null,replay)
+        }else{
+            const error = {
+                code:grpc.status.ALREADY_EXISTS,
+                details:"interest already exists"
+            }
+            response(error,null)
+        }
+        
     }catch(err){
         const error = {
             code:grpc.status.ABORTED,
@@ -117,7 +150,7 @@ const manageInterest = async (call,response)=>{
         }else{
             const error = {
                 code:grpc.status.UNAVAILABLE,
-                details:"error updating interests"
+                details:"interest not fount"
             }
             response(error,null)
 
