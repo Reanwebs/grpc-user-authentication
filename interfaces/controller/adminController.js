@@ -32,7 +32,6 @@ const adminLogin = async (call,response)=>{
 const getUsers = async (call,response)=>{
     try {
         const users = await adminUseCase.getAllUsers();
-        console.log(users);
         const replay = new auth_pb.GetUsersResponse()
         replay.setStatus(200);
         replay.setMessage("user list fetched successfully");
