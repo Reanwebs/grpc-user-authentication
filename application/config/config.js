@@ -8,7 +8,8 @@ const configKeys = {
     JWT_SECRET:process.env.JWT_SECRET,
     TWILIO_ACCOUNT_SID:process.env.TWILIO_ACCOUNT_SID,
     TWILIO_AUTH_TOKEN:process.env.TWILIO_AUTH_TOKEN,
-    TWILIO_SERVICE_SSID:process.env.TWILIO_SERVICE_SSID
+    TWILIO_SERVICE_SSID:process.env.TWILIO_SERVICE_SSID,
+    GOOGLE_AUTH_CLIENT:process.env.GOOGLE_AUTH_CLIENT
 }
 
 module.exports = configKeys

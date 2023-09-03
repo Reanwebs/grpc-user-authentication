@@ -204,7 +204,37 @@ const forgotPasswordChangePassword = async (call,callback)=>{
 
 }
 
+const googleLogin = async(call,callback)=>{
+    try {
+        const [token] = call.request.array;
+        const status = await autherizationUseCase.googleLogin(token)
+        const replay = new auth_pb.GoogleLoginResponse()
+        if(status.status){
+            replay.setStatus(200)
+            replay.setUsername(status.userName)
+            replay.setEmail(status.email)
+            replay.setUid(status.userId)
+            replay.setMessage(status.message)
+            replay.setPhonenumber(status?.number && null)
+            callback(null,replay)
+        }else{
+            const error = {
+                code: grpc.status.UNAUTHENTICATED,
+                details: status.message
+            };
+            callback(error,null)
+    
+        }
+        } catch (err) {
+            const error = {
+                code:grpc.status.ABORTED,
+                details:err.message
+            };
+          callback(error,null)            
+        }
+}
+
 
 module.exports = {
-    validName,otpRequest,userSignup,userLogin,resendOtp,forgotPasswordOtp,forgotPasswordValidateOtp,forgotPasswordChangePassword
+    validName,otpRequest,userSignup,userLogin,resendOtp,forgotPasswordOtp,forgotPasswordValidateOtp,forgotPasswordChangePassword,googleLogin
 }

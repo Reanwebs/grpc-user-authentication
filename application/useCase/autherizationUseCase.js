@@ -1,6 +1,7 @@
 const userDBRepository = require("../../domain/repository/userDBRepository")
 const otpUseCase = require("../../interfaces/services/otpService")
 const authService = require("../../interfaces/services/authService")
+const verify = require('../../interfaces/services/googleAuthService')
 
 
 const validateName = async (userName)=>{
@@ -100,6 +101,19 @@ const forgotChangePassword = async (number,password)=>{
     }
 }
 
+const googleLogin = async (token)=>{
+    try {
+        const data = await verify(token);
+        const user = await userDBRepository.createUserGoogle(data.userName,data.email);
+        if(user)return {status:true,message:"loggedin successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),userId:user._id.toString()}
+        else return {status:false,message:"failed to create user"}
+    } catch (error) {
+        throw new Error(error.message)
+        
+    }
+
+}
+
 
 
 module.exports = {
@@ -110,5 +124,6 @@ module.exports = {
     resendOtp,
     forgotPasswordSendOtp,
     forgotPasswordValidateOtp,
-    forgotChangePassword
+    forgotChangePassword,
+    googleLogin
 }

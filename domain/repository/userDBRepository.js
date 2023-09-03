@@ -119,6 +119,31 @@ const changePassword = async (number,password)=>{
     }
 }
 
+const createUserGoogle =async  (userName,email)=>{
+    try {
+        const user = await findUserByEmail(email);
+        if(user) return user;
+        else{
+          const referCode = await generateCode(userName);
+          const user = await User.create({
+            userName,
+            email,
+            referCode,
+            isGoogle:true
+          })
+          await Wallet.create({
+            userId:user._id,
+            coins:0
+            })
+          return user;
+        }
+        
+    } catch (error) {
+        throw new Error("error in user google signup")
+        
+    }
+}
+
 
 module.exports = {
     findUserName,
@@ -129,5 +154,6 @@ module.exports = {
     allUsers,
     manageUser,
     findUserByNumber,
-    changePassword
+    changePassword,
+    createUserGoogle
 }

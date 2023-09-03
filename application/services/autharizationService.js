@@ -7,7 +7,8 @@ const {validName,
       resendOtp,
       forgotPasswordOtp,
       forgotPasswordValidateOtp,
-      forgotPasswordChangePassword
+      forgotPasswordChangePassword,
+      googleLogin
     } = require("../../interfaces/controller/autherizationController")
 const {adminLogin,getUsers,manageUser,getInterest,addInterest,manageInterest} =  require("../../interfaces/controller/adminController")
 
@@ -27,7 +28,9 @@ server.addService(auth_grpc.AutharizationService,{
     manageInterest,
     forgotPasswordOtp,
     forgotPasswordValidateOtp,
-    forgotPasswordChangePassword
+    forgotPasswordChangePassword,
+    googleLogin
+    
 })
 
 module.exports = server;
