@@ -95,11 +95,29 @@ const manageUser = async (userId)=>{
         })
         return true
     }catch(err){
-        console.log(err);
         throw new Error("err in updating user")
     }
 }
 
+const findUserByNumber = async (number)=>{
+    try {
+        const user = await User.findOne({mobNo:number});
+        if(user) return true;
+        else return false;       
+    } catch (error) {
+        console.log(error);
+        throw new Error('error in finding user by number')
+    }
+}
+
+const changePassword = async (number,password)=>{
+    try {
+        const hashPassword = await authService.hashPassword(password);
+        await User.findOneAndUpdate({mobNo:number},{$set:{password:hashPassword}})
+    } catch (error) {
+        throw new Error("error in changing password")
+    }
+}
 
 
 module.exports = {
@@ -109,5 +127,7 @@ module.exports = {
     referalCoins,
     findUserByEmail,
     allUsers,
-    manageUser
+    manageUser,
+    findUserByNumber,
+    changePassword
 }

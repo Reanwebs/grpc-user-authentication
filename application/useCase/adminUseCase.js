@@ -55,7 +55,6 @@ const getAllInterest = async ()=>{
 
         return parsedInterest        
     } catch (error) {
-        console.log(error);
         throw new Error(error.message)
         
     }
@@ -66,7 +65,6 @@ const addInterest = async (interest)=>{
         const status = await adminDBRepository.addInterest(interest);
         return status  
     } catch (error) {
-        console.log(error);
         throw new Error(error.message)
     }
 }
@@ -76,7 +74,6 @@ const manageInterest = async (id)=>{
         const status = await adminDBRepository.manageInterest(id);
         return status        
     } catch (error) {
-        console.log(error);
         throw new Error(error.message)
     }
 }

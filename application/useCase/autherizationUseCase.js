@@ -66,6 +66,39 @@ const resendOtp = async (number)=>{
     }
 }
 
+const forgotPasswordSendOtp = async (number)=>{
+    try {
+        const status = await userDBRepository.findUserByNumber(number);
+        if(status){
+            await otpUseCase.sendOtp(number);
+            return true
+        }else return false
+        
+    } catch (error) {
+        throw new Error(error.message)
+        
+    }
+
+}
+
+const forgotPasswordValidateOtp = async(number,otp)=>{
+    try {
+        const status = await otpUseCase.validateOtp(number,otp);
+        if(status) return true;
+        else return false;
+    } catch (error) {
+        throw new Error("error in validating otp") 
+    }
+}
+
+const forgotChangePassword = async (number,password)=>{
+    try {
+        await userDBRepository.changePassword(number,password)
+        return true
+    } catch (error) {   
+        throw new Error(error,message)
+    }
+}
 
 
 
@@ -74,5 +107,8 @@ module.exports = {
     validateData,
     createUser,
     loginUser,
-    resendOtp
+    resendOtp,
+    forgotPasswordSendOtp,
+    forgotPasswordValidateOtp,
+    forgotChangePassword
 }

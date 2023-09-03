@@ -8,8 +8,10 @@ const client =  twilio(accountSid, authToken);
 
 const sendOtp = async(number)=>{
     try {
+        console.log(number,"uuuuuuuuu");
       await client.verify.v2.services(verifySid).verifications.create({to:`+91${number}`,channel:"sms"})
     } catch (error) {
+        console.log(error);
         throw new Error("error in sending otp")
     }
 }
@@ -22,7 +24,7 @@ const validateOtp = async(number,otp)=>{
         throw new Error("error in validating otp")
     }
 }
-
+ 
 module.exports = {
     sendOtp,validateOtp
 }
