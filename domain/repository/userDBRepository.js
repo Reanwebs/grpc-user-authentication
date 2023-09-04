@@ -144,6 +144,57 @@ const createUserGoogle =async  (userName,email)=>{
     }
 }
 
+const findUserById = async (userId)=>{
+    try {
+        console.log(userId,"userId in repository");
+        const user = await User.findById(userId);
+        console.log(user,"user in user find by id");
+        return user; 
+    } catch (error) {
+        throw new Error('error in finding user by id')
+    }
+}
+
+const changeUserName = async (userId,userName)=>{
+    try {
+        console.log(userId,userName);
+        const user = await User.findByIdAndUpdate({_id:userId},
+            {
+                $set:{userName:userName}
+            })
+        return user;
+    } catch (error) {
+        throw new Error("error in changing user name")
+    }
+}
+
+const changeEmail = async (userId,email)=>{
+    try {
+      const user = await User.findByIdAndUpdate({_id:userId},{
+        $set:{email:email}
+      })
+        return user
+    } catch (error) {
+        throw new Error("error in changing email")
+        
+    }
+}
+
+const changePasswordProfile = async (userId,password)=>{
+    try {
+        const hashPassword = await authService.hashPassword(password);
+        await User.findByIdAndUpdate({_id:userId},{
+            $set:{password:hashPassword}
+        })
+        
+    } catch (error) {
+
+         throw new Error("error in changing password")
+    }
+}
+
+
+
 
 module.exports = {
     findUserName,
@@ -155,5 +206,9 @@ module.exports = {
     manageUser,
     findUserByNumber,
     changePassword,
-    createUserGoogle
+    createUserGoogle,
+    findUserById,
+    changeUserName,
+    changeEmail,
+    changePasswordProfile
 }

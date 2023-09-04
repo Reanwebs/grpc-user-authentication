@@ -48,6 +48,94 @@ function deserialize_pb_AdminLoginResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.AdminLoginResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_ChangeEmailRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeEmailRequest)) {
+    throw new Error('Expected argument of type pb.ChangeEmailRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangeEmailRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangeEmailRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangeEmailResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeEmailResponse)) {
+    throw new Error('Expected argument of type pb.ChangeEmailResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangeEmailResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangeEmailResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangeEmailVerifyOtpRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeEmailVerifyOtpRequest)) {
+    throw new Error('Expected argument of type pb.ChangeEmailVerifyOtpRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangeEmailVerifyOtpRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangeEmailVerifyOtpRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangeEmailVerifyOtpResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeEmailVerifyOtpResponse)) {
+    throw new Error('Expected argument of type pb.ChangeEmailVerifyOtpResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangeEmailVerifyOtpResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangeEmailVerifyOtpResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangePasswordRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangePasswordRequest)) {
+    throw new Error('Expected argument of type pb.ChangePasswordRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangePasswordRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangePasswordRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangePasswordResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangePasswordResponse)) {
+    throw new Error('Expected argument of type pb.ChangePasswordResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangePasswordResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangePasswordResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangeUserNameRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeUserNameRequest)) {
+    throw new Error('Expected argument of type pb.ChangeUserNameRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangeUserNameRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangeUserNameRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangeUserNameResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeUserNameResponse)) {
+    throw new Error('Expected argument of type pb.ChangeUserNameResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangeUserNameResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangeUserNameResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_ForgotPasswordChangePasswordRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ForgotPasswordChangePasswordRequest)) {
     throw new Error('Expected argument of type pb.ForgotPasswordChangePasswordRequest');
@@ -533,6 +621,50 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_GoogleLoginRequest,
     responseSerialize: serialize_pb_GoogleLoginResponse,
     responseDeserialize: deserialize_pb_GoogleLoginResponse,
+  },
+  changeUserName: {
+    path: '/pb.Autharization/ChangeUserName',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ChangeUserNameRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ChangeUserNameResponse,
+    requestSerialize: serialize_pb_ChangeUserNameRequest,
+    requestDeserialize: deserialize_pb_ChangeUserNameRequest,
+    responseSerialize: serialize_pb_ChangeUserNameResponse,
+    responseDeserialize: deserialize_pb_ChangeUserNameResponse,
+  },
+  changeEmail: {
+    path: '/pb.Autharization/ChangeEmail',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ChangeEmailRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ChangeEmailResponse,
+    requestSerialize: serialize_pb_ChangeEmailRequest,
+    requestDeserialize: deserialize_pb_ChangeEmailRequest,
+    responseSerialize: serialize_pb_ChangeEmailResponse,
+    responseDeserialize: deserialize_pb_ChangeEmailResponse,
+  },
+  changePassword: {
+    path: '/pb.Autharization/ChangePassword',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ChangePasswordRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ChangePasswordResponse,
+    requestSerialize: serialize_pb_ChangePasswordRequest,
+    requestDeserialize: deserialize_pb_ChangePasswordRequest,
+    responseSerialize: serialize_pb_ChangePasswordResponse,
+    responseDeserialize: deserialize_pb_ChangePasswordResponse,
+  },
+  changeEmailVerifyOtp: {
+    path: '/pb.Autharization/ChangeEmailVerifyOtp',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ChangeEmailVerifyOtpRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ChangeEmailVerifyOtpResponse,
+    requestSerialize: serialize_pb_ChangeEmailVerifyOtpRequest,
+    requestDeserialize: deserialize_pb_ChangeEmailVerifyOtpRequest,
+    responseSerialize: serialize_pb_ChangeEmailVerifyOtpResponse,
+    responseDeserialize: deserialize_pb_ChangeEmailVerifyOtpResponse,
   },
 };
 

@@ -12,6 +12,7 @@ const {validName,
       validateUser
     } = require("../../interfaces/controller/autherizationController")
 const {adminLogin,getUsers,manageUser,getInterest,addInterest,manageInterest} =  require("../../interfaces/controller/adminController")
+const {changeUserName,changeEmail,changeEmailVerifyOtp,changePassword} = require('../../interfaces/controller/userProfileController')
 
 const server = new grpc.Server();
 
@@ -31,8 +32,11 @@ server.addService(auth_grpc.AutharizationService,{
     forgotPasswordValidateOtp,
     forgotPasswordChangePassword,
     googleLogin,
-    validateUser
-    
+    validateUser,
+    changeUserName,
+    changeEmail,
+    changeEmailVerifyOtp,
+    changePassword
 })
 
 module.exports = server;
