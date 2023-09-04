@@ -8,7 +8,8 @@ const {validName,
       forgotPasswordOtp,
       forgotPasswordValidateOtp,
       forgotPasswordChangePassword,
-      googleLogin
+      googleLogin,
+      validateUser
     } = require("../../interfaces/controller/autherizationController")
 const {adminLogin,getUsers,manageUser,getInterest,addInterest,manageInterest} =  require("../../interfaces/controller/adminController")
 
@@ -29,7 +30,8 @@ server.addService(auth_grpc.AutharizationService,{
     forgotPasswordOtp,
     forgotPasswordValidateOtp,
     forgotPasswordChangePassword,
-    googleLogin
+    googleLogin,
+    validateUser
     
 })
 

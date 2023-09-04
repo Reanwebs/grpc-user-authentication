@@ -114,6 +114,16 @@ const googleLogin = async (token)=>{
 
 }
 
+const validateUserStatus = async (email)=>{
+    try {
+        const user = await userDBRepository.findUserByEmail(email);
+        if(user) return false
+        else return true
+    } catch (error) {
+        throw new Error(error.message)
+    }
+}
+
 
 
 module.exports = {
@@ -125,5 +135,6 @@ module.exports = {
     forgotPasswordSendOtp,
     forgotPasswordValidateOtp,
     forgotChangePassword,
-    googleLogin
+    googleLogin,
+    validateUserStatus
 }

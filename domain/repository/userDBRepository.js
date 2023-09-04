@@ -34,7 +34,7 @@ const createUser = async (userName,email,mobNo,password,)=>{
             mobNo,
             password:hashPassword,
             referCode,
-            isGoogle:false
+            isGoogle:false,
         })
          await Wallet.create({
         userId:user._id,
@@ -65,7 +65,7 @@ const createUser = async (userName,email,mobNo,password,)=>{
 
 const findUserByEmail =async (email)=>{
     try{
-        const user = await User.findOne({email})
+        const user = await User.findOne({email,isBlocked:false})
         return user
     }catch(error){
       throw new Error("error finding user by email")

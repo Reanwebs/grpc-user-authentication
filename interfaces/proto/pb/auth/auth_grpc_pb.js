@@ -158,6 +158,28 @@ function deserialize_pb_GetUsersResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.GetUsersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_GoogleLoginRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GoogleLoginRequest)) {
+    throw new Error('Expected argument of type pb.GoogleLoginRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GoogleLoginRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GoogleLoginRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GoogleLoginResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GoogleLoginResponse)) {
+    throw new Error('Expected argument of type pb.GoogleLoginResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GoogleLoginResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GoogleLoginResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_LoginRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.LoginRequest)) {
     throw new Error('Expected argument of type pb.LoginRequest');
@@ -266,6 +288,28 @@ function serialize_pb_SignupResponse(arg) {
 
 function deserialize_pb_SignupResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.SignupResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ValidateUserRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ValidateUserRequest)) {
+    throw new Error('Expected argument of type pb.ValidateUserRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ValidateUserRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ValidateUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ValidateUserResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ValidateUserResponse)) {
+    throw new Error('Expected argument of type pb.ValidateUserResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ValidateUserResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ValidateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_resendOtpRequest(arg) {
@@ -467,6 +511,28 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_ManageInterestRequest,
     responseSerialize: serialize_pb_ManageInterestResponse,
     responseDeserialize: deserialize_pb_ManageInterestResponse,
+  },
+  validateUser: {
+    path: '/pb.Autharization/ValidateUser',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ValidateUserRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ValidateUserResponse,
+    requestSerialize: serialize_pb_ValidateUserRequest,
+    requestDeserialize: deserialize_pb_ValidateUserRequest,
+    responseSerialize: serialize_pb_ValidateUserResponse,
+    responseDeserialize: deserialize_pb_ValidateUserResponse,
+  },
+  googleLogin: {
+    path: '/pb.Autharization/GoogleLogin',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.GoogleLoginRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.GoogleLoginResponse,
+    requestSerialize: serialize_pb_GoogleLoginRequest,
+    requestDeserialize: deserialize_pb_GoogleLoginRequest,
+    responseSerialize: serialize_pb_GoogleLoginResponse,
+    responseDeserialize: deserialize_pb_GoogleLoginResponse,
   },
 };
 
