@@ -9,16 +9,11 @@ const verify = async(token)=>{
         userName:'',
         email:''
     }
-    console.log(token,"token in verify");
     const ticket = await client.verifyIdToken({
         idToken:token,
         audience:configKeys.GOOGLE_AUTH_CLIENT
     })
-    console.log(ticket,"ticket in verify");
-
     const payload = ticket.getPayload();
-
-    console.log(payload,"payload in verify");
     if(payload?.given_name && payload?.email){
         user.userName=payload.given_name,
         user.email=payload.email;

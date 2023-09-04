@@ -221,7 +221,7 @@ const googleLogin = async(call,callback)=>{
             const error = {
                 code: grpc.status.UNAUTHENTICATED,
                 details: status.message
-            };
+            }; 
             callback(error,null)
     
         }

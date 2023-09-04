@@ -25,7 +25,7 @@ const getAllUsers = async ()=>{
             id: user._id.toString() ,
             userName :user.userName,
             email:user.email,
-            phoneNumber:user.mobNo.toString(),
+            phoneNumber:user?.mobNo?.toString(),
             status:user.isBlocked
             
         }));
