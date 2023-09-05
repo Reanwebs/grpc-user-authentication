@@ -27,13 +27,14 @@ const changeEmail = async (userId,email)=>{
     try {
         const user = await userDBRepository.findUserById(userId);
         if(user && email !== user.email){
-            const userExist = userDBRepository.findUserByEmail(email);
+            const userExist = await  userDBRepository.findUserByEmail(email);
             if(userExist) return {status:false,message:"user already exists in email"}
             else{
                 await sendEmail(email); 
                 return {status:true,message:"please enter your otp send to email"}     
             }
         }
+        return {status:true,message:"no change in email"}
         
     } catch (error) {
         throw new Error(error.message)

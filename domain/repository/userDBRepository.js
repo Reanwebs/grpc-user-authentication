@@ -66,6 +66,7 @@ const createUser = async (userName,email,mobNo,password,)=>{
 const findUserByEmail =async (email)=>{
     try{
         const user = await User.findOne({email,isBlocked:false})
+        console.log("user exist ",user);
         return user
     }catch(error){
       throw new Error("error finding user by email")
@@ -146,9 +147,7 @@ const createUserGoogle =async  (userName,email)=>{
 
 const findUserById = async (userId)=>{
     try {
-        console.log(userId,"userId in repository");
         const user = await User.findById(userId);
-        console.log(user,"user in user find by id");
         return user; 
     } catch (error) {
         throw new Error('error in finding user by id')

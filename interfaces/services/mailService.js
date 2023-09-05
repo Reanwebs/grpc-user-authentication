@@ -18,13 +18,13 @@ const sendEmail = (email)=>{
 
     setTimeout(()=>{
         otp=null;
-    })
+    },120000)
 
     const mailOptions = {
         from:'ajithvkallada@gmail.com',
         to: email,
         subject: 'OTP for Login',
-        text: `Your OTP for verify email: ${otp}`,
+        text: `Your OTP for verify email: ${otp} `,
       };
 
       transport.sendMail(mailOptions,(error,info)=>{
