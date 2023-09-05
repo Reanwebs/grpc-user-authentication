@@ -114,6 +114,50 @@ function deserialize_pb_ChangePasswordResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.ChangePasswordResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_ChangePhoneNumberOtpRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberOtpRequest)) {
+    throw new Error('Expected argument of type pb.ChangePhoneNumberOtpRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangePhoneNumberOtpRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberOtpRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangePhoneNumberOtpResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberOtpResponse)) {
+    throw new Error('Expected argument of type pb.ChangePhoneNumberOtpResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangePhoneNumberOtpResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberOtpResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangePhoneNumberRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberRequest)) {
+    throw new Error('Expected argument of type pb.ChangePhoneNumberRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangePhoneNumberRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangePhoneNumberResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberResponse)) {
+    throw new Error('Expected argument of type pb.ChangePhoneNumberResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangePhoneNumberResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_ChangeUserNameRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeUserNameRequest)) {
     throw new Error('Expected argument of type pb.ChangeUserNameRequest');
@@ -665,6 +709,28 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_ChangeEmailVerifyOtpRequest,
     responseSerialize: serialize_pb_ChangeEmailVerifyOtpResponse,
     responseDeserialize: deserialize_pb_ChangeEmailVerifyOtpResponse,
+  },
+  changePhoneNumberOtp: {
+    path: '/pb.Autharization/ChangePhoneNumberOtp',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberOtpRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberOtpResponse,
+    requestSerialize: serialize_pb_ChangePhoneNumberOtpRequest,
+    requestDeserialize: deserialize_pb_ChangePhoneNumberOtpRequest,
+    responseSerialize: serialize_pb_ChangePhoneNumberOtpResponse,
+    responseDeserialize: deserialize_pb_ChangePhoneNumberOtpResponse,
+  },
+  changePhoneNumber: {
+    path: '/pb.Autharization/ChangePhoneNumber',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ChangePhoneNumberResponse,
+    requestSerialize: serialize_pb_ChangePhoneNumberRequest,
+    requestDeserialize: deserialize_pb_ChangePhoneNumberRequest,
+    responseSerialize: serialize_pb_ChangePhoneNumberResponse,
+    responseDeserialize: deserialize_pb_ChangePhoneNumberResponse,
   },
 };
 
