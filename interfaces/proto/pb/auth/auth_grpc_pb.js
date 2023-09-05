@@ -48,6 +48,28 @@ function deserialize_pb_AdminLoginResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.AdminLoginResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_ChangeAvatarRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeAvatarRequest)) {
+    throw new Error('Expected argument of type pb.ChangeAvatarRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangeAvatarRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangeAvatarRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ChangeAvatarResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeAvatarResponse)) {
+    throw new Error('Expected argument of type pb.ChangeAvatarResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ChangeAvatarResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ChangeAvatarResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_ChangeEmailRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeEmailRequest)) {
     throw new Error('Expected argument of type pb.ChangeEmailRequest');
@@ -400,6 +422,28 @@ function deserialize_pb_OtpSignUpResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.OtpSignUpResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_RemoveAvatarRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.RemoveAvatarRequest)) {
+    throw new Error('Expected argument of type pb.RemoveAvatarRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_RemoveAvatarRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.RemoveAvatarRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_RemoveAvatarResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.RemoveAvatarResponse)) {
+    throw new Error('Expected argument of type pb.RemoveAvatarResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_RemoveAvatarResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.RemoveAvatarResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_SignupRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.SignupRequest)) {
     throw new Error('Expected argument of type pb.SignupRequest');
@@ -731,6 +775,28 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_ChangePhoneNumberRequest,
     responseSerialize: serialize_pb_ChangePhoneNumberResponse,
     responseDeserialize: deserialize_pb_ChangePhoneNumberResponse,
+  },
+  changeAvatar: {
+    path: '/pb.Autharization/ChangeAvatar',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ChangeAvatarRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ChangeAvatarResponse,
+    requestSerialize: serialize_pb_ChangeAvatarRequest,
+    requestDeserialize: deserialize_pb_ChangeAvatarRequest,
+    responseSerialize: serialize_pb_ChangeAvatarResponse,
+    responseDeserialize: deserialize_pb_ChangeAvatarResponse,
+  },
+  removeAvatar: {
+    path: '/pb.Autharization/RemoveAvatar',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.RemoveAvatarRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.RemoveAvatarResponse,
+    requestSerialize: serialize_pb_RemoveAvatarRequest,
+    requestDeserialize: deserialize_pb_RemoveAvatarRequest,
+    responseSerialize: serialize_pb_RemoveAvatarResponse,
+    responseDeserialize: deserialize_pb_RemoveAvatarResponse,
   },
 };
 

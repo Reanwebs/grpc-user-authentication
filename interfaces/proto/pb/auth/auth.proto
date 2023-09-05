@@ -28,6 +28,8 @@ service Autharization {
     rpc ChangeEmailVerifyOtp(ChangeEmailVerifyOtpRequest) returns (ChangeEmailVerifyOtpResponse) {}
     rpc ChangePhoneNumberOtp(ChangePhoneNumberOtpRequest) returns (ChangePhoneNumberOtpResponse) {}
     rpc ChangePhoneNumber(ChangePhoneNumberRequest) returns (ChangePhoneNumberResponse) {}
+    rpc ChangeAvatar(ChangeAvatarRequest) returns (ChangeAvatarResponse){}
+    rpc RemoveAvatar(RemoveAvatarRequest) returns (RemoveAvatarResponse) {}
 }
 
 message SignupRequest {
@@ -74,6 +76,7 @@ message LoginResponse {
     string error = 5;
     string uid = 6;
     string message = 7;
+    string avatarId=8;
 }
 
 message validNameRequest {
@@ -243,6 +246,7 @@ message ChangeUserNameResponse{
     string phoneNumber = 4;
     string message = 5;
     string error = 6;
+    string avatarId=7;
     
 }
 
@@ -270,6 +274,7 @@ message ChangeEmailVerifyOtpResponse{
     string phoneNumber = 4;
     string message = 5;
     string error = 6;
+    string avatarId=7;
 }
 
 message ChangePasswordRequest{
@@ -310,5 +315,35 @@ message ChangePhoneNumberResponse{
     string phoneNumber = 4;
     string error = 5;
     string message = 6;
+    string avatarId=7;
+}
+
+message ChangeAvatarRequest{
+    string userId =1;
+    string avatarId =2;
+}
+
+message ChangeAvatarResponse{
+    int64 status = 1;
+    string username = 2;
+    string email = 3;
+    string phoneNumber = 4;
+    string error = 5;
+    string message = 6;
+    string avatarId=7;
+}
+
+message RemoveAvatarRequest{
+    string userId =1;
+}
+
+message RemoveAvatarResponse{
+    int64 status = 1;
+    string username = 2;
+    string email = 3;
+    string phoneNumber = 4;
+    string error = 5;
+    string message = 6;
+    string avatarId=7;
 }
 

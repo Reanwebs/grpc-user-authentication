@@ -12,10 +12,12 @@ const changeUserName = async (userId,userName)=>{
             if(userNameExist) return {status:false,message:"user name not available"}
             else{
               const user = await userDBRepository.changeUserName(userId,userName);
-              return {status:true,message:"user name updated successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString()
+              return {status:true,message:"user name updated successfully",
+              userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),avatarId:user?.avatarId
             }  
          }
-        } return {status:true,message:"No change in user name",userName:data?.userName,email:data?.email,number:data?.mobNo?.toString()}
+        } return {status:true,message:"No change in user name",
+        userName:data?.userName,email:data?.email,number:data?.mobNo?.toString(),avatarId:user?.avatarId}
         
     } catch (error) {
         throw new Error(error.message)
@@ -48,7 +50,8 @@ const changeEmailOtpVerify = async (userId,email,otp)=>{
         const data = await verifyOTP(otp);
         if(data.status){
             const user = await userDBRepository.changeEmail(userId,email);
-            return {status:true,message:"user name updated successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString()}
+            return {status:true,message:"user name updated successfully",
+            userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),avatarId:user?.avatarId}
         }else return {status:false,message:data.message}
     } catch (error) {
         throw new Error(error.message)
@@ -86,7 +89,8 @@ const changePhoneNumber = async (userId,phoneNumber,otp)=>{
         const status = await otpUseCase.validateOtp(phoneNumber,otp)
         if(status){
           const user = await userDBRepository.changePhoneNumber(userId,phoneNumber)
-          return {status:true,message:"phone number  updated successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString()}
+          return {status:true,message:"phone number  updated successfully",
+          userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),avatarId:user?.avatarId}
         }else{
           return {status:false,message:"invalid otp"}
         }   
@@ -95,6 +99,20 @@ const changePhoneNumber = async (userId,phoneNumber,otp)=>{
     }
 }
 
+const changeAvatar = async (userId,avatarId)=>{
+    try {
+          const user = await userDBRepository.changeAvatar(userId,avatarId)
+          if(user){
+            return {status:true,message:"avatar updated successfully",
+            userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),avatarId:user?.avatarId}
+          }else{
+          throw new Error("error in updating user avatar")
+        }   
+    } catch (error) {
+        throw new Error(error.message)     
+    }
+}
+
 module.exports={
-    changeUserName,changeEmail,changeEmailOtpVerify,changePassword,requestOtpToChangeNumber,changePhoneNumber
+    changeUserName,changeEmail,changeEmailOtpVerify,changePassword,requestOtpToChangeNumber,changePhoneNumber,changeAvatar
 }

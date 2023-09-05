@@ -12,7 +12,14 @@ const {validName,
       validateUser
     } = require("../../interfaces/controller/autherizationController")
 const {adminLogin,getUsers,manageUser,getInterest,addInterest,manageInterest} =  require("../../interfaces/controller/adminController")
-const {changeUserName,changeEmail,changeEmailVerifyOtp,changePassword,changePhoneNumberOtp,changePhoneNumber} = require('../../interfaces/controller/userProfileController')
+const {changeUserName,
+      changeEmail,
+      changeEmailVerifyOtp,
+      changePassword,
+      changePhoneNumberOtp,
+      changePhoneNumber,
+      changeAvatar
+    } = require('../../interfaces/controller/userProfileController')
 
 const server = new grpc.Server();
 
@@ -38,7 +45,9 @@ server.addService(auth_grpc.AutharizationService,{
     changeEmailVerifyOtp,
     changePassword,
     changePhoneNumberOtp,
-    changePhoneNumber
+    changePhoneNumber,
+    changeAvatar
+    
     
 })
 

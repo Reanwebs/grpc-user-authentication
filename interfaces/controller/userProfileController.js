@@ -14,6 +14,8 @@ const changeUserName = async (call,response)=>{
             replay.setEmail(data.email)
             replay.setPhonenumber(data.number)
             replay.setMessage(data.message)
+            replay.setAvatarid(data.avatarId)
+
             response(null,replay)
         }else{
             const error = {
@@ -70,6 +72,8 @@ const changeEmailVerifyOtp = async (call,response)=>{
             replay.setEmail(data.email)
             replay.setPhonenumber(data.number)
             replay.setMessage(data.message)
+            replay.setAvatarid(data.avatarId)
+
             response(null,replay)
         }else{
             const error = {
@@ -143,6 +147,8 @@ const changePhoneNumber = async (call,response)=>{
             replay.setEmail(data.email)
             replay.setPhonenumber(data.number)
             replay.setMessage(data.message)
+            replay.setAvatarid(data.avatarId)
+
             response(null,replay)
         }else{
             const error = {
@@ -161,4 +167,74 @@ const changePhoneNumber = async (call,response)=>{
     }
 }
 
-module.exports = {changeUserName,changeEmail,changeEmailVerifyOtp,changePassword,changePhoneNumberOtp,changePhoneNumber,changePhoneNumber}
+const changeAvatar = async (call,response)=>{
+    try {
+        const [userId,avatarId] = call.request.array;
+        const data = await userProfileUseCase.changeAvatar(userId,avatarId)
+        const replay = new auth_pb.ChangeAvatarResponse();
+        if(data.status){
+            replay.setStatus(200)
+            replay.setUsername(data.userName)
+            replay.setEmail(data.email)
+            replay.setPhonenumber(data.number)
+            replay.setMessage(data.message)
+            replay.setAvatarid(data.avatarId)
+            response(null,replay)
+        }else{
+            const error = {
+                code: grpc.status.INVALID_ARGUMENT,
+                details: data.message
+            };
+            response(error,null)
+        }  
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:err.message
+        };
+       response(error,null)
+        
+    }
+}
+
+const removeAvatar = async (call,response)=>{
+    try {
+        const [userId] = call.request.array;
+        const data = await userProfileUseCase.changeAvatar(userId,null)
+        const replay = new auth_pb.RemoveAvatarResponse();
+        if(data.status){
+            replay.setStatus(200)
+            replay.setUsername(data.userName)
+            replay.setEmail(data.email)
+            replay.setPhonenumber(data.number)
+            replay.setMessage(data.message)
+            replay.setAvatarid(data.avatarId)
+            response(null,replay)
+        }else{
+            const error = {
+                code: grpc.status.INVALID_ARGUMENT,
+                details: data.message
+            };
+            response(error,null)
+        }  
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:err.message
+        };
+       response(error,null)
+        
+    }
+}
+
+module.exports = 
+   {changeUserName,
+    changeEmail,
+    changeEmailVerifyOtp,
+    changePassword,
+    changePhoneNumberOtp,
+    changePhoneNumber,
+    changePhoneNumber,
+    changeAvatar,
+    removeAvatar
+}

@@ -52,7 +52,8 @@ const loginUser = async(email,password)=>{
           const status = await authService.comparePassword(password,user.password)
           if(!status) return {status:false,message:"Invalid password"}
         }
-        return {status:true,message:"loggedin successfully",userName:user.userName,email:user.email,number:user.mobNo.toString(),userId:user._id.toString()}
+        return {status:true,message:"loggedin successfully",
+        userName:user.userName,email:user.email,number:user.mobNo.toString(),userId:user._id.toString(),avatarId:user?.avatarId}
     }catch(error){
        throw new Error(error.message)
     }

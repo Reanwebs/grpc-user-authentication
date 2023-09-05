@@ -91,6 +91,7 @@ const  userLogin = async (call,callback)=>{
         replay.setPhonenumber(status.number)
         replay.setUid(status.userId)
         replay.setMessage(status.message)
+        replay.setAvatarid(data.avatarId)
         callback(null,replay)
     }else{
         const error = {

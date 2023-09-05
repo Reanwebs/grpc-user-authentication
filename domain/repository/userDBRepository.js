@@ -206,6 +206,19 @@ const changePhoneNumber = async (userId,phoneNumber)=>{
     }
 }
 
+const changeAvatar = async (userId,avatarId)=>{
+    try {
+        const user = await User.findByIdAndUpdate({_id:userId},{
+            $set:{avatarId:avatarId}
+        },
+        { new: true }
+        )
+        return user;
+    } catch (error) {
+        
+    }
+}
+
 
 
 
@@ -224,5 +237,6 @@ module.exports = {
     changeUserName,
     changeEmail,
     changePasswordProfile,
-    changePhoneNumber
+    changePhoneNumber,
+    changeAvatar
 }
