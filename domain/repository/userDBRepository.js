@@ -193,6 +193,17 @@ const changePasswordProfile = async (userId,password)=>{
     }
 }
 
+const changePhoneNumber = async (userId,phoneNumber)=>{
+    try {
+        const user = await User.findByIdAndUpdate({_id:userId},{
+            $set:{mobNo:phoneNumber}
+        })
+        return user;
+    } catch (error) {
+        
+    }
+}
+
 
 
 
@@ -210,5 +221,6 @@ module.exports = {
     findUserById,
     changeUserName,
     changeEmail,
-    changePasswordProfile
+    changePasswordProfile,
+    changePhoneNumber
 }

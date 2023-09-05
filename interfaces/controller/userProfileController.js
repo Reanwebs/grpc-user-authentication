@@ -106,4 +106,59 @@ const changePassword = async (call,response)=>{
     }
 }
 
-module.exports = {changeUserName,changeEmail,changeEmailVerifyOtp,changePassword}
+const changePhoneNumberOtp = async (call,response)=>{
+    try {
+        const [userId,phoneNumber] = call.request.array;
+        const data = await userProfileUseCase.requestOtpToChangeNumber(userId,phoneNumber)
+        const replay = new auth_pb.ChangePhoneNumberOtpResponse();
+        if(data.status){
+            replay.setStatus(200)
+            replay.setMessage(data.message)
+            response(null,replay)
+        }else{
+            const error = {
+                code: grpc.status.INVALID_ARGUMENT,
+                details: data.message
+            };
+            response(error,null)
+        }  
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:err.message
+        };
+       response(error,null)
+        
+    }
+}
+
+const changePhoneNumber = async (call,response)=>{
+    try {
+        const [userId,phoneNumber,otp] = call.request.array;
+        const data = await userProfileUseCase.changePhoneNumber(userId,phoneNumber,otp)
+        const replay = new auth_pb.ChangePhoneNumberResponse();
+        if(data.status){
+            replay.setStatus(200)
+            replay.setUsername(data.userName)
+            replay.setEmail(data.email)
+            replay.setPhonenumber(data.number)
+            replay.setMessage(data.message)
+            response(null,replay)
+        }else{
+            const error = {
+                code: grpc.status.INVALID_ARGUMENT,
+                details: data.message
+            };
+            response(error,null)
+        }  
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:err.message
+        };
+       response(error,null)
+        
+    }
+}
+
+module.exports = {changeUserName,changeEmail,changeEmailVerifyOtp,changePassword,changePhoneNumberOtp,changePhoneNumber,changePhoneNumber}

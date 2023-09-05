@@ -1,5 +1,7 @@
 const userDBRepository = require('../../domain/repository/userDBRepository')
 const {sendEmail,verifyOTP} = require('../../interfaces/services/mailService')
+const otpUseCase = require("../../interfaces/services/otpService")
+
 
 
 const changeUserName = async (userId,userName)=>{
@@ -60,6 +62,34 @@ const changePassword = async (userId,email)=>{
     }
 }
 
+const requestOtpToChangeNumber = async (userId,phoneNumber)=>{
+    try {
+        const user = await userDBRepository.findUserById(userId);
+        if(user && phoneNumber !== user.mobNo){
+            const status = await userDBRepository.findUserByNumber(phoneNumber);
+            if(!status) await otpUseCase.sendOtp(phoneNumber);
+           else return {status:false,message:"user already exists in phone number"}
+        }
+    } catch (error) {
+        throw new Error (error.message)
+        
+    }
+}
+
+const changePhoneNumber = async (userId,phoneNumber,otp)=>{
+    try {
+        const status = await otpUseCase.validateOtp(phoneNumber,otp)
+        if(status){
+          const user = await userDBRepository.changePhoneNumber(userId,phoneNumber)
+          return {status:true,message:"phone number  updated successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString()}
+        }else{
+          return {status:false,message:"invalid otp"}
+        }   
+    } catch (error) {
+        throw new Error(error.message)     
+    }
+}
+
 module.exports={
-    changeUserName,changeEmail,changeEmailOtpVerify,changePassword
+    changeUserName,changeEmail,changeEmailOtpVerify,changePassword,requestOtpToChangeNumber,changePhoneNumber
 }
