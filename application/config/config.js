@@ -11,8 +11,7 @@ const configKeys = {
     TWILIO_SERVICE_SSID:process.env.TWILIO_SERVICE_SSID,
     GOOGLE_AUTH_CLIENT:process.env.GOOGLE_AUTH_CLIENT,
     PASS_NODE_MAILER:process.env.PASS_NODE_MAILER,
-    EMAIL_NODE_MAILER:process.env.EMAIL_NODE_MAILER
-
+    EMAIL_NODE_MAILER:process.env.EMAIL_NODE_MAILER,
 }
 
 module.exports = configKeys
