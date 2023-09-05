@@ -8,7 +8,6 @@ const validateAdmin = async (email)=>{
         return admin
         
     } catch (error) {
-        console.log(error,"errrr in admin db repository");
         throw new Error("error in logging admin")
     }
     

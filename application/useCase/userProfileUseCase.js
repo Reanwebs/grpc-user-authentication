@@ -84,7 +84,6 @@ const requestOtpToChangeNumber = async (userId,phoneNumber)=>{
 const changePhoneNumber = async (userId,phoneNumber,otp)=>{
     try {
         const status = await otpUseCase.validateOtp(phoneNumber,otp)
-        console.log(status,"status");
         if(status){
           const user = await userDBRepository.changePhoneNumber(userId,phoneNumber)
           return {status:true,message:"phone number  updated successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString()}
