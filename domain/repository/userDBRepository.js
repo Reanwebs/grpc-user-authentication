@@ -157,11 +157,12 @@ const findUserById = async (userId)=>{
 
 const changeUserName = async (userId,userName)=>{
     try {
-        console.log(userId,userName);
         const user = await User.findByIdAndUpdate({_id:userId},
             {
                 $set:{userName:userName}
-            })
+            },
+            { new: true }
+            )
         return user;
     } catch (error) {
         throw new Error("error in changing user name")
@@ -171,8 +172,10 @@ const changeUserName = async (userId,userName)=>{
 const changeEmail = async (userId,email)=>{
     try {
       const user = await User.findByIdAndUpdate({_id:userId},{
-        $set:{email:email}
-      })
+        $set:{email:email},
+      },
+      { new: true }
+      )
         return user
     } catch (error) {
         throw new Error("error in changing email")
@@ -197,7 +200,9 @@ const changePhoneNumber = async (userId,phoneNumber)=>{
     try {
         const user = await User.findByIdAndUpdate({_id:userId},{
             $set:{mobNo:phoneNumber}
-        })
+        },
+        { new: true }
+        )
         return user;
     } catch (error) {
         

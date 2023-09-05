@@ -2,12 +2,12 @@ const userDBRepository = require('../../domain/repository/userDBRepository')
 const {sendEmail,verifyOTP} = require('../../interfaces/services/mailService')
 const otpUseCase = require("../../interfaces/services/otpService")
 
-
+ 
 
 const changeUserName = async (userId,userName)=>{
     try {
-        const user = await userDBRepository.findUserById(userId);
-        if(user && userName !== user.userName){
+        const data = await userDBRepository.findUserById(userId);
+        if(data && userName !== data.userName){
             const userNameExist = await userDBRepository.findUserName(userName);
             if(userNameExist) return {status:false,message:"user name not available"}
             else{
@@ -15,7 +15,7 @@ const changeUserName = async (userId,userName)=>{
               return {status:true,message:"user name updated successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString()
             }  
          }
-        }
+        } return {status:true,message:"No change in user name",userName:data?.userName,email:data?.email,number:data?.mobNo?.toString()}
         
     } catch (error) {
         throw new Error(error.message)
@@ -65,11 +65,15 @@ const changePassword = async (userId,email)=>{
 const requestOtpToChangeNumber = async (userId,phoneNumber)=>{
     try {
         const user = await userDBRepository.findUserById(userId);
-        if(user && phoneNumber !== user.mobNo){
+        if(user && phoneNumber !== user?.mobNo?.toString()){
             const status = await userDBRepository.findUserByNumber(phoneNumber);
-            if(!status) await otpUseCase.sendOtp(phoneNumber);
-           else return {status:false,message:"user already exists in phone number"}
+            if(!status) {
+                await otpUseCase.sendOtp(phoneNumber);
+                return {status:201,message:"otp send to your number"}
+            }
+            else return {status:false,message:"user already exists in phone number"}
         }
+        return {status:true,message:"No change in phone number"}
     } catch (error) {
         throw new Error (error.message)
         
@@ -79,6 +83,7 @@ const requestOtpToChangeNumber = async (userId,phoneNumber)=>{
 const changePhoneNumber = async (userId,phoneNumber,otp)=>{
     try {
         const status = await otpUseCase.validateOtp(phoneNumber,otp)
+        console.log(status,"status");
         if(status){
           const user = await userDBRepository.changePhoneNumber(userId,phoneNumber)
           return {status:true,message:"phone number  updated successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString()}
