@@ -68,6 +68,7 @@ const findUserByEmail =async (email)=>{
         const user = await User.findOne({email,isBlocked:false})
         return user
     }catch(error){
+        console.log(error);
       throw new Error("error finding user by email")
     }
 }

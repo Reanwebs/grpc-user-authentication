@@ -81,8 +81,10 @@ const  userSignup = async(call,callback)=>{
 
 const  userLogin = async (call,callback)=>{
     try {
+        console.log('imhere');
     const [email,password] = call.request.array;
     const status = await autherizationUseCase.loginUser(email,password)
+    console.log(status);
     const replay = new auth_pb.LoginResponse()
     if(status.status){
         replay.setStatus(200)
@@ -92,6 +94,7 @@ const  userLogin = async (call,callback)=>{
         replay.setUid(status.userId)
         replay.setMessage(status.message)
         replay.setAvatarid(data.avatarId)
+        console.log(replay);
         callback(null,replay)
     }else{
         const error = {

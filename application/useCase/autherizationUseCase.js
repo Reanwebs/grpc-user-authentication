@@ -55,6 +55,7 @@ const loginUser = async(email,password)=>{
         return {status:true,message:"loggedin successfully",
         userName:user.userName,email:user.email,number:user.mobNo.toString(),userId:user._id.toString(),avatarId:user?.avatarId}
     }catch(error){
+        console.log(error);
        throw new Error(error.message)
     }
 }
