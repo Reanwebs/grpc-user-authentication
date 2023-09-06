@@ -7251,7 +7251,8 @@ proto.pb.GoogleLoginResponse.toObject = function(includeInstance, msg) {
     phonenumber: jspb.Message.getFieldWithDefault(msg, 4, ""),
     error: jspb.Message.getFieldWithDefault(msg, 5, ""),
     uid: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    message: jspb.Message.getFieldWithDefault(msg, 7, "")
+    message: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    avatarid: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -7315,6 +7316,10 @@ proto.pb.GoogleLoginResponse.deserializeBinaryFromReader = function(msg, reader)
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAvatarid(value);
       break;
     default:
       reader.skipField();
@@ -7391,6 +7396,13 @@ proto.pb.GoogleLoginResponse.serializeBinaryToWriter = function(message, writer)
   if (f.length > 0) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = message.getAvatarid();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -7520,6 +7532,24 @@ proto.pb.GoogleLoginResponse.prototype.getMessage = function() {
  */
 proto.pb.GoogleLoginResponse.prototype.setMessage = function(value) {
   return jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string avatarId = 8;
+ * @return {string}
+ */
+proto.pb.GoogleLoginResponse.prototype.getAvatarid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.GoogleLoginResponse} returns this
+ */
+proto.pb.GoogleLoginResponse.prototype.setAvatarid = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 

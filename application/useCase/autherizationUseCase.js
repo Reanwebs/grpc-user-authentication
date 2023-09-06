@@ -107,7 +107,8 @@ const googleLogin = async (token)=>{
     try {
         const data = await verify(token);
         const user = await userDBRepository.createUserGoogle(data.userName,data.email);
-        if(user)return {status:true,message:"loggedin successfully",userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),userId:user._id.toString()}
+        if(user)return {status:true,message:"loggedin successfully",
+        userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),userId:user._id.toString(),avatarId:user?.avatarId}
         else return {status:false,message:"failed to create user"}
     } catch (error) {
         throw new Error(error.message)

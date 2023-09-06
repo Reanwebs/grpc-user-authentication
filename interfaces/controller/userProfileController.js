@@ -7,6 +7,7 @@ const changeUserName = async (call,response)=>{
     try {
         const [userId,userName] = call.request.array;
         const data = await userProfileUseCase.changeUserName(userId,userName);
+        console.log(data);
         const replay = new auth_pb.ChangeUserNameResponse()
         if(data.status){
             replay.setStatus(200)
@@ -14,7 +15,9 @@ const changeUserName = async (call,response)=>{
             replay.setEmail(data.email)
             replay.setPhonenumber(data.number)
             replay.setMessage(data.message)
-            replay.setAvatarid(data.avatarId)
+            if(data.avatarId){
+                replay.setAvatarid(data.avatarId)
+            }
 
             response(null,replay)
         }else{
@@ -72,7 +75,9 @@ const changeEmailVerifyOtp = async (call,response)=>{
             replay.setEmail(data.email)
             replay.setPhonenumber(data.number)
             replay.setMessage(data.message)
-            replay.setAvatarid(data.avatarId)
+            if(data.avatarId){
+                replay.setAvatarid(data.avatarId)
+            }
 
             response(null,replay)
         }else{
@@ -147,7 +152,9 @@ const changePhoneNumber = async (call,response)=>{
             replay.setEmail(data.email)
             replay.setPhonenumber(data.number)
             replay.setMessage(data.message)
-            replay.setAvatarid(data.avatarId)
+            if(data.avatarId){
+                replay.setAvatarid(data.avatarId)
+            }
 
             response(null,replay)
         }else{
@@ -178,7 +185,9 @@ const changeAvatar = async (call,response)=>{
             replay.setEmail(data.email)
             replay.setPhonenumber(data.number)
             replay.setMessage(data.message)
-            replay.setAvatarid(data.avatarId)
+            if(data.avatarId){
+                replay.setAvatarid(data.avatarId)
+            }
             response(null,replay)
         }else{
             const error = {
@@ -208,7 +217,9 @@ const removeAvatar = async (call,response)=>{
             replay.setEmail(data.email)
             replay.setPhonenumber(data.number)
             replay.setMessage(data.message)
-            replay.setAvatarid(data.avatarId)
+            if(data.avatarId){
+                replay.setAvatarid(data.avatarId)
+            }
             response(null,replay)
         }else{
             const error = {

@@ -18,7 +18,8 @@ const {changeUserName,
       changePassword,
       changePhoneNumberOtp,
       changePhoneNumber,
-      changeAvatar
+      changeAvatar,
+      removeAvatar
     } = require('../../interfaces/controller/userProfileController')
 
 const server = new grpc.Server();
@@ -46,9 +47,8 @@ server.addService(auth_grpc.AutharizationService,{
     changePassword,
     changePhoneNumberOtp,
     changePhoneNumber,
-    changeAvatar
-    
-    
+    changeAvatar,
+    removeAvatar
 })
 
 module.exports = server;
