@@ -11,6 +11,7 @@ const findUserName =async (userName)=>{
         const user = await User.findOne({userName:userName})
         return user;   
     } catch (error) {
+       
         throw new Error("Error in finding user by name")        
     }
 }
@@ -19,7 +20,9 @@ const findExistingUser = async (email,number)=>{
     try{ 
         const user = await User.findOne({$or:[{email:email},{mobNo:number}]})
         return user;
-    }catch{
+    }catch(error){
+        console.log(error);
+
         throw new Error("Error in validating user data") 
     }
 }

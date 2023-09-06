@@ -23,6 +23,7 @@ const validateData = async (email,number)=>{
          return true
         }
     } catch (error) {
+        console.log(error);
         throw new Error("Error in sending otp ")
     }
 } 

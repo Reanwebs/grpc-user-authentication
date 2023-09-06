@@ -32,6 +32,7 @@ const otpRequest =async (call,callback)=>{
     try {
     const [userName,email,number,password] = call.request.array;
     let status =await autherizationUseCase.validateData(email,number)
+    console.log(status);
     const replay = new auth_pb.OtpSignUpResponse()
     if(status){
         replay.setStatus(200)
