@@ -1,54 +1,39 @@
 const grpc = require("@grpc/grpc-js")
 const auth_grpc = require("../../interfaces/proto/pb/auth/auth_grpc_pb")
-const {validName,
-      otpRequest,
-      userSignup,
-      userLogin,
-      resendOtp,
-      forgotPasswordOtp,
-      forgotPasswordValidateOtp,
-      forgotPasswordChangePassword,
-      googleLogin,
-      validateUser
-    } = require("../../interfaces/controller/autherizationController")
-const {adminLogin,getUsers,manageUser,getInterest,addInterest,manageInterest} =  require("../../interfaces/controller/adminController")
-const {changeUserName,
-      changeEmail,
-      changeEmailVerifyOtp,
-      changePassword,
-      changePhoneNumberOtp,
-      changePhoneNumber,
-      changeAvatar,
-      removeAvatar
-    } = require('../../interfaces/controller/userProfileController')
+const autherizationController = require('../../interfaces/controller/autherizationController')
+const userProfileController = require('../../interfaces/controller/userProfileController')
+const adminController = require('../../interfaces/controller/adminController')
+const communityController = require('../../interfaces/controller/communityController')
 
 const server = new grpc.Server();
 
 server.addService(auth_grpc.AutharizationService,{
-    validName,
-    otpRequest,
-    userSignup,
-    userLogin,
-    resendOtp,
-    adminLogin,
-    getUsers,
-    manageUser,
-    getInterest,
-    addInterest,
-    manageInterest,
-    forgotPasswordOtp,
-    forgotPasswordValidateOtp,
-    forgotPasswordChangePassword,
-    googleLogin,
-    validateUser,
-    changeUserName,
-    changeEmail,
-    changeEmailVerifyOtp,
-    changePassword,
-    changePhoneNumberOtp,
-    changePhoneNumber,
-    changeAvatar,
-    removeAvatar
+    validName:autherizationController.validName,
+    otpRequest:autherizationController.otpRequest,
+    userSignup:autherizationController.userSignup,
+    userLogin:autherizationController.userLogin,
+    resendOtp:autherizationController.resendOtp,
+    adminLogin:adminController.adminLogin,
+    getUsers:adminController.getUsers,
+    manageUser:adminController.manageUser,
+    getInterest:adminController.getInterest,
+    addInterest:adminController.addInterest,
+    manageInterest:adminController.manageInterest,
+    forgotPasswordOtp:autherizationController.forgotPasswordOtp,
+    forgotPasswordValidateOtp:autherizationController.forgotPasswordValidateOtp,
+    forgotPasswordChangePassword:autherizationController.forgotPasswordChangePassword,
+    googleLogin:autherizationController.googleLogin,
+    validateUser:autherizationController.validateUser,
+    changeUserName:userProfileController.changeUserName,
+    changeEmail:userProfileController.changeEmail,
+    changeEmailVerifyOtp:userProfileController.changeEmailVerifyOtp,
+    changePassword:userProfileController.changePassword,
+    changePhoneNumberOtp:userProfileController.changePhoneNumberOtp,
+    changePhoneNumber:userProfileController.changePhoneNumber,
+    changeAvatar:userProfileController.changeAvatar,
+    removeAvatar:userProfileController.removeAvatar,
+    createCommunity:communityController.createCommunity,
+    joinCommunity:communityController.joinCommunity
 })
 
 module.exports = server;

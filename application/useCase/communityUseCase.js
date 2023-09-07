@@ -10,6 +10,17 @@ const createCommunityUseCase = async (data)=>{
     }
 }
 
+const joinCommunityUseCase = async (data)=>{
+    try {
+        console.log(data);
+        const {userId,communityId} = data;
+        const community = await communityDBRepository.joinCommunity(data)
+    } catch (error) {
+        throw new Error(error.message)
+    }
+}
+
 module.exports ={
-    createCommunityUseCase
+    createCommunityUseCase,
+    joinCommunity
 }
