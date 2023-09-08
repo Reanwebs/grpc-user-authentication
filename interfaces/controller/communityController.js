@@ -207,11 +207,11 @@ const deleteCommunity = async (call,response)=>{
     }
 }
 
-const blockCommunity = async (call,response)=>{
+const manageCommunity = async (call,response)=>{
     try {
         const [communityId] = call.request.array;
-        const status = await communityUseCase.blockCommunity(communityId)
-        const replay = new auth_pb.BlockCommunityResponse();
+        const status = await communityUseCase.manageCommunity(communityId)
+        const replay = new auth_pb.ManageCommunityResponse();
         if(status.status){
             replay.setStatus(200);
             replay.setMessage(status.message);
@@ -232,6 +232,21 @@ const blockCommunity = async (call,response)=>{
     }
 }
 
+const getActiveCommunity  = async (call,response)=>{
+    try {
+        const data = await communityUseCase.getActiveCommunities()
+        const replay = new auth_pb.GetActiveCommunityResponse();
+        
+    } catch (err) {
+        const  error = {
+            code: grpc.status.ABORTED,
+            details: err.message
+        }
+        response(error,null)
+    }
+}
+
+
 
 module.exports = {
     createCommunity,
@@ -241,5 +256,5 @@ module.exports = {
     removeMember,
     addModerator,
     deleteCommunity,
-    blockCommunity
+    manageCommunity
 }

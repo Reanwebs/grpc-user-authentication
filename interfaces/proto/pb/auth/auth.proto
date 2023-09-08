@@ -38,8 +38,9 @@ service Autharization {
     rpc AddModerator(AddModeratorRequest) returns (AddModeratorResponse) {}
     rpc AddMember(AddMemberRequest) returns (AddMemberResponse){}
     rpc ChangeCommunityJoinType(ChangeCommunityJoinTypeRequest) returns (ChangeCommunityJoinTypeResponse){}
-    rpc DeleteCommunity(DeleteCommunityRequest) returns (DeleteCommunityResponse) {}
-    rpc BlockCommunity(BlockCommunityRequest) returns (BlockCommunityResponse){}
+    rpc DeleteCommunity(DeleteCommunityRequest) returns (DeleteCommunityResponse) {} 
+    rpc ManageCommunity(ManageCommunityRequest) returns (ManageCommunityResponse) {}
+    rpc GetActiveCommunity(GetActiveCommunityRequest) returns (GetActiveCommunityResponse) {}
 }
 
 message SignupRequest {
@@ -358,9 +359,6 @@ message RemoveAvatarResponse{
     string avatarId=7;
 }
 
-message Moderator{
-    string moderatorId=1;
-}
 
 message Members{
     string memberId=1;
@@ -369,10 +367,9 @@ message Members{
 message CreateCommunityRequest{
     string adminId =1;
     string communityName=2;
-    repeated Moderator moderators=3;
-    repeated Members members=4;
-    string description = 5;
-    string joinedType = 6;
+    repeated Members members=3;
+    string description = 4;
+    string joinedType = 5;
 }
 
 message CreateCommunityResponse{
@@ -474,12 +471,38 @@ message DeleteCommunityResponse{
     string error =3;
 }
 
-message BlockCommunityRequest{
+message ManageCommunityRequest{
     string communityId=1;
 }
 
-message BlockCommunityResponse{
+message ManageCommunityResponse{
     int64 status =1;
     string message = 2;
     string error =3;
+}
+
+message Community{
+   string id = 1;
+   string communityName=2;
+   string communityDescription = 3;
+   string communityAvatar = 4;
+
+}
+message GetActiveCommunityRequest{
+
+}
+
+message GetActiveCommunityResponse{
+    string status = 1;
+    string message = 2;
+    repeated Community Community=3;
+    string error =4;
+}
+
+message GetAllCommunityRequest{
+
+}
+
+message GetAllCommunityResponse{
+
 }

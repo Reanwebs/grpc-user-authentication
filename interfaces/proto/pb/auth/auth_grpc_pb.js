@@ -114,28 +114,6 @@ function deserialize_pb_AdminLoginResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.AdminLoginResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_pb_BlockCommunityRequest(arg) {
-  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.BlockCommunityRequest)) {
-    throw new Error('Expected argument of type pb.BlockCommunityRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_pb_BlockCommunityRequest(buffer_arg) {
-  return interfaces_proto_pb_auth_auth_pb.BlockCommunityRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_pb_BlockCommunityResponse(arg) {
-  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.BlockCommunityResponse)) {
-    throw new Error('Expected argument of type pb.BlockCommunityResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_pb_BlockCommunityResponse(buffer_arg) {
-  return interfaces_proto_pb_auth_auth_pb.BlockCommunityResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_pb_ChangeAvatarRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ChangeAvatarRequest)) {
     throw new Error('Expected argument of type pb.ChangeAvatarRequest');
@@ -422,6 +400,28 @@ function deserialize_pb_ForgotPasswordValidateOtpResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.ForgotPasswordValidateOtpResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_GetActiveCommunityRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetActiveCommunityRequest)) {
+    throw new Error('Expected argument of type pb.GetActiveCommunityRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetActiveCommunityRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetActiveCommunityRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetActiveCommunityResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetActiveCommunityResponse)) {
+    throw new Error('Expected argument of type pb.GetActiveCommunityResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetActiveCommunityResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetActiveCommunityResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_GetInterestRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetInterestRequest)) {
     throw new Error('Expected argument of type pb.GetInterestRequest');
@@ -552,6 +552,28 @@ function serialize_pb_LoginResponse(arg) {
 
 function deserialize_pb_LoginResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.LoginResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ManageCommunityRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ManageCommunityRequest)) {
+    throw new Error('Expected argument of type pb.ManageCommunityRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ManageCommunityRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ManageCommunityRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ManageCommunityResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ManageCommunityResponse)) {
+    throw new Error('Expected argument of type pb.ManageCommunityResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ManageCommunityResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ManageCommunityResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_ManageInterestRequest(arg) {
@@ -1117,16 +1139,27 @@ var AutharizationService = exports.AutharizationService = {
     responseSerialize: serialize_pb_DeleteCommunityResponse,
     responseDeserialize: deserialize_pb_DeleteCommunityResponse,
   },
-  blockCommunity: {
-    path: '/pb.Autharization/BlockCommunity',
+  manageCommunity: {
+    path: '/pb.Autharization/ManageCommunity',
     requestStream: false,
     responseStream: false,
-    requestType: interfaces_proto_pb_auth_auth_pb.BlockCommunityRequest,
-    responseType: interfaces_proto_pb_auth_auth_pb.BlockCommunityResponse,
-    requestSerialize: serialize_pb_BlockCommunityRequest,
-    requestDeserialize: deserialize_pb_BlockCommunityRequest,
-    responseSerialize: serialize_pb_BlockCommunityResponse,
-    responseDeserialize: deserialize_pb_BlockCommunityResponse,
+    requestType: interfaces_proto_pb_auth_auth_pb.ManageCommunityRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ManageCommunityResponse,
+    requestSerialize: serialize_pb_ManageCommunityRequest,
+    requestDeserialize: deserialize_pb_ManageCommunityRequest,
+    responseSerialize: serialize_pb_ManageCommunityResponse,
+    responseDeserialize: deserialize_pb_ManageCommunityResponse,
+  },
+  getActiveCommunity: {
+    path: '/pb.Autharization/GetActiveCommunity',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.GetActiveCommunityRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.GetActiveCommunityResponse,
+    requestSerialize: serialize_pb_GetActiveCommunityRequest,
+    requestDeserialize: deserialize_pb_GetActiveCommunityRequest,
+    responseSerialize: serialize_pb_GetActiveCommunityResponse,
+    responseDeserialize: deserialize_pb_GetActiveCommunityResponse,
   },
 };
 

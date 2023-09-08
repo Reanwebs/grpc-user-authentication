@@ -1,104 +1,170 @@
 const communityDBRepository = require('../../domain/repository/communityDBRepository')
+const communityRequestDBRepository = require('../../domain/repository/communityRequestDBRepository')
 const user = require('../../interfaces/models/user')
 
-const createCommunityUseCase = async (data)=>{
-    try {
-        const communityData = user.communityData(data)
-        const status = await communityDBRepository.createCommunity(communityData)
-        return status
-    } catch (error) {
-        throw new Error(error.message)
-    }
-}
-
-const joinCommunityUseCase = async (data)=>{
-    try {
-        const status = await communityDBRepository.joinCommunity(data)
-        return status
-    } catch (error) {
-        throw new Error(error.message)
-    }
-}
-
-const leaveCommunityUseCase = async (data)=>{
-    try {
-        const status = await communityDBRepository.leaveCommunity(data)
-        if(status){
-            return {status:true,message:"successfully leaved"}
-        }else{
-            return {status:false,message:"unable to leave"}
+module.exports={
+     createCommunityUseCase :async (data)=>{
+        try {
+            const communityData = user.communityData(data)
+            const communityExists = await communityDBRepository.findCommunityByName(communityData.communityName);
+            if(communityExists) return {status:false,message:"community already exists "};
+            await communityDBRepository.createCommunity(communityData)
+        } catch (error) {
+            throw new Error(error.message)
         }
-    } catch (error) {
-        throw new Error(error.message)
+    },
+
+    joinCommunityUseCase:async (data)=>{
+        try {
+            const {communityId,userId} = data;
+            const isValid = communityDBRepository.validateId(communityId);
+            if(!isValid) return {status:false,message:"invalid communityid"};
+
+            const parseId = communityDBRepository.parseId(communityId);
+
+            const userExists = await communityDBRepository.userExistsInCommunity(parseId,userId)
+            if(userExists) return {status:false,message:"you are already a member"};
+
+            const community = await communityDBRepository.findCommunityById(parseId);
+
+            if(!community) return {status:false,message:"no community found"};
+
+            if(community.joinType === "any one can join"){
+                await communityDBRepository.addMemberToCommunity(parseId,{userId:userId})
+                return {status:true,message:"you have been addedd to community"};
+            }
+
+            const requestData = {
+                communityId:community._id,
+                adminId:community.adminId,
+                userId:data.userId,
+                message:data?.message
+            }
+
+            await communityRequestDBRepository.createRequest(requestData);
+            return {status:true,message:"request submitted successfully"}
+            
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+    leaveCommunityUseCase: async (data)=>{
+        try {
+            const {userId,communityId} = data;
+            const isValidUser = communityDBRepository.validateId(userId);
+            const isValidComId = communityDBRepository.validateId(communityId);
+            if(!isValidUser || !isValidComId) return {status:false,message:"invalid id"};
+
+            const parseCommId = communityDBRepository.parseId(communityId);
+
+            await communityDBRepository.removeUserFromCommunity(parseCommId,userId);
+            return {status:true,message:"successfully leaved community"}
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+    acceptJoinCommunity: async (data)=>{
+        try {
+            const {communityId,adminId,userId} = data;
+            const isValid = communityDBRepository.validateId(communityId);
+             if(!isValid) return {status:false,message:"invalid communityid"};
+
+             const parseCommId = communityDBRepository.parseId(communityId);
+
+            const isAdmin = await communityDBRepository.findCommunityAdmin(parseCommId,adminId)
+            if(!isAdmin) return {status:false,message:"no community found"};
+
+            await communityDBRepository.addMemberToCommunity(parseCommId,{userId:userId});
+            await communityRequestDBRepository.removeRequest(communityId,userId)
+            return {status:true,message:"request accepted successfully"};
+
+        } catch (error) {
+            throw new Error(error.message)
+        }   
+    },
+    removeMember: async (data)=>{
+        try {
+           const {userId,adminId,communityId} = data;
+           const isValidComId = communityDBRepository.validateId(communityId);
+           if(!isValidComId) return {status:false,message:"invalid communityid"};
+
+           const parseId = communityDBRepository.parseId(communityId);
+           await communityDBRepository.removeUserFromCommunity(parseId,userId);
+            return {status:true,message:"user removed succesfully"};
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+
+    addModerator: async (data)=>{
+        try {
+            const {userId,adminId,communityId} = data;
+           const isValidComId = communityDBRepository.validateId(communityId);
+           if(!isValidComId) return {status:false,message:"invalid communityid"};
+
+           const parseId = communityDBRepository.parseId(communityId);
+           await communityDBRepository.addModeratorByAdmin(parseId,userId);
+           return {status:true,message:"user has been addedd as moderator"};
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+    addModerator: async (data)=>{
+        try {
+            const {userId,adminId,communityId} = data;
+           const isValidComId = communityDBRepository.validateId(communityId);
+           if(!isValidComId) return {status:false,message:"invalid communityid"};
+
+           const parseId = communityDBRepository.parseId(communityId);
+           await communityDBRepository.addMemberToCommunity(parseId,{userId:userId});
+           return {status:true,message:"user has been addedd as moderator"};
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+    deleteCommunity : async (data)=>{
+        try {
+            const {adminId,communityId} = data;
+           const isValidComId = communityDBRepository.validateId(communityId);
+           if(!isValidComId) return {status:false,message:"invalid communityid"};
+
+           const parseId = communityDBRepository.parseId(communityId);
+           const isAdmin = await communityDBRepository.findCommunityAdmin(parseId,adminId);
+           if(!isAdmin) return {status:false,message:"no community found"}; 
+
+           await communityDBRepository.deleteCommunity(parseId);
+           return {status:true,message:"community removed successfully"};
+
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+
+    manageCommunity : async (communityId)=>{
+        try {
+            const isValidComId = communityDBRepository.validateId(communityId);
+            if(!isValidComId) return {status:false,message:"invalid communityid"};
+ 
+            const parseId = communityDBRepository.parseId(communityId);
+            const community = await communityDBRepository.findCommunityById(parseId);
+            const state = !community.isBlocked;
+            await communityDBRepository.manageCommunity(parseId,state);
+            return {status:true,message:"community status changed successfully"};
+            
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+
+    getActiveCommunities : async ()=>{
+        try {
+            const communities = await communityDBRepository.getActiveCommunities();
+            return communities;
+            
+        } catch (error) {
+            
+        }
     }
+
 }
 
-const acceptJoinCommunity = async (data)=>{
-    try {
-        const status = await communityDBRepository.acceptJoinCommunity(data)
-        if(status){
-            return {status:true,message:"user has been added to community"}
-        } 
-        return {status:false,message:"you are not admin"}
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
-const removeMember = async (data)=>{
-    try {
-        const status = await communityDBRepository.removeMember(data)
-        return status
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
-const addModerator = async (data)=>{
-    try {
-        const status = await communityDBRepository.addModeratorByAdmin(data)
-        return status
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
-const addMember = async (data)=>{
-    try {
-        const status = await communityDBRepository.addMember(data)
-        return status
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
-const deleteCommunity = async (data)=>{
-    try {
-        const status = await communityDBRepository.deleteCommunity(data)
-        return status
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
-const changeCommunityStatus = async (data)=>{
-    try {
-        const status = await communityDBRepository.changeCommunityStatus(data)
-        return status
-    } catch (error) {
-        throw new Error(error)
-    }
-}
-
-
-module.exports ={
-    createCommunityUseCase,
-    joinCommunityUseCase,
-    leaveCommunityUseCase,
-    acceptJoinCommunity,
-    removeMember,
-    addModerator,
-    addMember,
-    deleteCommunity,
-    changeCommunityStatus
-}

@@ -1,11 +1,18 @@
 const communityData = (data)=>{
+    const membersArray = [];
+    for (let i = 0; i < data[2].length; i++) {
+        membersArray.push({
+          member: {
+            userId: data[i]
+          }
+        });
+      }
     const community = {
         adminId: data[0],
         communityName: data[1],
-        moderators: data[2]?.map(mods => mods[0]), 
-        members: [data[0], ...(data[2]?.map(mods => mods[0]) || []), ...(data[3]?.map(members => members[0]) || [])], 
-        description: data[4],
-        joinType: data[5]
+        members:membersArray, 
+        description: data[3],
+        joinType: data[4]
       };
 
       return community;
