@@ -19,13 +19,17 @@ const CommunitySchema = mongoose.Schema({
         type:String,
         required:true
     },
-    joinedType:{
+    joinType:{
         type:String,
         required:true
     },
     isBlocked:{
         type:Boolean,
         default:false
+    },
+    isActive:{
+        type:Boolean,
+        default:true
     },
     createdAt:{
         type:Date,
@@ -37,5 +41,5 @@ const CommunitySchema = mongoose.Schema({
 
 const Community = mongoose.model('Community',CommunitySchema)
 
-module.exports = Community
+module.exports = Community;
 

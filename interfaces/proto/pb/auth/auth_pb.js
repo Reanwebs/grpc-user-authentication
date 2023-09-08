@@ -12374,7 +12374,6 @@ proto.pb.JoinCommunityRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     userid: jspb.Message.getFieldWithDefault(msg, 1, ""),
     communityid: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    jointype: jspb.Message.getFieldWithDefault(msg, 3, ""),
     message: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
@@ -12419,10 +12418,6 @@ proto.pb.JoinCommunityRequest.deserializeBinaryFromReader = function(msg, reader
     case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setCommunityid(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setJointype(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
@@ -12471,13 +12466,6 @@ proto.pb.JoinCommunityRequest.serializeBinaryToWriter = function(message, writer
       f
     );
   }
-  f = message.getJointype();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
   f = message.getMessage();
   if (f.length > 0) {
     writer.writeString(
@@ -12521,24 +12509,6 @@ proto.pb.JoinCommunityRequest.prototype.getCommunityid = function() {
  */
 proto.pb.JoinCommunityRequest.prototype.setCommunityid = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional string joinType = 3;
- * @return {string}
- */
-proto.pb.JoinCommunityRequest.prototype.getJointype = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.pb.JoinCommunityRequest} returns this
- */
-proto.pb.JoinCommunityRequest.prototype.setJointype = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

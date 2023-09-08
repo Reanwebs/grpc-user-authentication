@@ -33,7 +33,14 @@ server.addService(auth_grpc.AutharizationService,{
     changeAvatar:userProfileController.changeAvatar,
     removeAvatar:userProfileController.removeAvatar,
     createCommunity:communityController.createCommunity,
-    joinCommunity:communityController.joinCommunity
+    joinCommunity:communityController.joinCommunity,
+    leaveCommunity:communityController.leaveCommunity,
+    acceptJoinCommunity:communityController.acceptJoinCommunity,
+    removeMember:communityController.removeMember,
+    addModerator:communityController.addModerator,
+    addMember:communityController.addMember,
+    deleteCommunity:communityController.deleteCommunity,
+    blockCommunity:communityController.blockCommunity
 })
 
 module.exports = server;
