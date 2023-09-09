@@ -6,7 +6,7 @@ const createCommunity = async (call,response)=>{
     try {
         const status = await communityUseCase.createCommunityUseCase(call.request.array)
          const replay = new auth_pb.CreateCommunityResponse();
-         if(status){
+         if(status.status){
          replay.setStatus(201);
          replay.setMessage("community created successfully");
          response(null,replay)
@@ -29,7 +29,6 @@ const createCommunity = async (call,response)=>{
 
 const joinCommunity = async (call,response)=>{
     try {
-         console.log(call.request.array)
          const [userId,communityId,message] = call.request.array;
          const status = await communityUseCase.joinCommunityUseCase({userId,communityId,message})
          if (status.status) {
@@ -86,7 +85,6 @@ const acceptJoinCommunity = async (call,response)=>{
 
         const status = await communityUseCase.acceptJoinCommunity({communityId,adminId,userId})
         const replay = new auth_pb.AcceptJoinCommunityResponse();
-        console.log(status);
         if(status.status){
             replay.setStatus(200);
             replay.setMessage(status.message);
@@ -207,11 +205,11 @@ const deleteCommunity = async (call,response)=>{
     }
 }
 
-const blockCommunity = async (call,response)=>{
+const manageCommunity = async (call,response)=>{
     try {
         const [communityId] = call.request.array;
-        const status = await communityUseCase.blockCommunity(communityId)
-        const replay = new auth_pb.BlockCommunityResponse();
+        const status = await communityUseCase.manageCommunity(communityId)
+        const replay = new auth_pb.ManageCommunityResponse();
         if(status.status){
             replay.setStatus(200);
             replay.setMessage(status.message);
@@ -232,6 +230,21 @@ const blockCommunity = async (call,response)=>{
     }
 }
 
+const getActiveCommunity  = async (call,response)=>{
+    try {
+        const data = await communityUseCase.getActiveCommunities()
+        const replay = new auth_pb.GetActiveCommunityResponse();
+        
+    } catch (err) {
+        const  error = {
+            code: grpc.status.ABORTED,
+            details: err.message
+        }
+        response(error,null)
+    }
+}
+
+
 
 module.exports = {
     createCommunity,
@@ -240,6 +253,7 @@ module.exports = {
     acceptJoinCommunity,
     removeMember,
     addModerator,
+    addMember,
     deleteCommunity,
-    blockCommunity
+    manageCommunity
 }

@@ -5,15 +5,24 @@ const CommunitySchema = mongoose.Schema({
         type:String,
         required:true
     },
+    communityImage:{
+        type:String,
+    },
     adminId:{
         type:String,
         required:true
     },
-    moderators:[
-        {type:String}
-    ],
     members:[
-        {type:String}
+       {
+            userId:{
+                type:String,
+                required:true
+            },
+            isModerator:{
+                type:Boolean,
+                default:false
+            }
+       }
     ],
     description:{
         type:String,

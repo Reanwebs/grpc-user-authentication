@@ -40,7 +40,7 @@ server.addService(auth_grpc.AutharizationService,{
     addModerator:communityController.addModerator,
     addMember:communityController.addMember,
     deleteCommunity:communityController.deleteCommunity,
-    blockCommunity:communityController.blockCommunity
+    manageCommunity:communityController.manageCommunity
 })
 
 module.exports = server;
