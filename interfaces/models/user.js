@@ -1,10 +1,9 @@
 const communityData = (data)=>{
     const membersArray = [];
-    for (let i = 0; i < data[2].length; i++) {
+    const member = data[2]
+    for (let i = 0; i < member.length; i++) {
         membersArray.push({
-          member: {
-            userId: data[i]
-          }
+            userId: member[i]
         });
       }
     const community = {

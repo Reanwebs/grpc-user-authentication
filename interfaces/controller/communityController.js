@@ -6,7 +6,7 @@ const createCommunity = async (call,response)=>{
     try {
         const status = await communityUseCase.createCommunityUseCase(call.request.array)
          const replay = new auth_pb.CreateCommunityResponse();
-         if(status){
+         if(status.status){
          replay.setStatus(201);
          replay.setMessage("community created successfully");
          response(null,replay)
@@ -29,7 +29,6 @@ const createCommunity = async (call,response)=>{
 
 const joinCommunity = async (call,response)=>{
     try {
-         console.log(call.request.array)
          const [userId,communityId,message] = call.request.array;
          const status = await communityUseCase.joinCommunityUseCase({userId,communityId,message})
          if (status.status) {
@@ -86,7 +85,6 @@ const acceptJoinCommunity = async (call,response)=>{
 
         const status = await communityUseCase.acceptJoinCommunity({communityId,adminId,userId})
         const replay = new auth_pb.AcceptJoinCommunityResponse();
-        console.log(status);
         if(status.status){
             replay.setStatus(200);
             replay.setMessage(status.message);
@@ -255,6 +253,7 @@ module.exports = {
     acceptJoinCommunity,
     removeMember,
     addModerator,
+    addMember,
     deleteCommunity,
     manageCommunity
 }

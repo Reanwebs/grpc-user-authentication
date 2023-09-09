@@ -27,7 +27,7 @@ module.exports ={
         try {
             const userExists = await Community.findOne({
                 _id:communityId,
-                "members": { $elemMatch: { 'member.userId':userId } }
+                "members": { $elemMatch: { 'userId':userId } }
             });
             return userExists
         } catch (error) {
@@ -47,7 +47,7 @@ module.exports ={
         try {
             const result = await Community.updateOne(
              {_id:communityId},
-             { $pull: { members: { 'member.userId': userId } } }
+             { $pull: { members: { 'userId': userId } } }
              )
             return result
         } catch (error) {
@@ -77,11 +77,11 @@ module.exports ={
             const result = await Community.updateOne(
                 {
                     _id: communityId,
-                    "members.member.userId": userId 
+                    "members.userId": userId 
                   },
                   {
                     $set: {
-                      "members.$.member.isModerator": true 
+                      "members.$.isModerator": true 
                     }
                   }
             )

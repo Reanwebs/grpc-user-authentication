@@ -14,7 +14,6 @@ const CommunitySchema = mongoose.Schema({
     },
     members:[
        {
-        member:{
             userId:{
                 type:String,
                 required:true
@@ -23,7 +22,6 @@ const CommunitySchema = mongoose.Schema({
                 type:Boolean,
                 default:false
             }
-        }
        }
     ],
     description:{

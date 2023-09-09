@@ -8,7 +8,10 @@ module.exports={
             const communityData = user.communityData(data)
             const communityExists = await communityDBRepository.findCommunityByName(communityData.communityName);
             if(communityExists) return {status:false,message:"community already exists "};
-            await communityDBRepository.createCommunity(communityData)
+            else{
+                await communityDBRepository.createCommunity(communityData);
+                return {status:true,message:"community created successfully "};
+            }
         } catch (error) {
             throw new Error(error.message)
         }
@@ -22,14 +25,15 @@ module.exports={
 
             const parseId = communityDBRepository.parseId(communityId);
 
-            const userExists = await communityDBRepository.userExistsInCommunity(parseId,userId)
-            if(userExists) return {status:false,message:"you are already a member"};
-
             const community = await communityDBRepository.findCommunityById(parseId);
 
             if(!community) return {status:false,message:"no community found"};
 
-            if(community.joinType === "any one can join"){
+            const userExists = await communityDBRepository.userExistsInCommunity(parseId,userId)
+            if(userExists) return {status:false,message:"you are already a member"};
+
+
+            if(community.joinType === "open"){
                 await communityDBRepository.addMemberToCommunity(parseId,{userId:userId})
                 return {status:true,message:"you have been addedd to community"};
             }
@@ -109,7 +113,7 @@ module.exports={
             throw new Error(error.message)
         }
     },
-    addModerator: async (data)=>{
+    addMember: async (data)=>{
         try {
             const {userId,adminId,communityId} = data;
            const isValidComId = communityDBRepository.validateId(communityId);
@@ -117,7 +121,7 @@ module.exports={
 
            const parseId = communityDBRepository.parseId(communityId);
            await communityDBRepository.addMemberToCommunity(parseId,{userId:userId});
-           return {status:true,message:"user has been addedd as moderator"};
+           return {status:true,message:"user has been addedd to community"};
         } catch (error) {
             throw new Error(error.message)
         }
