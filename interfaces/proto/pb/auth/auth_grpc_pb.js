@@ -444,6 +444,28 @@ function deserialize_pb_GetInterestResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.GetInterestResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_GetInterstsUserRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetInterstsUserRequest)) {
+    throw new Error('Expected argument of type pb.GetInterstsUserRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetInterstsUserRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetInterstsUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetInterstsUserResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetInterstsUserResponse)) {
+    throw new Error('Expected argument of type pb.GetInterstsUserResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetInterstsUserResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetInterstsUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_GetUsersRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetUsersRequest)) {
     throw new Error('Expected argument of type pb.GetUsersRequest');
@@ -1160,6 +1182,17 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_GetActiveCommunityRequest,
     responseSerialize: serialize_pb_GetActiveCommunityResponse,
     responseDeserialize: deserialize_pb_GetActiveCommunityResponse,
+  },
+  getInterstsUser: {
+    path: '/pb.Autharization/GetInterstsUser',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.GetInterstsUserRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.GetInterstsUserResponse,
+    requestSerialize: serialize_pb_GetInterstsUserRequest,
+    requestDeserialize: deserialize_pb_GetInterstsUserRequest,
+    responseSerialize: serialize_pb_GetInterstsUserResponse,
+    responseDeserialize: deserialize_pb_GetInterstsUserResponse,
   },
 };
 

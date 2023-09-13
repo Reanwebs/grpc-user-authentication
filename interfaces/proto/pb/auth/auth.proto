@@ -41,6 +41,7 @@ service Autharization {
     rpc DeleteCommunity(DeleteCommunityRequest) returns (DeleteCommunityResponse) {} 
     rpc ManageCommunity(ManageCommunityRequest) returns (ManageCommunityResponse) {}
     rpc GetActiveCommunity(GetActiveCommunityRequest) returns (GetActiveCommunityResponse) {}
+    rpc GetInterstsUser(GetInterstsUserRequest) returns (GetInterstsUserResponse){}
 }
 
 message SignupRequest {
@@ -501,4 +502,19 @@ message GetAllCommunityRequest{
 
 message GetAllCommunityResponse{
 
+}
+
+message UserInterest{
+    string interest =1;
+}
+
+message GetInterstsUserRequest{
+    
+}
+
+message GetInterstsUserResponse{
+    int64 status =1;
+    repeated UserInterest intersts = 2;
+    string message = 3;
+    string error =4;
 }

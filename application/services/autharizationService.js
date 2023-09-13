@@ -4,6 +4,7 @@ const autherizationController = require('../../interfaces/controller/autherizati
 const userProfileController = require('../../interfaces/controller/userProfileController')
 const adminController = require('../../interfaces/controller/adminController')
 const communityController = require('../../interfaces/controller/communityController')
+const conferenceController = require('../../interfaces/controller/userConferenceController')
 
 const server = new grpc.Server();
 
@@ -40,7 +41,9 @@ server.addService(auth_grpc.AutharizationService,{
     addModerator:communityController.addModerator,
     addMember:communityController.addMember,
     deleteCommunity:communityController.deleteCommunity,
-    manageCommunity:communityController.manageCommunity
+    manageCommunity:communityController.manageCommunity,
+    getInterstsUser:conferenceController.getInterstsUser
+
 })
 
 module.exports = server;
