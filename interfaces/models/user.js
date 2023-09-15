@@ -11,7 +11,8 @@ const communityData = (data)=>{
         communityName: data[1],
         members:membersArray, 
         description: data[3],
-        joinType: data[4]
+        joinType: data[4],
+        communityImage:data[5]
       };
 
       return community;

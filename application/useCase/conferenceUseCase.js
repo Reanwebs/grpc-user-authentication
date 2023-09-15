@@ -6,7 +6,7 @@ module.exports ={
             const interests = await conferenceUseCase.getActiveInterests();
             const data = [];
             interests.forEach((interest) => {
-                data.push(interest.interest);
+                data.push(interest);
             });
             return data;
         } catch (error) {

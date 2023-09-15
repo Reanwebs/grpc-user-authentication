@@ -234,7 +234,20 @@ const getActiveCommunity  = async (call,response)=>{
     try {
         const data = await communityUseCase.getActiveCommunities()
         const replay = new auth_pb.GetActiveCommunityResponse();
-        
+        console.log(data);
+        const community = data.map(community=>{
+            const communityMsg = new auth_pb.Community();
+            communityMsg.setId(community?._id.toString())
+            communityMsg.setCommunityname(community?.communityName);
+            communityMsg.setCommunitydescription(community?.description);
+            communityMsg.setCommunityavatar(community?.communityImage);
+            communityMsg.setMembercount(community?.members.length)
+            return communityMsg;  
+        })
+        replay.setCommunityList(community)
+        replay.setStatus(200);
+        replay.setMessage('active communities fetched successfully')
+        response(null,replay)
     } catch (err) {
         const  error = {
             code: grpc.status.ABORTED,

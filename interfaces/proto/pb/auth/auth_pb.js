@@ -11732,7 +11732,8 @@ proto.pb.CreateCommunityRequest.toObject = function(includeInstance, msg) {
     communityname: jspb.Message.getFieldWithDefault(msg, 2, ""),
     membersList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
     description: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    joinedtype: jspb.Message.getFieldWithDefault(msg, 5, "")
+    joinedtype: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    communityimage: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -11788,6 +11789,10 @@ proto.pb.CreateCommunityRequest.deserializeBinaryFromReader = function(msg, read
     case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setJoinedtype(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setCommunityimage(value);
       break;
     default:
       reader.skipField();
@@ -11850,6 +11855,13 @@ proto.pb.CreateCommunityRequest.serializeBinaryToWriter = function(message, writ
   if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getCommunityimage();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
       f
     );
   }
@@ -11962,6 +11974,24 @@ proto.pb.CreateCommunityRequest.prototype.getJoinedtype = function() {
  */
 proto.pb.CreateCommunityRequest.prototype.setJoinedtype = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string communityImage = 6;
+ * @return {string}
+ */
+proto.pb.CreateCommunityRequest.prototype.getCommunityimage = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.CreateCommunityRequest} returns this
+ */
+proto.pb.CreateCommunityRequest.prototype.setCommunityimage = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
@@ -15460,7 +15490,8 @@ proto.pb.Community.toObject = function(includeInstance, msg) {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     communityname: jspb.Message.getFieldWithDefault(msg, 2, ""),
     communitydescription: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    communityavatar: jspb.Message.getFieldWithDefault(msg, 4, "")
+    communityavatar: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    membercount: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -15512,6 +15543,10 @@ proto.pb.Community.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setCommunityavatar(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMembercount(value);
       break;
     default:
       reader.skipField();
@@ -15567,6 +15602,13 @@ proto.pb.Community.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getMembercount();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -15642,6 +15684,24 @@ proto.pb.Community.prototype.getCommunityavatar = function() {
  */
 proto.pb.Community.prototype.setCommunityavatar = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string memberCount = 5;
+ * @return {string}
+ */
+proto.pb.Community.prototype.getMembercount = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.Community} returns this
+ */
+proto.pb.Community.prototype.setMembercount = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
@@ -15941,7 +16001,7 @@ proto.pb.GetActiveCommunityResponse.prototype.setMessage = function(value) {
 
 
 /**
- * repeated Community Community = 3;
+ * repeated Community community = 3;
  * @return {!Array<!proto.pb.Community>}
  */
 proto.pb.GetActiveCommunityResponse.prototype.getCommunityList = function() {

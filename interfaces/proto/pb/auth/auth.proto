@@ -367,6 +367,7 @@ message CreateCommunityRequest{
     repeated string Members=3;
     string description = 4;
     string joinedType = 5;
+    string communityImage = 6;
 }
 
 message CreateCommunityResponse{
@@ -483,6 +484,7 @@ message Community{
    string communityName=2;
    string communityDescription = 3;
    string communityAvatar = 4;
+   string memberCount = 5;
 
 }
 message GetActiveCommunityRequest{
@@ -492,7 +494,7 @@ message GetActiveCommunityRequest{
 message GetActiveCommunityResponse{
     string status = 1;
     string message = 2;
-    repeated Community Community=3;
+    repeated Community community=3;
     string error =4;
 }
 
