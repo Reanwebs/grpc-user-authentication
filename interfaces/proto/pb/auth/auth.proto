@@ -488,8 +488,8 @@ message Community{
    string communityName=2;
    string communityDescription = 3;
    string communityAvatar = 4;
-   string memberCount = 5;
-   string communtyAdmin=6;
+   int32 memberCount = 5;
+   string communityAdmin=6;
    bool isActive=7;
    bool isBlocked = 8;
 }
@@ -554,7 +554,7 @@ message GetCommunityByIdResponse{
     int64 status =1;
     string message = 2;
     string error = 3;
-    repeated Community community=4;
+    Community community=4;
     repeated Participants members =5;
 }
 

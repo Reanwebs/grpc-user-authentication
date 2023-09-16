@@ -49,7 +49,7 @@ const getUsers = async (call,response)=>{
         response(null,replay)
         
     } catch (err) {
-        console.log(err);
+       
         const error = {
             code:grpc.status.ABORTED,
             details:"error in fetching users list"
@@ -102,7 +102,7 @@ const getInterest = async (call,response)=>{
         replay.setInterestsList(interstMsg)
         response(null,replay)
     } catch (err) {
-        console.log(err);
+  
         const error = {
             code:grpc.status.ABORTED,
             details:"error in fetching interests"
@@ -176,19 +176,21 @@ const getAllCommunity = async (call,response)=>{
         communityMsg.setCommunitydescription(community?.description);
         communityMsg.setCommunityavatar(community?.communityImage);
         communityMsg.setMembercount(community?.members.length);
-        communityMsg.setCommuntyAdmin(community?.admin?.userName);
+        communityMsg.setCommunityadmin(community?.adminId?.userName);
         communityMsg.setIsactive(community?.isActive)
         communityMsg.setIsblocked(community?.isBlocked)
         return communityMsg;  
       })
       replay.setCommunitiesList(communityList);
+     
       replay.setStatus(200)
       replay.setMessage('communities fetched successfully')
       response(null,replay)
     } catch (err) {
+  
         const error = {
             code:grpc.status.ABORTED,
-            details:"error updating interests"
+            details:"error in fetching communities "
         }
         response(error,null)
         

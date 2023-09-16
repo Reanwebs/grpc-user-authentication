@@ -21,7 +21,6 @@ const findExistingUser = async (email,number)=>{
         const user = await User.findOne({$or:[{email:email},{mobNo:number}]})
         return user;
     }catch(error){
-        console.log(error);
 
         throw new Error("Error in validating user data") 
     }
@@ -71,7 +70,6 @@ const findUserByEmail =async (email)=>{
         const user = await User.findOne({email,isBlocked:false})
         return user
     }catch(error){
-        console.log(error);
       throw new Error("error finding user by email")
     }
 }
@@ -225,7 +223,7 @@ const changeAvatar = async (userId,avatarId)=>{
 
 const searchUser = async (userName) => {
     try {
-        const user = await User.find({ userName: { $regex: new RegExp(userName, 'i') } });
+        const user = await User.find({ userName: { $regex: new RegExp(`^${userName}`, 'i') } });
         return user;
     } catch (error) {
         throw new Error("Error in finding user by name");
