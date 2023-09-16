@@ -223,6 +223,15 @@ const changeAvatar = async (userId,avatarId)=>{
     }
 }
 
+const searchUser = async (userName) => {
+    try {
+        const user = await User.find({ userName: { $regex: new RegExp(userName, 'i') } });
+        return user;
+    } catch (error) {
+        throw new Error("Error in finding user by name");
+    }
+}
+
 
 
 
@@ -242,5 +251,6 @@ module.exports = {
     changeEmail,
     changePasswordProfile,
     changePhoneNumber,
-    changeAvatar
+    changeAvatar,
+    searchUser
 }

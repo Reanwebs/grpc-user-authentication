@@ -242,9 +242,63 @@ const getActiveCommunity  = async (call,response)=>{
             communityMsg.setCommunitydescription(community?.description);
             communityMsg.setCommunityavatar(community?.communityImage);
             communityMsg.setMembercount(community?.members.length)
-            return communityMsg;  
+            return communityMsg;
         })
         replay.setCommunityList(community)
+        replay.setStatus(200);
+        replay.setMessage('active communities fetched successfully')
+        response(null,replay)
+    } catch (err) {
+        const  error = {
+            code: grpc.status.ABORTED,
+            details: err.message
+        }
+        response(error,null)
+    }
+}
+
+const validateCommunityName = async (call,response)=>{
+    try {
+        const [communityName] = call.request.array
+        const status = await communityUseCase.validateCommunityName(communityName)
+        const replay = new auth_pb.ValidateCommunityNameResponse();
+        if(status.status){
+            replay.setStatus(200);
+            replay.setMessage(status.message);
+            response(null,replay)
+        }else{
+            const  error = {
+                code: grpc.status.ALREADY_EXISTS,
+                details: status.message
+            }
+            response(error,null)
+        }
+    } catch (err) {
+        const  error = {
+            code: grpc.status.ABORTED,
+            details: err.message
+        }
+        response(error,null)
+    }
+}
+
+const getCommunityById =  async (call,response)=>{
+    try {
+        const [id] = call.request.array
+        const data = await communityUseCase.getActiveCommunities(id)
+        console.log(data);
+        // const replay = new auth_pb.GetActiveCommunityResponse();
+        // console.log(data);
+        // const community = data.map(community=>{
+        //     const communityMsg = new auth_pb.Community();
+        //     communityMsg.setId(community?._id.toString())
+        //     communityMsg.setCommunityname(community?.communityName);
+        //     communityMsg.setCommunitydescription(community?.description);
+        //     communityMsg.setCommunityavatar(community?.communityImage);
+        //     communityMsg.setMembercount(community?.members.length)
+        //     return communityMsg;
+        // })
+        // replay.setCommunityList(community)
         replay.setStatus(200);
         replay.setMessage('active communities fetched successfully')
         response(null,replay)
@@ -268,5 +322,9 @@ module.exports = {
     addModerator,
     addMember,
     deleteCommunity,
-    manageCommunity
+    manageCommunity,
+    getActiveCommunity,
+    validateCommunityName,
+    getCommunityById
+
 }
