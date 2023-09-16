@@ -2,6 +2,8 @@ const userDBRepository = require("../../domain/repository/userDBRepository")
 const otpUseCase = require("../../interfaces/services/otpService")
 const authService = require("../../interfaces/services/authService")
 const verify = require('../../interfaces/services/googleAuthService')
+const {sendEmail,verifyOTP} = require('../../interfaces/services/mailService')
+
 
 
 const validateName = async (userName)=>{
@@ -68,11 +70,11 @@ const resendOtp = async (number)=>{
     }
 }
 
-const forgotPasswordSendOtp = async (number)=>{
+const forgotPasswordSendOtp = async (email)=>{
     try {
-        const status = await userDBRepository.findUserByNumber(number);
-        if(status){
-            await otpUseCase.sendOtp(number);
+        const user = await userDBRepository.findUserByEmail(email);
+        if(user){
+            await sendEmail(email)
             return true
         }else return false
         
@@ -83,19 +85,19 @@ const forgotPasswordSendOtp = async (number)=>{
 
 }
 
-const forgotPasswordValidateOtp = async(number,otp)=>{
+const forgotPasswordValidateOtp = async(otp)=>{
     try {
-        const status = await otpUseCase.validateOtp(number,otp);
-        if(status) return true;
+        const status = await verifyOTP(otp);
+        if(status.status) return true;
         else return false;
     } catch (error) {
         throw new Error("error in validating otp") 
     }
 }
 
-const forgotChangePassword = async (number,password)=>{
+const forgotChangePassword = async (email,password)=>{
     try {
-        await userDBRepository.changePassword(number,password)
+        await userDBRepository.changePassword(email,password)
         return true
     } catch (error) {   
         throw new Error(error,message)

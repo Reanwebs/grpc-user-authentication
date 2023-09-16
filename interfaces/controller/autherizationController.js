@@ -3,6 +3,7 @@ const auth_pb = require("../proto/pb/auth/auth_pb")
 const grpc = require("@grpc/grpc-js")
 
 
+
 const validName = async(call,callback)=>{
     try {
         const [userName] = call.request.array
@@ -136,8 +137,8 @@ const resendOtp = async (call,callback)=>{
 
 const forgotPasswordOtp = async (call,callback)=>{
     try {
-        const [number] = call.request.array;
-        const status = await autherizationUseCase.forgotPasswordSendOtp(number)
+        const [email] = call.request.array;
+        const status = await autherizationUseCase.forgotPasswordSendOtp(email)
         const replay = new auth_pb.ForgotPasswordOtpResponse()
         if(status){
             replay.setStatus(201);
@@ -161,8 +162,8 @@ const forgotPasswordOtp = async (call,callback)=>{
 
 const forgotPasswordValidateOtp = async (call,callback)=>{
     try {
-        const [number,otp] = call.request.array;
-        const status = await autherizationUseCase.forgotPasswordValidateOtp(number,otp);
+        const [email,otp] = call.request.array;
+        const status = await autherizationUseCase.forgotPasswordValidateOtp(email,otp);
         const replay = new auth_pb.ForgotPasswordValidateOtpResponse()
         if(status){
             replay.setStatus(200);
@@ -186,8 +187,8 @@ const forgotPasswordValidateOtp = async (call,callback)=>{
 
 const forgotPasswordChangePassword = async (call,callback)=>{
     try {
-        const [number,password] = call.request.array;
-        const status = await autherizationUseCase.forgotChangePassword(number,password);
+        const [email,password] = call.request.array;
+        const status = await autherizationUseCase.forgotChangePassword(email,password);
         const replay = new auth_pb.ForgotPasswordChangePasswordResponse()
         if(status){
             replay.setStatus(200);

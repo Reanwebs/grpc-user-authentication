@@ -492,6 +492,8 @@ message Community{
    string communityAdmin=6;
    bool isActive=7;
    bool isBlocked = 8;
+   bool isAdmin = 9;
+   bool isMember = 10;
 }
 message GetActiveCommunityRequest{
 

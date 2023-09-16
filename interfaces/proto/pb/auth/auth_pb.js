@@ -15648,7 +15648,9 @@ proto.pb.Community.toObject = function(includeInstance, msg) {
     membercount: jspb.Message.getFieldWithDefault(msg, 5, 0),
     communityadmin: jspb.Message.getFieldWithDefault(msg, 6, ""),
     isactive: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
-    isblocked: jspb.Message.getBooleanFieldWithDefault(msg, 8, false)
+    isblocked: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+    isadmin: jspb.Message.getBooleanFieldWithDefault(msg, 9, false),
+    ismember: jspb.Message.getBooleanFieldWithDefault(msg, 10, false)
   };
 
   if (includeInstance) {
@@ -15716,6 +15718,14 @@ proto.pb.Community.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsblocked(value);
+      break;
+    case 9:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsadmin(value);
+      break;
+    case 10:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setIsmember(value);
       break;
     default:
       reader.skipField();
@@ -15799,6 +15809,20 @@ proto.pb.Community.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       8,
+      f
+    );
+  }
+  f = message.getIsadmin();
+  if (f) {
+    writer.writeBool(
+      9,
+      f
+    );
+  }
+  f = message.getIsmember();
+  if (f) {
+    writer.writeBool(
+      10,
       f
     );
   }
@@ -15946,6 +15970,42 @@ proto.pb.Community.prototype.getIsblocked = function() {
  */
 proto.pb.Community.prototype.setIsblocked = function(value) {
   return jspb.Message.setProto3BooleanField(this, 8, value);
+};
+
+
+/**
+ * optional bool isAdmin = 9;
+ * @return {boolean}
+ */
+proto.pb.Community.prototype.getIsadmin = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 9, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.pb.Community} returns this
+ */
+proto.pb.Community.prototype.setIsadmin = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 9, value);
+};
+
+
+/**
+ * optional bool isMember = 10;
+ * @return {boolean}
+ */
+proto.pb.Community.prototype.getIsmember = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.pb.Community} returns this
+ */
+proto.pb.Community.prototype.setIsmember = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 10, value);
 };
 
 

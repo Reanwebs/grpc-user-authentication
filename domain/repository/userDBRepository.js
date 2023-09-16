@@ -111,10 +111,10 @@ const findUserByNumber = async (number)=>{
     }
 }
 
-const changePassword = async (number,password)=>{
+const changePassword = async (email,password)=>{
     try {
         const hashPassword = await authService.hashPassword(password);
-        await User.findOneAndUpdate({mobNo:number},{$set:{password:hashPassword}})
+        await User.findOneAndUpdate({email:email},{$set:{password:hashPassword}})
     } catch (error) {
         throw new Error("error in changing password")
     }
