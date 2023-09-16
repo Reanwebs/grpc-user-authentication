@@ -32,7 +32,6 @@ const otpRequest =async (call,callback)=>{
     try {
     const [userName,email,number,password] = call.request.array;
     let status =await autherizationUseCase.validateData(email,number)
-    console.log(status);
     const replay = new auth_pb.OtpSignUpResponse()
     if(status){
         replay.setStatus(200)
@@ -138,7 +137,6 @@ const resendOtp = async (call,callback)=>{
 const forgotPasswordOtp = async (call,callback)=>{
     try {
         const [number] = call.request.array;
-        console.log(number);
         const status = await autherizationUseCase.forgotPasswordSendOtp(number)
         const replay = new auth_pb.ForgotPasswordOtpResponse()
         if(status){
@@ -153,7 +151,6 @@ const forgotPasswordOtp = async (call,callback)=>{
             callback(error,null)
         }  
     } catch (err) {
-        console.log(err);
         const error = {
             code:grpc.status.ABORTED,
             details:err.message

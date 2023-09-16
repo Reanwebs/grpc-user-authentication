@@ -7,7 +7,6 @@ const changeUserName = async (call,response)=>{
     try {
         const [userId,userName] = call.request.array;
         const data = await userProfileUseCase.changeUserName(userId,userName);
-        console.log(data);
         const replay = new auth_pb.ChangeUserNameResponse()
         if(data.status){
             replay.setStatus(200)

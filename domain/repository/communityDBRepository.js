@@ -131,16 +131,19 @@ module.exports ={
     },
     getAllCommunities:async ()=>{
         try {
-            const communities = await Community.aggregate([
-                {
-                  $lookup: {
-                    from: 'users', 
-                    localField: 'adminId',
-                    foreignField: '_id',
-                    as: 'admin', 
-                  },
-                },
-              ])
+            const communities = await Community.find({})
+            .populate({
+                path: 'adminId',
+                model: 'User',
+                select: 'userName email mobNo' 
+              })
+              .populate({ path: 'members', 
+            populate: {
+                 path: 'userId',
+                 model:'User',
+                 select:'userName email mobNo'
+             } })
+          .exec();
             return communities;
         } catch (error) {
             throw new Error(error)  

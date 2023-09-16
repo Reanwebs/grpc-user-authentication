@@ -183,7 +183,7 @@ module.exports={
     validateCommunityName:async (communityName)=>{
         try {
             const community= await communityDBRepository.findCommunityByName(communityName);
-            if(communitiy){
+            if(community){
                 return {status:false,message:"community name already exists"}
             }
             return {status:true,message:"community name available"}
@@ -201,11 +201,10 @@ module.exports={
  
             const parseId = communityDBRepository.parseId(communityId);
             const community = await communityDBRepository.getCommunityDetails(parseId)
-            return {status:false,message:"invalid communityid",data:community};
+            return {status:true,message:"community details fetched successfully",data:community};
 
             
         } catch (error) {
-
             throw new Error(error.message)
             
         }

@@ -15645,8 +15645,8 @@ proto.pb.Community.toObject = function(includeInstance, msg) {
     communityname: jspb.Message.getFieldWithDefault(msg, 2, ""),
     communitydescription: jspb.Message.getFieldWithDefault(msg, 3, ""),
     communityavatar: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    membercount: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    communtyadmin: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    membercount: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    communityadmin: jspb.Message.getFieldWithDefault(msg, 6, ""),
     isactive: jspb.Message.getBooleanFieldWithDefault(msg, 7, false),
     isblocked: jspb.Message.getBooleanFieldWithDefault(msg, 8, false)
   };
@@ -15702,12 +15702,12 @@ proto.pb.Community.deserializeBinaryFromReader = function(msg, reader) {
       msg.setCommunityavatar(value);
       break;
     case 5:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt32());
       msg.setMembercount(value);
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
-      msg.setCommuntyadmin(value);
+      msg.setCommunityadmin(value);
       break;
     case 7:
       var value = /** @type {boolean} */ (reader.readBool());
@@ -15775,13 +15775,13 @@ proto.pb.Community.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getMembercount();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt32(
       5,
       f
     );
   }
-  f = message.getCommuntyadmin();
+  f = message.getCommunityadmin();
   if (f.length > 0) {
     writer.writeString(
       6,
@@ -15878,28 +15878,28 @@ proto.pb.Community.prototype.setCommunityavatar = function(value) {
 
 
 /**
- * optional string memberCount = 5;
- * @return {string}
+ * optional int32 memberCount = 5;
+ * @return {number}
  */
 proto.pb.Community.prototype.getMembercount = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.pb.Community} returns this
  */
 proto.pb.Community.prototype.setMembercount = function(value) {
-  return jspb.Message.setProto3StringField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional string communtyAdmin = 6;
+ * optional string communityAdmin = 6;
  * @return {string}
  */
-proto.pb.Community.prototype.getCommuntyadmin = function() {
+proto.pb.Community.prototype.getCommunityadmin = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
@@ -15908,7 +15908,7 @@ proto.pb.Community.prototype.getCommuntyadmin = function() {
  * @param {string} value
  * @return {!proto.pb.Community} returns this
  */
-proto.pb.Community.prototype.setCommuntyadmin = function(value) {
+proto.pb.Community.prototype.setCommunityadmin = function(value) {
   return jspb.Message.setProto3StringField(this, 6, value);
 };
 
@@ -17808,7 +17808,7 @@ proto.pb.GetCommunityByIdRequest.prototype.setCommunityid = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.pb.GetCommunityByIdResponse.repeatedFields_ = [4,5];
+proto.pb.GetCommunityByIdResponse.repeatedFields_ = [5];
 
 
 
@@ -17844,8 +17844,7 @@ proto.pb.GetCommunityByIdResponse.toObject = function(includeInstance, msg) {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0),
     message: jspb.Message.getFieldWithDefault(msg, 2, ""),
     error: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    communityList: jspb.Message.toObjectList(msg.getCommunityList(),
-    proto.pb.Community.toObject, includeInstance),
+    community: (f = msg.getCommunity()) && proto.pb.Community.toObject(includeInstance, f),
     membersList: jspb.Message.toObjectList(msg.getMembersList(),
     proto.pb.Participants.toObject, includeInstance)
   };
@@ -17899,7 +17898,7 @@ proto.pb.GetCommunityByIdResponse.deserializeBinaryFromReader = function(msg, re
     case 4:
       var value = new proto.pb.Community;
       reader.readMessage(value,proto.pb.Community.deserializeBinaryFromReader);
-      msg.addCommunity(value);
+      msg.setCommunity(value);
       break;
     case 5:
       var value = new proto.pb.Participants;
@@ -17956,9 +17955,9 @@ proto.pb.GetCommunityByIdResponse.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getCommunityList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
+  f = message.getCommunity();
+  if (f != null) {
+    writer.writeMessage(
       4,
       f,
       proto.pb.Community.serializeBinaryToWriter
@@ -18030,40 +18029,39 @@ proto.pb.GetCommunityByIdResponse.prototype.setError = function(value) {
 
 
 /**
- * repeated Community community = 4;
- * @return {!Array<!proto.pb.Community>}
+ * optional Community community = 4;
+ * @return {?proto.pb.Community}
  */
-proto.pb.GetCommunityByIdResponse.prototype.getCommunityList = function() {
-  return /** @type{!Array<!proto.pb.Community>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.pb.Community, 4));
+proto.pb.GetCommunityByIdResponse.prototype.getCommunity = function() {
+  return /** @type{?proto.pb.Community} */ (
+    jspb.Message.getWrapperField(this, proto.pb.Community, 4));
 };
 
 
 /**
- * @param {!Array<!proto.pb.Community>} value
+ * @param {?proto.pb.Community|undefined} value
  * @return {!proto.pb.GetCommunityByIdResponse} returns this
 */
-proto.pb.GetCommunityByIdResponse.prototype.setCommunityList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+proto.pb.GetCommunityByIdResponse.prototype.setCommunity = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
 };
 
 
 /**
- * @param {!proto.pb.Community=} opt_value
- * @param {number=} opt_index
- * @return {!proto.pb.Community}
- */
-proto.pb.GetCommunityByIdResponse.prototype.addCommunity = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.pb.Community, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
+ * Clears the message field making it undefined.
  * @return {!proto.pb.GetCommunityByIdResponse} returns this
  */
-proto.pb.GetCommunityByIdResponse.prototype.clearCommunityList = function() {
-  return this.setCommunityList([]);
+proto.pb.GetCommunityByIdResponse.prototype.clearCommunity = function() {
+  return this.setCommunity(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.pb.GetCommunityByIdResponse.prototype.hasCommunity = function() {
+  return jspb.Message.getField(this, 4) != null;
 };
 
 

@@ -234,7 +234,6 @@ const getActiveCommunity  = async (call,response)=>{
     try {
         const data = await communityUseCase.getActiveCommunities()
         const replay = new auth_pb.GetActiveCommunityResponse();
-        console.log(data);
         const community = data.map(community=>{
             const communityMsg = new auth_pb.Community();
             communityMsg.setId(community?._id.toString())
@@ -243,7 +242,7 @@ const getActiveCommunity  = async (call,response)=>{
             communityMsg.setCommunityavatar(community?.communityImage);
             communityMsg.setMembercount(community?.members.length)
             return communityMsg;
-        })
+        })  
         replay.setCommunityList(community)
         replay.setStatus(200);
         replay.setMessage('active communities fetched successfully')
@@ -285,24 +284,39 @@ const validateCommunityName = async (call,response)=>{
 const getCommunityById =  async (call,response)=>{
     try {
         const [id] = call.request.array
-        const data = await communityUseCase.getActiveCommunities(id)
-        console.log(data);
-        // const replay = new auth_pb.GetActiveCommunityResponse();
-        // console.log(data);
-        // const community = data.map(community=>{
-        //     const communityMsg = new auth_pb.Community();
-        //     communityMsg.setId(community?._id.toString())
-        //     communityMsg.setCommunityname(community?.communityName);
-        //     communityMsg.setCommunitydescription(community?.description);
-        //     communityMsg.setCommunityavatar(community?.communityImage);
-        //     communityMsg.setMembercount(community?.members.length)
-        //     return communityMsg;
-        // })
-        // replay.setCommunityList(community)
-        replay.setStatus(200);
-        replay.setMessage('active communities fetched successfully')
-        response(null,replay)
+        const data = await communityUseCase.getCommunityDetails(id)
+        const replay = new auth_pb.GetCommunityByIdResponse();
+        if(data.status){
+            const communityMsg = new auth_pb.Community();
+            communityMsg.setId(data?.data?._id.toString())
+            communityMsg.setCommunityname(data?.data?.communityName);
+            communityMsg.setCommunitydescription(data?.data?.description);
+            communityMsg.setCommunityavatar(data?.data?.communityImage);
+            communityMsg.setMembercount(data?.data?.members.length)
+            communityMsg.setCommunityadmin(data?.data?.adminId?.userName)
+    
+            const memberMsg = data?.data?.members.map((member)=>{
+                const memberList = new auth_pb.Participants()
+                memberList.setUsername(member?.userId?.userName)
+                memberList.setUserid(member?.userId?._id.toString())
+                return memberList
+            })
+            replay.setCommunity(communityMsg)
+            replay.setMembersList(memberMsg)
+            replay.setStatus(200);
+            replay.setMessage(data.message)
+            response(null,replay)
+        }else{
+            const  error = {
+                code: grpc.status.INVALID_ARGUMENT,
+                details: data.message
+            }
+            response(error,null)
+
+        }
+       
     } catch (err) {
+        
         const  error = {
             code: grpc.status.ABORTED,
             details: err.message
