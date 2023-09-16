@@ -1,5 +1,6 @@
 const Community = require('../models/communityModel')
 const mongoose = require('mongoose')
+const User = require('../models/userModel')
 
 module.exports ={
      validateId : (id)=> mongoose.Types.ObjectId.isValid(id),
@@ -127,6 +128,45 @@ module.exports ={
         } catch (error) {
             throw new Error(error)  
         }
-    }
+    },
+    getAllCommunities:async ()=>{
+        try {
+            const communities = await Community.aggregate([
+                {
+                  $lookup: {
+                    from: 'users', 
+                    localField: 'adminId',
+                    foreignField: '_id',
+                    as: 'admin', 
+                  },
+                },
+              ])
+            return communities;
+        } catch (error) {
+            throw new Error(error)  
+        }
+    },
+    getCommunityDetails :async (id)=>{
+        try {
 
+            const community = await Community.findOne({_id:id})
+        .populate({
+            path: 'adminId',
+            model: 'User',
+            select: 'userName email mobNo' 
+          })
+        .populate({ path: 'members', 
+            populate: {
+                 path: 'userId',
+                 model:'User',
+                 select:'userName email mobNo'
+        } })
+          .exec();
+
+          return community
+            
+        } catch (error) {
+            throw new Error('error in finding community details')
+        }
+    }
 }

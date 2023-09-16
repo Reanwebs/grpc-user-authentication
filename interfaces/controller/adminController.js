@@ -1,6 +1,7 @@
 const grpc = require('@grpc/grpc-js')
 const auth_pb = require("../proto/pb/auth/auth_pb")
 const adminUseCase = require("../../application/useCase/adminUseCase")
+const communityUseCase = require('../../application/useCase/communityUseCase')
 
 
 const adminLogin = async (call,response)=>{
@@ -164,13 +165,44 @@ const manageInterest = async (call,response)=>{
     }
 }
 
+const getAllCommunity = async (call,response)=>{
+    try {
+      const replay = new auth_pb.GetAllCommunityResponse()
+      const communities = await communityUseCase.getAllCommunities();
+      const communityList = communities.map(community=>{
+        const communityMsg = new auth_pb.Community();
+        communityMsg.setId(community?._id.toString())
+        communityMsg.setCommunityname(community?.communityName);
+        communityMsg.setCommunitydescription(community?.description);
+        communityMsg.setCommunityavatar(community?.communityImage);
+        communityMsg.setMembercount(community?.members.length);
+        communityMsg.setCommuntyAdmin(community?.admin?.userName);
+        communityMsg.setIsactive(community?.isActive)
+        communityMsg.setIsblocked(community?.isBlocked)
+        return communityMsg;  
+      })
+      replay.setCommunitiesList(communityList);
+      replay.setStatus(200)
+      replay.setMessage('communities fetched successfully')
+      response(null,replay)
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:"error updating interests"
+        }
+        response(error,null)
+        
+    }
+}
+
 module.exports={
     adminLogin,
     getUsers,
     manageUser,
     getInterest,
     addInterest,
-    manageInterest
+    manageInterest,
+    getAllCommunity
 }
 
 

@@ -166,8 +166,51 @@ module.exports={
             return communities;
             
         } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+
+    getAllCommunities : async ()=>{
+        try {
+            const communities = await communityDBRepository.getAllCommunities();
+            return communities;
+            
+        } catch (error) {
+            throw new Error(error.message)
             
         }
+    },
+    validateCommunityName:async (communityName)=>{
+        try {
+            const community= await communityDBRepository.findCommunityByName(communityName);
+            if(communitiy){
+                return {status:false,message:"community name already exists"}
+            }
+            return {status:true,message:"community name available"}
+           
+            
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    },
+    getCommunityDetails :async (communityId)=>{
+        try {
+
+            const isValidComId = communityDBRepository.validateId(communityId);
+            if(!isValidComId) return {status:false,message:"invalid communityid"};
+ 
+            const parseId = communityDBRepository.parseId(communityId);
+            const community = await communityDBRepository.getCommunityDetails(parseId)
+            return {status:false,message:"invalid communityid",data:community};
+
+            
+        } catch (error) {
+
+            throw new Error(error.message)
+            
+        }
+
+        
     }
 
 }

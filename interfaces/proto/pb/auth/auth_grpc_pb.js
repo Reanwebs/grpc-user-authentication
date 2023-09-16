@@ -422,6 +422,50 @@ function deserialize_pb_GetActiveCommunityResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.GetActiveCommunityResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_GetAllCommunityRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetAllCommunityRequest)) {
+    throw new Error('Expected argument of type pb.GetAllCommunityRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetAllCommunityRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetAllCommunityRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetAllCommunityResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetAllCommunityResponse)) {
+    throw new Error('Expected argument of type pb.GetAllCommunityResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetAllCommunityResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetAllCommunityResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetCommunityByIdRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetCommunityByIdRequest)) {
+    throw new Error('Expected argument of type pb.GetCommunityByIdRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetCommunityByIdRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetCommunityByIdRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetCommunityByIdResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetCommunityByIdResponse)) {
+    throw new Error('Expected argument of type pb.GetCommunityByIdResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetCommunityByIdResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetCommunityByIdResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_GetInterestRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetInterestRequest)) {
     throw new Error('Expected argument of type pb.GetInterestRequest');
@@ -464,6 +508,28 @@ function serialize_pb_GetInterstsUserResponse(arg) {
 
 function deserialize_pb_GetInterstsUserResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.GetInterstsUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetUserByNameRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetUserByNameRequest)) {
+    throw new Error('Expected argument of type pb.GetUserByNameRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetUserByNameRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetUserByNameRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetUserByNameResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetUserByNameResponse)) {
+    throw new Error('Expected argument of type pb.GetUserByNameResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetUserByNameResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetUserByNameResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_GetUsersRequest(arg) {
@@ -728,6 +794,28 @@ function serialize_pb_SignupResponse(arg) {
 
 function deserialize_pb_SignupResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.SignupResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ValidateCommunityNameRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ValidateCommunityNameRequest)) {
+    throw new Error('Expected argument of type pb.ValidateCommunityNameRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ValidateCommunityNameRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ValidateCommunityNameRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_ValidateCommunityNameResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ValidateCommunityNameResponse)) {
+    throw new Error('Expected argument of type pb.ValidateCommunityNameResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_ValidateCommunityNameResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.ValidateCommunityNameResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_pb_ValidateUserRequest(arg) {
@@ -1193,6 +1281,50 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_GetInterstsUserRequest,
     responseSerialize: serialize_pb_GetInterstsUserResponse,
     responseDeserialize: deserialize_pb_GetInterstsUserResponse,
+  },
+  getUserByName: {
+    path: '/pb.Autharization/GetUserByName',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.GetUserByNameRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.GetUserByNameResponse,
+    requestSerialize: serialize_pb_GetUserByNameRequest,
+    requestDeserialize: deserialize_pb_GetUserByNameRequest,
+    responseSerialize: serialize_pb_GetUserByNameResponse,
+    responseDeserialize: deserialize_pb_GetUserByNameResponse,
+  },
+  getAllCommunity: {
+    path: '/pb.Autharization/GetAllCommunity',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.GetAllCommunityRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.GetAllCommunityResponse,
+    requestSerialize: serialize_pb_GetAllCommunityRequest,
+    requestDeserialize: deserialize_pb_GetAllCommunityRequest,
+    responseSerialize: serialize_pb_GetAllCommunityResponse,
+    responseDeserialize: deserialize_pb_GetAllCommunityResponse,
+  },
+  getCommunityById: {
+    path: '/pb.Autharization/GetCommunityById',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.GetCommunityByIdRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.GetCommunityByIdResponse,
+    requestSerialize: serialize_pb_GetCommunityByIdRequest,
+    requestDeserialize: deserialize_pb_GetCommunityByIdRequest,
+    responseSerialize: serialize_pb_GetCommunityByIdResponse,
+    responseDeserialize: deserialize_pb_GetCommunityByIdResponse,
+  },
+  validateCommunityName: {
+    path: '/pb.Autharization/ValidateCommunityName',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.ValidateCommunityNameRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.ValidateCommunityNameResponse,
+    requestSerialize: serialize_pb_ValidateCommunityNameRequest,
+    requestDeserialize: deserialize_pb_ValidateCommunityNameRequest,
+    responseSerialize: serialize_pb_ValidateCommunityNameResponse,
+    responseDeserialize: deserialize_pb_ValidateCommunityNameResponse,
   },
 };
 

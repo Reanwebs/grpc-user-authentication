@@ -42,6 +42,10 @@ service Autharization {
     rpc ManageCommunity(ManageCommunityRequest) returns (ManageCommunityResponse) {}
     rpc GetActiveCommunity(GetActiveCommunityRequest) returns (GetActiveCommunityResponse) {}
     rpc GetInterstsUser(GetInterstsUserRequest) returns (GetInterstsUserResponse){}
+    rpc GetUserByName(GetUserByNameRequest) returns (GetUserByNameResponse){}
+    rpc GetAllCommunity(GetAllCommunityRequest) returns (GetAllCommunityResponse) {}
+    rpc GetCommunityById(GetCommunityByIdRequest) returns (GetCommunityByIdResponse){}
+    rpc ValidateCommunityName(ValidateCommunityNameRequest) returns (ValidateCommunityNameResponse){}
 }
 
 message SignupRequest {
@@ -485,7 +489,9 @@ message Community{
    string communityDescription = 3;
    string communityAvatar = 4;
    string memberCount = 5;
-
+   string communtyAdmin=6;
+   bool isActive=7;
+   bool isBlocked = 8;
 }
 message GetActiveCommunityRequest{
 
@@ -503,7 +509,10 @@ message GetAllCommunityRequest{
 }
 
 message GetAllCommunityResponse{
-
+    int64 status =1;
+    string message =2;
+    repeated Community communities=3;
+    string error =4;
 }
 
 message UserInterest{
@@ -519,4 +528,42 @@ message GetInterstsUserResponse{
     repeated UserInterest intersts = 2;
     string message = 3;
     string error =4;
+}
+
+message GetUserByNameRequest{
+    string userName = 1;
+}
+
+message GetUserByNameResponse{
+    int64 status =1;
+    string message = 2;
+    string error = 3;
+    repeated user users=4;
+}
+
+message Participants{
+    string userName=1;
+    string userId=2;
+}
+
+message GetCommunityByIdRequest{
+    string communityId=1;
+}
+
+message GetCommunityByIdResponse{
+    int64 status =1;
+    string message = 2;
+    string error = 3;
+    repeated Community community=4;
+    repeated Participants members =5;
+}
+
+message ValidateCommunityNameRequest{
+    string communityName=1;
+}
+
+message ValidateCommunityNameResponse{
+    int64 status =1;
+    string message = 2;
+    string error = 3;
 }

@@ -42,7 +42,12 @@ server.addService(auth_grpc.AutharizationService,{
     addMember:communityController.addMember,
     deleteCommunity:communityController.deleteCommunity,
     manageCommunity:communityController.manageCommunity,
-    getInterstsUser:conferenceController.getInterstsUser
+    getInterstsUser:conferenceController.getInterstsUser,
+    getActiveCommunity:communityController.getActiveCommunity,
+    getUserByName:autherizationController.getUserByName,
+    getAllCommunity:adminController.getAllCommunity,
+    validateCommunityName:communityController.validateCommunityName,
+    getCommunityById:communityController.getCommunityById
 
 })
 
