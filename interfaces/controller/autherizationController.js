@@ -163,7 +163,7 @@ const forgotPasswordOtp = async (call,callback)=>{
 const forgotPasswordValidateOtp = async (call,callback)=>{
     try {
         const [email,otp] = call.request.array;
-        const status = await autherizationUseCase.forgotPasswordValidateOtp(email,otp);
+        const status = await autherizationUseCase.forgotPasswordValidateOtp(otp);
         const replay = new auth_pb.ForgotPasswordValidateOtpResponse()
         if(status){
             replay.setStatus(200);
