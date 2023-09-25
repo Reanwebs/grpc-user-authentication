@@ -5538,7 +5538,8 @@ proto.pb.user.toObject = function(includeInstance, msg) {
     username: jspb.Message.getFieldWithDefault(msg, 2, ""),
     email: jspb.Message.getFieldWithDefault(msg, 3, ""),
     phonenumber: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    status: jspb.Message.getBooleanFieldWithDefault(msg, 5, false)
+    avatarid: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    status: jspb.Message.getBooleanFieldWithDefault(msg, 6, false)
   };
 
   if (includeInstance) {
@@ -5592,6 +5593,10 @@ proto.pb.user.deserializeBinaryFromReader = function(msg, reader) {
       msg.setPhonenumber(value);
       break;
     case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAvatarid(value);
+      break;
+    case 6:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setStatus(value);
       break;
@@ -5652,10 +5657,17 @@ proto.pb.user.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getAvatarid();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
   f = message.getStatus();
   if (f) {
     writer.writeBool(
-      5,
+      6,
       f
     );
   }
@@ -5735,11 +5747,29 @@ proto.pb.user.prototype.setPhonenumber = function(value) {
 
 
 /**
- * optional bool status = 5;
+ * optional string avatarId = 5;
+ * @return {string}
+ */
+proto.pb.user.prototype.getAvatarid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.user} returns this
+ */
+proto.pb.user.prototype.setAvatarid = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional bool status = 6;
  * @return {boolean}
  */
 proto.pb.user.prototype.getStatus = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 5, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
 };
 
 
@@ -5748,7 +5778,7 @@ proto.pb.user.prototype.getStatus = function() {
  * @return {!proto.pb.user} returns this
  */
 proto.pb.user.prototype.setStatus = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 5, value);
+  return jspb.Message.setProto3BooleanField(this, 6, value);
 };
 
 

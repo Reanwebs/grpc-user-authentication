@@ -266,6 +266,7 @@ const getUserByName =  async (call,callback)=>{
             const userMessage = new auth_pb.user();
             userMessage.setId(user.id);
             userMessage.setUsername(user.userName);
+            userMessage.setAvatarid(user.avatarId);
             return userMessage;
         });
         replay.setStatus(200);
