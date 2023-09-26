@@ -46,6 +46,7 @@ service Autharization {
     rpc GetAllCommunity(GetAllCommunityRequest) returns (GetAllCommunityResponse) {}
     rpc GetCommunityById(GetCommunityByIdRequest) returns (GetCommunityByIdResponse){}
     rpc ValidateCommunityName(ValidateCommunityNameRequest) returns (ValidateCommunityNameResponse){}
+    rpc GetUserDetails(GetUserDetailsRequest) returns (GetUserDetailsResponse){}
 }
 
 message SignupRequest {
@@ -569,4 +570,15 @@ message ValidateCommunityNameResponse{
     int64 status =1;
     string message = 2;
     string error = 3;
+}
+
+message GetUserDetailsRequest{
+    string UserID = 1;
+}
+
+message GetUserDetailsResponse{
+    string UserName = 1;
+    string AvatarID = 2;
+    bool   Permission = 3;
+    string Result     = 4;
 }

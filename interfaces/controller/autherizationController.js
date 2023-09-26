@@ -282,6 +282,25 @@ const getUserByName =  async (call,callback)=>{
     }
 }
 
+const getUserDetails = async (call,callback)=>{
+    try {
+        const [userId] = call.request.array;
+        const data = await autherizationUseCase.getUserDetailsById(userId)
+        const replay = new auth_pb.GetUserDetailsResponse();
+        replay.setUsername(data.userName)
+        replay.setAvatarid(data.avatarId)
+        replay.setPermission(true)
+        replay.setResult("successs")
+        callback(null,replay)        
+    } catch (err) {
+        const error = {
+            code:grpc.status.ABORTED,
+            details:err.message
+        };
+      callback(error,null)  
+    }
+}
+
 module.exports = {
     validName,
     otpRequest,
@@ -293,5 +312,6 @@ module.exports = {
     forgotPasswordChangePassword,
     googleLogin,
     validateUser,
-    getUserByName
+    getUserByName,
+    getUserDetails
 }

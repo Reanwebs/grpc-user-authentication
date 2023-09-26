@@ -137,6 +137,15 @@ const getUserDetails= async (userName)=>{
     }
 }
 
+const getUserDetailsById = async (userId)=>{
+    try {
+        const user = await userDBRepository.findUserById(userId)
+        return user
+    } catch (error) {
+        throw new Error(error.message)
+    }
+}
+
 
 
 module.exports = {
@@ -150,5 +159,6 @@ module.exports = {
     forgotChangePassword,
     googleLogin,
     validateUserStatus,
-    getUserDetails
+    getUserDetails,
+    getUserDetailsById
 }

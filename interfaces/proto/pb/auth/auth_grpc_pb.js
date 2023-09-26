@@ -532,6 +532,28 @@ function deserialize_pb_GetUserByNameResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.GetUserByNameResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_GetUserDetailsRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetUserDetailsRequest)) {
+    throw new Error('Expected argument of type pb.GetUserDetailsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetUserDetailsRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetUserDetailsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetUserDetailsResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetUserDetailsResponse)) {
+    throw new Error('Expected argument of type pb.GetUserDetailsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetUserDetailsResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetUserDetailsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_GetUsersRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetUsersRequest)) {
     throw new Error('Expected argument of type pb.GetUsersRequest');
@@ -1325,6 +1347,17 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_ValidateCommunityNameRequest,
     responseSerialize: serialize_pb_ValidateCommunityNameResponse,
     responseDeserialize: deserialize_pb_ValidateCommunityNameResponse,
+  },
+  getUserDetails: {
+    path: '/pb.Autharization/GetUserDetails',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.GetUserDetailsRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.GetUserDetailsResponse,
+    requestSerialize: serialize_pb_GetUserDetailsRequest,
+    requestDeserialize: deserialize_pb_GetUserDetailsRequest,
+    responseSerialize: serialize_pb_GetUserDetailsResponse,
+    responseDeserialize: deserialize_pb_GetUserDetailsResponse,
   },
 };
 

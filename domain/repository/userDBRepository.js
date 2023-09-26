@@ -147,6 +147,9 @@ const createUserGoogle =async  (userName,email)=>{
 
 const findUserById = async (userId)=>{
     try {
+        if(!mongoose.Types.ObjectId.isValid(userId)){
+            new mongoose.Types.ObjectId(userId)
+        }
         const user = await User.findById(userId);
         return user; 
     } catch (error) {
@@ -223,7 +226,7 @@ const changeAvatar = async (userId,avatarId)=>{
 
 const searchUser = async (userName) => {
     try {
-        const user = await User.find({ userName: { $regex: new RegExp(`^${userName}`, 'i') } });
+        const user = await User.find({isBlocked:false,userName: { $regex: new RegExp(`^${userName}`, 'i') } });
         return user;
     } catch (error) {
         throw new Error("Error in finding user by name");
