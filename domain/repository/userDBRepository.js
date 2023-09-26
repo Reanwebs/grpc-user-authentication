@@ -148,7 +148,7 @@ const createUserGoogle =async  (userName,email)=>{
 const findUserById = async (userId)=>{
     try {
         if(!mongoose.Types.ObjectId.isValid(userId)){
-            new mongoose.Types.ObjectId(userId)
+          userId =  new mongoose.Types.ObjectId(userId)
         }
         const user = await User.findById(userId);
         return user; 
