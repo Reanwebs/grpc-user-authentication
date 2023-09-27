@@ -2280,7 +2280,11 @@ proto.pb.SignupResponse.toObject = function(includeInstance, msg) {
     status: jspb.Message.getFieldWithDefault(msg, 1, 0),
     token: jspb.Message.getFieldWithDefault(msg, 2, ""),
     message: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    error: jspb.Message.getFieldWithDefault(msg, 4, "")
+    error: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    userid: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    reward: jspb.Message.getBooleanFieldWithDefault(msg, 6, false),
+    recipientid: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    recipientname: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
   if (includeInstance) {
@@ -2332,6 +2336,22 @@ proto.pb.SignupResponse.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setError(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUserid(value);
+      break;
+    case 6:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReward(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRecipientid(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setRecipientname(value);
       break;
     default:
       reader.skipField();
@@ -2387,6 +2407,34 @@ proto.pb.SignupResponse.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getUserid();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getReward();
+  if (f) {
+    writer.writeBool(
+      6,
+      f
+    );
+  }
+  f = message.getRecipientid();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
+    );
+  }
+  f = message.getRecipientname();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -2462,6 +2510,78 @@ proto.pb.SignupResponse.prototype.getError = function() {
  */
 proto.pb.SignupResponse.prototype.setError = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string userId = 5;
+ * @return {string}
+ */
+proto.pb.SignupResponse.prototype.getUserid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.SignupResponse} returns this
+ */
+proto.pb.SignupResponse.prototype.setUserid = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional bool reward = 6;
+ * @return {boolean}
+ */
+proto.pb.SignupResponse.prototype.getReward = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 6, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.pb.SignupResponse} returns this
+ */
+proto.pb.SignupResponse.prototype.setReward = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 6, value);
+};
+
+
+/**
+ * optional string recipientId = 7;
+ * @return {string}
+ */
+proto.pb.SignupResponse.prototype.getRecipientid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.SignupResponse} returns this
+ */
+proto.pb.SignupResponse.prototype.setRecipientid = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string recipientName = 8;
+ * @return {string}
+ */
+proto.pb.SignupResponse.prototype.getRecipientname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.SignupResponse} returns this
+ */
+proto.pb.SignupResponse.prototype.setRecipientname = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
