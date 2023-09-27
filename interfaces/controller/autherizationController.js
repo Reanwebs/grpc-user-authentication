@@ -58,11 +58,17 @@ const otpRequest =async (call,callback)=>{
 const  userSignup = async(call,callback)=>{
     try{
         const[userName,email,number,password,cPassword,otp,referral] = call.request.array;
-        const status = await autherizationUseCase.createUser(userName,email,number,password,otp,referral)
+        const data = await autherizationUseCase.createUser(userName,email,number,password,otp,referral)
         const replay = new auth_pb.SignupResponse()
-        if(status){
+        if(data.status){
             replay.setStatus(201)
             replay.setMessage("account created successfully")
+            replay.setUserid(data.userId)
+            if(data.reward){
+                replay.setReward(data.reward);
+                replay.setRecipientid(data.reciepantId)
+                replay.setRecipientname(data.userName)
+            }
             callback(null,replay)
         }else{
             const error = {

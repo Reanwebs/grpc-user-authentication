@@ -57,6 +57,7 @@ message SignupRequest {
     string cPassword = 5;
     string otp = 6;
     string referral = 7;
+    
 }
 
 message SignupResponse {
@@ -64,6 +65,10 @@ message SignupResponse {
     string token = 2;
     string message =3; 
     string error = 4;
+    string userId=5;
+    bool reward =6;
+    string recipientId=7;
+    string recipientName=8;
 }
 
 message OtpSignUpRequest {
@@ -77,7 +82,7 @@ message OtpSignUpRequest {
 message OtpSignUpResponse {
     int64 status = 1;
     string message = 2;
-    string error = 3;
+    string error = 3;   
 }
 
 message LoginRequest {

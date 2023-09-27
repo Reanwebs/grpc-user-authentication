@@ -38,10 +38,10 @@ const createUser = async (userName,email,mobNo,password,)=>{
             referCode,
             isGoogle:false,
         })
-         await Wallet.create({
-        userId:user._id,
-        coins:0
-        })
+        //  await Wallet.create({
+        // userId:user._id,
+        // coins:0
+        // })
 
         return user;
           
@@ -50,15 +50,17 @@ const createUser = async (userName,email,mobNo,password,)=>{
     }
 }
 
- const referalCoins = async(referral,userid)=>{
+ const referalCoins = async(referral)=>{
     try {
         const referUser = await User.findOne({referCode:referral})
         if(referUser){
-          await Wallet.findOneAndUpdate(
-             {userId:userid},
-             {$set:{coins:5}
-         })
+        //   await Wallet.findOneAndUpdate(
+        //      {userId:userid},
+        //      {$set:{coins:5}
+        //  })
+         return {reward:true,reciepantId:referUser._id.toString()}
         }
+        return {reward:false}
         
     } catch (error) {
         throw new Error("error in creating referral coins")
