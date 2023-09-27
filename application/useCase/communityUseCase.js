@@ -160,9 +160,9 @@ module.exports={
         }
     },
 
-    getActiveCommunities : async ()=>{
+    getActiveCommunities : async (userId)=>{
         try {
-            const communities = await communityDBRepository.getActiveCommunities();
+            const communities = await communityDBRepository.getActiveCommunities(userId);
             return communities;
             
         } catch (error) {
@@ -204,6 +204,18 @@ module.exports={
             return {status:true,message:"community details fetched successfully",data:community};
 
             
+        } catch (error) {
+            throw new Error(error.message)
+            
+        }
+
+        
+    },
+    getUserJoinedCommunities :async (userId)=>{
+        try {
+
+           const communities = await communityDBRepository.getUserJoinedCommunities(userId)
+           return communities
         } catch (error) {
             throw new Error(error.message)
             

@@ -121,9 +121,17 @@ module.exports ={
             throw new Error(error)  
         }
     },
-    getActiveCommunities :async ()=>{
+    getActiveCommunities :async (userId)=>{
         try {
-            const communities = await Community.find({isBlocked:false,isActive:true})
+            // const communities = await Community.find({isBlocked:false,isActive:true})
+            const communities = await Community.find({
+                isBlocked: false,
+                isActive: true,
+                $nor: [
+                  { adminId: userId }, // Exclude communities where the user is the admin
+                  { 'members.userId': userId }, // Exclude communities where the user is a member
+                ],
+              });
             return communities;
         } catch (error) {
             throw new Error(error)  
@@ -167,6 +175,24 @@ module.exports ={
           .exec();
 
           return community
+            
+        } catch (error) {
+            throw new Error('error in finding community details')
+        }
+    },
+    getUserJoinedCommunities :async (id)=>{
+        try {
+
+            const communities = await Community.find({
+                isBlocked: false,
+                isActive: true,
+                $or: [
+                  { adminId: id }, 
+                  { 'members.userId': id }, 
+                ],
+              });
+
+          return communities
             
         } catch (error) {
             throw new Error('error in finding community details')

@@ -34,7 +34,7 @@ const createUser = async (userName,email,number,password,otp,referral)=>{
         const status = await otpUseCase.validateOtp(number,otp)  
         if(status){
          const user =  await userDBRepository.createUser(userName,email,number,password) 
-         const data = {}
+         let data = {}
            if(referral){
             const res = await userDBRepository.referalCoins(referral,user._id)
             data = {...res}
@@ -42,6 +42,7 @@ const createUser = async (userName,email,number,password,otp,referral)=>{
             data.userId = user._id.toString()
             data.status = true
             data.userName = user.userName
+            
         return data
         }else{
             return {status:false}
