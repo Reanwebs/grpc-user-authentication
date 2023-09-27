@@ -47,6 +47,7 @@ service Autharization {
     rpc GetCommunityById(GetCommunityByIdRequest) returns (GetCommunityByIdResponse){}
     rpc ValidateCommunityName(ValidateCommunityNameRequest) returns (ValidateCommunityNameResponse){}
     rpc GetUserDetails(GetUserDetailsRequest) returns (GetUserDetailsResponse){}
+    rpc GetJoinedCommunity(GetJoinedCommunityRequest) returns (GetJoinedCommunityResponse) {}
 }
 
 message SignupRequest {
@@ -57,7 +58,6 @@ message SignupRequest {
     string cPassword = 5;
     string otp = 6;
     string referral = 7;
-    
 }
 
 message SignupResponse {
@@ -69,6 +69,7 @@ message SignupResponse {
     bool reward =6;
     string recipientId=7;
     string recipientName=8;
+
 }
 
 message OtpSignUpRequest {
@@ -82,7 +83,7 @@ message OtpSignUpRequest {
 message OtpSignUpResponse {
     int64 status = 1;
     string message = 2;
-    string error = 3;   
+    string error = 3;
 }
 
 message LoginRequest {
@@ -503,7 +504,7 @@ message Community{
    bool isMember = 10;
 }
 message GetActiveCommunityRequest{
-
+       string userId = 1;
 }
 
 message GetActiveCommunityResponse{
@@ -586,4 +587,15 @@ message GetUserDetailsResponse{
     string AvatarID = 2;
     bool   Permission = 3;
     string Result     = 4;
+}
+
+message GetJoinedCommunityRequest{
+    string userId =1;
+}
+
+message GetJoinedCommunityResponse{
+    string status = 1;
+    string message = 2;
+    repeated Community community=3;
+    string error =4;
 }

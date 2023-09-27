@@ -510,6 +510,28 @@ function deserialize_pb_GetInterstsUserResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.GetInterstsUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_GetJoinedCommunityRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetJoinedCommunityRequest)) {
+    throw new Error('Expected argument of type pb.GetJoinedCommunityRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetJoinedCommunityRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetJoinedCommunityRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_GetJoinedCommunityResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetJoinedCommunityResponse)) {
+    throw new Error('Expected argument of type pb.GetJoinedCommunityResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_GetJoinedCommunityResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.GetJoinedCommunityResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_GetUserByNameRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.GetUserByNameRequest)) {
     throw new Error('Expected argument of type pb.GetUserByNameRequest');
@@ -1358,6 +1380,17 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_GetUserDetailsRequest,
     responseSerialize: serialize_pb_GetUserDetailsResponse,
     responseDeserialize: deserialize_pb_GetUserDetailsResponse,
+  },
+  getJoinedCommunity: {
+    path: '/pb.Autharization/GetJoinedCommunity',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.GetJoinedCommunityRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.GetJoinedCommunityResponse,
+    requestSerialize: serialize_pb_GetJoinedCommunityRequest,
+    requestDeserialize: deserialize_pb_GetJoinedCommunityRequest,
+    responseSerialize: serialize_pb_GetJoinedCommunityResponse,
+    responseDeserialize: deserialize_pb_GetJoinedCommunityResponse,
   },
 };
 

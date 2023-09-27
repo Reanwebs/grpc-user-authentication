@@ -232,7 +232,8 @@ const manageCommunity = async (call,response)=>{
 
 const getActiveCommunity  = async (call,response)=>{
     try {
-        const data = await communityUseCase.getActiveCommunities()
+        const [userId] = call.request.array;
+        const data = await communityUseCase.getActiveCommunities(userId)
         const replay = new auth_pb.GetActiveCommunityResponse();
         const community = data.map(community=>{
             const communityMsg = new auth_pb.Community();
@@ -325,6 +326,37 @@ const getCommunityById =  async (call,response)=>{
     }
 }
 
+const getJoinedCommunity  = async (call,response)=>{
+    try {
+        const [userId] = call.request.array;
+        const data = await communityUseCase.getUserJoinedCommunities(userId)
+        const replay = new auth_pb.GetJoinedCommunityResponse();
+        if(data){
+            const community = data.map(community=>{
+                const communityMsg = new auth_pb.Community();
+                communityMsg.setId(community?._id.toString())
+                communityMsg.setCommunityname(community?.communityName);
+                communityMsg.setCommunitydescription(community?.description);
+                communityMsg.setCommunityavatar(community?.communityImage);
+                communityMsg.setMembercount(community?.members.length)
+                return communityMsg;
+            })  
+            replay.setCommunityList(community)
+        }
+        
+        replay.setStatus(200);
+        replay.setMessage('joined communities fetched successfully')
+        response(null,replay)
+    } catch (err) {
+        const  error = {
+            code: grpc.status.ABORTED,
+            details: err.message
+        }
+        response(error,null)
+    }
+}
+
+
 
 
 module.exports = {
@@ -339,6 +371,7 @@ module.exports = {
     manageCommunity,
     getActiveCommunity,
     validateCommunityName,
-    getCommunityById
+    getCommunityById,
+    getJoinedCommunity
 
 }

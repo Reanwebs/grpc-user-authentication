@@ -48,7 +48,8 @@ server.addService(auth_grpc.AutharizationService,{
     getAllCommunity:adminController.getAllCommunity,
     validateCommunityName:communityController.validateCommunityName,
     getCommunityById:communityController.getCommunityById,
-    getUserDetails:autherizationController.getUserDetails
+    getUserDetails:autherizationController.getUserDetails,
+    getJoinedCommunity:communityController.getJoinedCommunity
 
 })
 
