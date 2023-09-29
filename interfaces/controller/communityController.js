@@ -299,7 +299,7 @@ const getCommunityById =  async (call,response)=>{
                 const memberList = new auth_pb.Participants()
                 memberList.setUsername(member?.userId?.userName)
                 memberList.setUserid(member?.userId?._id.toString())
-                memberList.setAvatarid(member?.userId?.avatarId ? userId.avatarId : '')
+                memberList.setAvatarid(member?.userId?.avatarId ?member?.userId?.avatarId : '' )
                 
                 return memberList
             })
@@ -318,7 +318,7 @@ const getCommunityById =  async (call,response)=>{
         }
        
     } catch (err) {
-        
+         console.log(err);
         const  error = {
             code: grpc.status.ABORTED,
             details: err.message
