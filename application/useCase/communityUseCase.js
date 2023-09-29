@@ -222,6 +222,17 @@ module.exports={
         }
 
         
+    },
+
+    searchCommunities :async (communityName)=>{
+        try {
+
+            const communities = await communityDBRepository.searchCommunities(communityName)
+            return communities
+         } catch (error) {
+             throw new Error(error.message)
+             
+         }
     }
 
 }

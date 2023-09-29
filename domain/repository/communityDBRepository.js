@@ -197,5 +197,13 @@ module.exports ={
         } catch (error) {
             throw new Error('error in finding community details')
         }
+    },
+    searchCommunities : async (communityName)=>{
+        try {
+            const communities = await Community.find({isBlocked:false,isActive:true,communityName: { $regex: new RegExp(`^${communityName}`, 'i') } });
+            return communities;
+        } catch (error) {
+            throw new Error("Error in finding user by name");
+        }
     }
 }
