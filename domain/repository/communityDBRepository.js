@@ -121,15 +121,14 @@ module.exports ={
             throw new Error(error)  
         }
     },
-    getActiveCommunities :async (userId)=>{
+    getActiveCommunities :async (id)=>{
         try {
-            // const communities = await Community.find({isBlocked:false,isActive:true})
             const communities = await Community.find({
                 isBlocked: false,
                 isActive: true,
                 $nor: [
-                  { adminId: userId }, // Exclude communities where the user is the admin
-                  { 'members.userId': userId }, // Exclude communities where the user is a member
+                  { adminId: id }, 
+                  { 'members.userId': id }, 
                 ],
               });
             return communities;
@@ -170,7 +169,7 @@ module.exports ={
             populate: {
                  path: 'userId',
                  model:'User',
-                 select:'userName email mobNo'
+                 select:'userName email mobNo avatarId'
         } })
           .exec();
 
@@ -204,6 +203,25 @@ module.exports ={
             return communities;
         } catch (error) {
             throw new Error("Error in finding user by name");
+        }
+    },
+    checkPermission:async (userId,id)=>{
+        try {
+
+            const communities = await Community.find({
+                _id:id,
+                isBlocked: false,
+                isActive: true,
+                $or: [
+                  { adminId: userId }, 
+                  { 'members.userId': userId }, 
+                ],
+              });
+
+          return communities
+            
+        } catch (error) {
+            throw new Error('error in finding community details')
         }
     }
 }

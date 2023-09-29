@@ -295,11 +295,12 @@ const getCommunityById =  async (call,response)=>{
             communityMsg.setCommunityavatar(data?.data?.communityImage);
             communityMsg.setMembercount(data?.data?.members.length)
             communityMsg.setCommunityadmin(data?.data?.adminId?.userName)
-    
             const memberMsg = data?.data?.members.map((member)=>{
                 const memberList = new auth_pb.Participants()
                 memberList.setUsername(member?.userId?.userName)
                 memberList.setUserid(member?.userId?._id.toString())
+                memberList.setAvatarid(member?.userId?.avatarId ? userId.avatarId : '')
+                
                 return memberList
             })
             replay.setCommunity(communityMsg)
@@ -386,6 +387,22 @@ const searchCommunity  = async (call,response)=>{
     }
 }
 
+const userGroupPermission = async (call,response)=>{
+    try {
+        const[userId,communityId] = call.request.array
+        const status = await communityUseCase.checkUserPermission(userId,communityId)
+        const replay = new auth_pb.UserGroupPermissionResponse();
+        replay.setPermission(status.Permission)
+        response(null,replay)
+    } catch (err) {
+        const  error = {
+            code: grpc.status.ABORTED,
+            details: err.message
+        }
+        response(error,null)
+    }
+}
+
 
 
 
@@ -405,6 +422,7 @@ module.exports = {
     validateCommunityName,
     getCommunityById,
     getJoinedCommunity,
-    searchCommunity
+    searchCommunity,
+    userGroupPermission
 
 }

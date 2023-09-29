@@ -4,7 +4,7 @@ const user = require('../../interfaces/models/user')
 
 module.exports={
      createCommunityUseCase :async (data)=>{
-        try {
+        try {    
             const communityData = user.communityData(data)
             const communityExists = await communityDBRepository.findCommunityByName(communityData.communityName);
             if(communityExists) return {status:false,message:"community already exists "};
@@ -229,6 +229,22 @@ module.exports={
 
             const communities = await communityDBRepository.searchCommunities(communityName)
             return communities
+         } catch (error) {
+             throw new Error(error.message)
+             
+         }
+    },
+    checkUserPermission:async (userId,communityId)=>{
+        try {
+            const isValidComId = communityDBRepository.validateId(communityId);
+            if(!isValidComId) return {status:false,message:"invalid communityid"};
+ 
+            const parseId = communityDBRepository.parseId(communityId);
+            const communities = await communityDBRepository.checkPermission(userId,parseId)
+            if(communities){
+                return {Permission:true}
+            }
+            return {Permission:false}
          } catch (error) {
              throw new Error(error.message)
              
