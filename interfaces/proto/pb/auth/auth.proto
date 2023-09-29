@@ -48,6 +48,7 @@ service Autharization {
     rpc ValidateCommunityName(ValidateCommunityNameRequest) returns (ValidateCommunityNameResponse){}
     rpc GetUserDetails(GetUserDetailsRequest) returns (GetUserDetailsResponse){}
     rpc GetJoinedCommunity(GetJoinedCommunityRequest) returns (GetJoinedCommunityResponse) {}
+    rpc SearchCommunity(SearchCommunityRequest) returns (SearchCommunityResponse) {}
 }
 
 message SignupRequest {
@@ -599,3 +600,15 @@ message GetJoinedCommunityResponse{
     repeated Community community=3;
     string error =4;
 }
+
+message SearchCommunityRequest{
+    string communityName = 1;
+}
+
+message SearchCommunityResponse{
+    string status = 1;
+    string message = 2;
+    repeated Community community=3;
+    string error =4;
+}
+

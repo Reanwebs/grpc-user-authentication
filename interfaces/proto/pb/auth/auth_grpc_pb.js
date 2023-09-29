@@ -818,6 +818,28 @@ function deserialize_pb_RemoveMemberResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.RemoveMemberResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_SearchCommunityRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.SearchCommunityRequest)) {
+    throw new Error('Expected argument of type pb.SearchCommunityRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_SearchCommunityRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.SearchCommunityRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_SearchCommunityResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.SearchCommunityResponse)) {
+    throw new Error('Expected argument of type pb.SearchCommunityResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_SearchCommunityResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.SearchCommunityResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_SignupRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.SignupRequest)) {
     throw new Error('Expected argument of type pb.SignupRequest');
@@ -1391,6 +1413,17 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_GetJoinedCommunityRequest,
     responseSerialize: serialize_pb_GetJoinedCommunityResponse,
     responseDeserialize: deserialize_pb_GetJoinedCommunityResponse,
+  },
+  searchCommunity: {
+    path: '/pb.Autharization/SearchCommunity',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.SearchCommunityRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.SearchCommunityResponse,
+    requestSerialize: serialize_pb_SearchCommunityRequest,
+    requestDeserialize: deserialize_pb_SearchCommunityRequest,
+    responseSerialize: serialize_pb_SearchCommunityResponse,
+    responseDeserialize: deserialize_pb_SearchCommunityResponse,
   },
 };
 
