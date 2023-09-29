@@ -862,6 +862,28 @@ function deserialize_pb_SignupResponse(buffer_arg) {
   return interfaces_proto_pb_auth_auth_pb.SignupResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_pb_UserGroupPermissionRequest(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.UserGroupPermissionRequest)) {
+    throw new Error('Expected argument of type pb.UserGroupPermissionRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_UserGroupPermissionRequest(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.UserGroupPermissionRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_pb_UserGroupPermissionResponse(arg) {
+  if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.UserGroupPermissionResponse)) {
+    throw new Error('Expected argument of type pb.UserGroupPermissionResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_pb_UserGroupPermissionResponse(buffer_arg) {
+  return interfaces_proto_pb_auth_auth_pb.UserGroupPermissionResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_pb_ValidateCommunityNameRequest(arg) {
   if (!(arg instanceof interfaces_proto_pb_auth_auth_pb.ValidateCommunityNameRequest)) {
     throw new Error('Expected argument of type pb.ValidateCommunityNameRequest');
@@ -1424,6 +1446,17 @@ var AutharizationService = exports.AutharizationService = {
     requestDeserialize: deserialize_pb_SearchCommunityRequest,
     responseSerialize: serialize_pb_SearchCommunityResponse,
     responseDeserialize: deserialize_pb_SearchCommunityResponse,
+  },
+  userGroupPermission: {
+    path: '/pb.Autharization/UserGroupPermission',
+    requestStream: false,
+    responseStream: false,
+    requestType: interfaces_proto_pb_auth_auth_pb.UserGroupPermissionRequest,
+    responseType: interfaces_proto_pb_auth_auth_pb.UserGroupPermissionResponse,
+    requestSerialize: serialize_pb_UserGroupPermissionRequest,
+    requestDeserialize: deserialize_pb_UserGroupPermissionRequest,
+    responseSerialize: serialize_pb_UserGroupPermissionResponse,
+    responseDeserialize: deserialize_pb_UserGroupPermissionResponse,
   },
 };
 

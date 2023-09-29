@@ -49,6 +49,7 @@ service Autharization {
     rpc GetUserDetails(GetUserDetailsRequest) returns (GetUserDetailsResponse){}
     rpc GetJoinedCommunity(GetJoinedCommunityRequest) returns (GetJoinedCommunityResponse) {}
     rpc SearchCommunity(SearchCommunityRequest) returns (SearchCommunityResponse) {}
+    rpc UserGroupPermission(UserGroupPermissionRequest) returns (UserGroupPermissionResponse){}
 }
 
 message SignupRequest {
@@ -555,6 +556,7 @@ message GetUserByNameResponse{
 message Participants{
     string userName=1;
     string userId=2;
+    string avatarId =3;
 }
 
 message GetCommunityByIdRequest{
@@ -610,5 +612,16 @@ message SearchCommunityResponse{
     string message = 2;
     repeated Community community=3;
     string error =4;
+}
+
+message UserGroupPermissionRequest{
+    string UserID  = 1;
+    string GroupID = 2;
+}
+
+message UserGroupPermissionResponse{
+    bool Permission = 1;
+    string Reason   = 2;
+    string ChatType = 3;
 }
 
