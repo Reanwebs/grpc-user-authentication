@@ -340,6 +340,7 @@ const getJoinedCommunity  = async (call,response)=>{
                 communityMsg.setCommunitydescription(community?.description);
                 communityMsg.setCommunityavatar(community?.communityImage);
                 communityMsg.setMembercount(community?.members.length)
+                communityMsg.setIsadmin(community?.adminId === userId ? true : false)
                 return communityMsg;
             })  
             replay.setCommunityList(community)

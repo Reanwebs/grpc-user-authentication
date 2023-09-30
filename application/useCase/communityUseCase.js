@@ -120,8 +120,13 @@ module.exports={
            if(!isValidComId) return {status:false,message:"invalid communityid"};
 
            const parseId = communityDBRepository.parseId(communityId);
-           await communityDBRepository.addMemberToCommunity(parseId,{userId:userId});
-           return {status:true,message:"user has been addedd to community"};
+           const userExists = await communityDBRepository.userExistsInCommunity(parseId,userId)
+           if(!userExists){
+            await communityDBRepository.addMemberToCommunity(parseId,{userId:userId});
+            return {status:true,message:"user has been addedd to community"};
+           }
+           
+           return {status:false,message:"user already in community"};
         } catch (error) {
             throw new Error(error.message)
         }
