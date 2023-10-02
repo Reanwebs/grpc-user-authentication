@@ -97,6 +97,7 @@ const  userLogin = async (call,callback)=>{
         replay.setEmail(status.email)
         replay.setPhonenumber(status.number)
         replay.setUid(status.userId)
+        replay.setReferralcode(status.referralCode)
         replay.setMessage(status.message)
         if(status.avatarId){
             replay.setAvatarid(status.avatarId)
@@ -224,6 +225,7 @@ const googleLogin = async(call,callback)=>{
             replay.setUid(status.userId)
             replay.setMessage(status.message)
             replay.setPhonenumber(status?.number && null)
+            replay.setReferralcode(status?.referralCode)
             if(status.avatarId){
                 replay.setAvatarid(status?.avatarId)
             }
