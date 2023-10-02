@@ -3356,7 +3356,8 @@ proto.pb.LoginResponse.toObject = function(includeInstance, msg) {
     error: jspb.Message.getFieldWithDefault(msg, 5, ""),
     uid: jspb.Message.getFieldWithDefault(msg, 6, ""),
     message: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    avatarid: jspb.Message.getFieldWithDefault(msg, 8, "")
+    avatarid: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    referralcode: jspb.Message.getFieldWithDefault(msg, 9, "")
   };
 
   if (includeInstance) {
@@ -3424,6 +3425,10 @@ proto.pb.LoginResponse.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setAvatarid(value);
+      break;
+    case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setReferralcode(value);
       break;
     default:
       reader.skipField();
@@ -3507,6 +3512,13 @@ proto.pb.LoginResponse.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       8,
+      f
+    );
+  }
+  f = message.getReferralcode();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
       f
     );
   }
@@ -3654,6 +3666,24 @@ proto.pb.LoginResponse.prototype.getAvatarid = function() {
  */
 proto.pb.LoginResponse.prototype.setAvatarid = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional string referralCode = 9;
+ * @return {string}
+ */
+proto.pb.LoginResponse.prototype.getReferralcode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.LoginResponse} returns this
+ */
+proto.pb.LoginResponse.prototype.setReferralcode = function(value) {
+  return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 
@@ -8348,7 +8378,8 @@ proto.pb.GoogleLoginResponse.toObject = function(includeInstance, msg) {
     error: jspb.Message.getFieldWithDefault(msg, 5, ""),
     uid: jspb.Message.getFieldWithDefault(msg, 6, ""),
     message: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    avatarid: jspb.Message.getFieldWithDefault(msg, 8, "")
+    avatarid: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    referralcode: jspb.Message.getFieldWithDefault(msg, 9, "")
   };
 
   if (includeInstance) {
@@ -8416,6 +8447,10 @@ proto.pb.GoogleLoginResponse.deserializeBinaryFromReader = function(msg, reader)
     case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setAvatarid(value);
+      break;
+    case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setReferralcode(value);
       break;
     default:
       reader.skipField();
@@ -8499,6 +8534,13 @@ proto.pb.GoogleLoginResponse.serializeBinaryToWriter = function(message, writer)
   if (f.length > 0) {
     writer.writeString(
       8,
+      f
+    );
+  }
+  f = message.getReferralcode();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
       f
     );
   }
@@ -8646,6 +8688,24 @@ proto.pb.GoogleLoginResponse.prototype.getAvatarid = function() {
  */
 proto.pb.GoogleLoginResponse.prototype.setAvatarid = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional string referralCode = 9;
+ * @return {string}
+ */
+proto.pb.GoogleLoginResponse.prototype.getReferralcode = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.GoogleLoginResponse} returns this
+ */
+proto.pb.GoogleLoginResponse.prototype.setReferralcode = function(value) {
+  return jspb.Message.setProto3StringField(this, 9, value);
 };
 
 

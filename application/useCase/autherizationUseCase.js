@@ -61,7 +61,7 @@ const loginUser = async(email,password)=>{
           if(!status) return {status:false,message:"Invalid password"}
         }
         return {status:true,message:"loggedin successfully",
-        userName:user.userName,email:user.email,number:user?.mobNo?.toString(),userId:user._id.toString(),avatarId:user?.avatarId}
+        userName:user.userName,email:user.email,number:user?.mobNo?.toString(),userId:user._id.toString(),avatarId:user?.avatarId,referralCode:user.referCode}
     }catch(error){
        throw new Error(error.message)
     }
@@ -115,7 +115,7 @@ const googleLogin = async (token)=>{
         const data = await verify(token);
         const user = await userDBRepository.createUserGoogle(data.userName,data.email);
         if(user)return {status:true,message:"loggedin successfully",
-        userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),userId:user._id.toString(),avatarId:user?.avatarId}
+        userName:user?.userName,email:user?.email,number:user?.mobNo?.toString(),userId:user._id.toString(),avatarId:user?.avatarId,referralCode:user?.referCode}
         else return {status:false,message:"failed to create user"}
     } catch (error) {
         throw new Error(error.message)
