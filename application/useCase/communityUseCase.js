@@ -213,7 +213,6 @@ module.exports={
             throw new Error(error.message)
             
         }
-
         
     },
     getUserJoinedCommunities :async (userId)=>{
@@ -247,7 +246,7 @@ module.exports={
             const parseId = communityDBRepository.parseId(communityId);
             const communities = await communityDBRepository.checkPermission(userId,parseId)
             if(communities){
-                return {Permission:true}
+                return {Permission:true,communityName:communities.communityName,communityImage:communities.communityImage}
             }
             return {Permission:false}
          } catch (error) {

@@ -208,7 +208,7 @@ module.exports ={
     checkPermission:async (userId,id)=>{
         try {
 
-            const communities = await Community.find({
+            const communities = await Community.findOne({
                 _id:id,
                 isBlocked: false,
                 isActive: true,
