@@ -20232,7 +20232,9 @@ proto.pb.UserGroupPermissionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     permission: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
     reason: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    chattype: jspb.Message.getFieldWithDefault(msg, 3, "")
+    chattype: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    groupname: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    groupavatarid: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -20281,6 +20283,14 @@ proto.pb.UserGroupPermissionResponse.deserializeBinaryFromReader = function(msg,
       var value = /** @type {string} */ (reader.readString());
       msg.setChattype(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setGroupname(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setGroupavatarid(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -20328,6 +20338,20 @@ proto.pb.UserGroupPermissionResponse.serializeBinaryToWriter = function(message,
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getGroupname();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getGroupavatarid();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -20385,6 +20409,42 @@ proto.pb.UserGroupPermissionResponse.prototype.getChattype = function() {
  */
 proto.pb.UserGroupPermissionResponse.prototype.setChattype = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string GroupName = 4;
+ * @return {string}
+ */
+proto.pb.UserGroupPermissionResponse.prototype.getGroupname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.UserGroupPermissionResponse} returns this
+ */
+proto.pb.UserGroupPermissionResponse.prototype.setGroupname = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string GroupAvatarID = 5;
+ * @return {string}
+ */
+proto.pb.UserGroupPermissionResponse.prototype.getGroupavatarid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.pb.UserGroupPermissionResponse} returns this
+ */
+proto.pb.UserGroupPermissionResponse.prototype.setGroupavatarid = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 

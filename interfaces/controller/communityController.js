@@ -394,6 +394,10 @@ const userGroupPermission = async (call,response)=>{
         const status = await communityUseCase.checkUserPermission(userId,communityId)
         const replay = new auth_pb.UserGroupPermissionResponse();
         replay.setPermission(status.Permission)
+        if(status.Permission){
+            replay.setGroupname(status.communityName)
+            replay.setGroupavatarid(status.communityImage)
+        }
         response(null,replay)
     } catch (err) {
         const  error = {
