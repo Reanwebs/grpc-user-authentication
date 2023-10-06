@@ -1,2 +1,8 @@
 .env
 /node_modules
+ca-cert.pem
+ca-csr.pem
+ca-key.pem
+server-cert.pem
+server-csr.pem
+server-key.pem
