@@ -1,0 +1,10 @@
+version: "2.2"
+services:
+  auth:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+
+      
