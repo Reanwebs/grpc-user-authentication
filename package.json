@@ -19,6 +19,7 @@
     "mongoose": "^7.4.4",
     "nodemailer": "^6.9.4",
     "referral-codes": "^2.0.3",
+    "tls": "^0.0.1",
     "twilio": "^4.16.0"
   },
   "devDependencies": {
