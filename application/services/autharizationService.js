@@ -7,7 +7,7 @@ const communityController = require('../../interfaces/controller/communityContro
 const conferenceController = require('../../interfaces/controller/userConferenceController')
 
 const server = new grpc.Server();
-
+ 
 server.addService(auth_grpc.AutharizationService,{
     validName:autherizationController.validName,
     otpRequest:autherizationController.otpRequest,
