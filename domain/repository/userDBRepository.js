@@ -134,10 +134,10 @@ const createUserGoogle =async  (userName,email)=>{
             referCode,
             isGoogle:true
           })
-          await Wallet.create({
-            userId:user._id,
-            coins:0
-            })
+        //   await Wallet.create({
+        //     userId:user._id,
+        //     coins:0
+        //     })
           return user;
         }
         
